@@ -144,6 +144,25 @@ exports.report_message = function (response, status_box, cls, type) {
     if (type === undefined) {
         type = ' ';
     }
+    
+    // make alerts-dropdown a single-reference.
+    // check if there are any alerts left, and if not then hide the dropdown.
+    
+    // create reports for testing.. --> delete after of course.
+    // possibly add an alerts icon that greys out when you open the dropdown
+    // and then turns red when you close it. Clicking toggles it.
+    
+    /*
+    window.create_reports = function () {
+      ui.report_message("Deactivation encountered an error. Please reload and try again.",
+                 $("#home-error"), 'alert-error');
+      ui.report_message("There was an error reloading the application. Please reload and try again.", $("#reloading-application"), "reloading-application")
+    };
+    */
+    
+    if ($("#alerts-dropdown").hasClass("notdisplayed")) {
+      $("#alerts-dropdown").removeClass("notdisplayed");
+    }
 
     if (type === 'subscriptions-status') {
         status_box.removeClass(status_classes).addClass(cls).children('#response')
@@ -381,6 +400,10 @@ $(function () {
         e.stopPropagation();
         e.preventDefault();
     });
+    
+    $("#alerts-dropdown #exit-alerts").click(function () {
+      $("#alerts-dropdown").slideUp(300);
+    })
 
     // A little hackish, because it doesn't seem to totally get us the
     // exact right width for the floating_recipient_bar and compose

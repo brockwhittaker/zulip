@@ -139,6 +139,11 @@ a {
     z-index: 101;
     
     box-shadow: 0px 0px 20px rgba(0,0,0,0.2);
+    overflow: hidden;
+}
+
+#alerts-dropdown .alert {
+  width: calc(100% - 100px);
 }
 
 #alerts-dropdown .home-error-bar {
@@ -146,10 +151,14 @@ a {
 }
 
 #alerts-dropdown #exit-alerts {
-  text-align: right;
-  padding: 5px 10px;
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 10px;
   font-size: 2em;
   font-weight: 300;
+  
+  cursor: pointer;
 }
 
 textarea,
