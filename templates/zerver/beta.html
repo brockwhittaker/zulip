@@ -1,0 +1,78 @@
+{% extends "zerver/portico_signup.html" %}
+
+{% block portico_content %}
+
+<div class="beta-signup-container">
+  <div class="pitch">
+      <h3>{{ _('Sign up for our beta') }}</h3>
+  </div>
+
+  <form method="post" class="form-horizontal" id="registration" action="{{ url('zerver.views.sign_up_for_beta') }}">
+  {{ csrf_input }}
+
+  <p> We'll use the information below to inform you when our service launches,
+  and to inform our roadmap for the next couple of months. In the meantime,
+  feel free to
+  <a href="https://zulip.readthedocs.io/en/latest/prod-install.html">install</a> Zulip on your server,
+  <a href="https://github.com/zulip/zulip">contribute</a> to the Zulip open source project, or
+  <a href="https://zulip.tabbott.net">say hello</a> on the developer Zulip app.</p>
+
+  <!-- added full name and organization name -->
+  <div class="control-group">
+    <label for="full_name">*{{ _('Full name') }}</label>
+    <div class="">
+      <input id="id_full_name" class="required" type="text" name="full_name" maxlength="100"
+             value=""/>
+    </div>
+  </div>
+  
+  <div class="control-group">
+    <label for="org_name">*{{ _('Organization name') }}</label>
+    <div class="">
+      <input id="id_org_name" class="required" type="text" name="org_name" maxlength="100"
+             value=""/>
+    </div>
+  </div>
+  <!-- eof full name and organization name -->
+
+
+  <div class="control-group {% if form.email.errors %} error {% endif %}">
+    <label for="email">*{{ _('Email') }}</label>
+    <div class="">
+      <input id="id_email" class="required" type="text" name="email" maxlength="100"
+             value="{% if form.email.value() %}{{ form.email.value() }}{% endif %}"/>
+      {% if form.email.errors %}
+        <p for="id_org_size" class="error help-inline">Please enter a valid email address.</p>
+      {% endif %}
+    </div>
+  </div>
+
+  <div class="control-group {% if form.org_size.errors %} error {% endif %}">
+    <label for="org_size">{{ _('Number of users (roughly)') }}</label>
+    <div class="">
+      <input id="id_org_size" type="text" name="org_size" maxlength="100"
+             value="{% if form.org_size.value() %}{{ form.org_size.value() }}{% endif %}" />
+      {% if form.org_size.errors %}
+        <p for="id_org_size" class="error help-inline">Please enter a whole number.</p>
+      {% endif %}
+    </div>
+  </div>
+
+  <div class="control-group">
+    <label for="comments">{{ _('Tell us about yourself') }}</label>
+    <div class="">
+      <textarea id="id_comments" rows="5" name="comments"
+                placeholder="{{ _('What does your organization do? Any feature requests?') }}"
+      />{% if form.comments.value() %}{{ form.comments.value() }}{% endif %}</textarea>
+    </div>
+  </div>
+
+  <div class="control-group">
+    <div class="controls">
+      <input type="submit" class="btn btn-large btn-primary" value="Send" /><br />
+    </div>
+  </div>
+  </form>
+</div>
+
+{% endblock %}

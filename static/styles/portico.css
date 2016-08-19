@@ -880,6 +880,47 @@ a.bottom-signup-button {
     color: #ddd;
 }
 
+.beta-signup-container {
+  width: 500px;
+  margin: calc(50vh - 350px) auto 0 auto;
+}
+
+.beta-signup-container p {
+  font-size: 16px;
+}
+
+.beta-signup-container .control-group {
+  display: inline-block;
+  vertical-align: top;
+  padding: 10px;
+  margin-bottom: 0px;
+}
+
+.beta-signup-container .control-group.error p {
+  display: block;
+}
+
+.beta-signup-container .control-group textarea {
+  width: 450px;
+}
+
+.beta-signup-container .controls input[type=submit] {
+  font-weight: 300;
+  font-size: 16px;
+  
+  padding: 8px 25px;
+  border-radius: 4px;
+  border: none;
+  
+  box-shadow: 1px 1px 3px rgba(0,0,0,0.1);
+}
+
+@media (max-height: 700px) {
+  .beta-signup-container {
+    width: 500px;
+    margin: 0 auto;
+  }
+}
 
 @media (max-width: 950px) {
 

@@ -36,7 +36,7 @@ from zerver.lib.actions import do_change_password, do_change_full_name, do_chang
     do_update_pointer, realm_user_count
 from zerver.lib.push_notifications import num_push_devices_for_user
 from zerver.forms import RegistrationForm, HomepageForm, RealmCreationForm, ToSForm, \
-    CreateUserForm, OurAuthenticationForm
+    CreateUserForm, SignUpForBetaForm, OurAuthenticationForm
 from zerver.lib.actions import is_inactive
 from django.views.decorators.csrf import csrf_exempt
 from django_auth_ldap.backend import LDAPBackend, _LDAPUser
@@ -689,6 +689,24 @@ def initial_invite_page(request):
 def logout_then_login(request, **kwargs):
     # type: (HttpRequest, **Any) -> HttpResponse
     return django_logout_then_login(request, kwargs)
+
+def sign_up_for_beta(request):
+    # type: (HttpRequest) -> HttpResponse
+    success = False
+    if request.method == 'POST':
+        form = SignUpForBetaForm(request.POST)
+        print 'gothere'
+        print form
+        print form.cleaned_data
+        if form.is_valid():
+            print 'is valid'
+            InterestedUser.objects.create(**form.cleaned_data)
+            # send_registration_completion_email(email, request)
+            form = SignUpForBetaForm()
+            success = True
+    else:
+        form = SignUpForBetaForm()
+    return render_to_response('zerver/beta.html', {'form': form, 'success': success}, request=request)
 
 def create_preregistration_user(email, request, realm_creation=False):
     # type: (text_type, HttpRequest, bool) -> HttpResponse

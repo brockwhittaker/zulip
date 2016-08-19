@@ -175,6 +175,11 @@ class CreateUserForm(forms.Form):
     full_name = forms.CharField(max_length=100)
     email = forms.EmailField()
 
+class SignUpForBetaForm(forms.Form):
+    email = forms.EmailField()
+    org_size = forms.IntegerField(required=False)
+    comments = forms.CharField(widget=forms.Textarea, required=False)
+
 class OurAuthenticationForm(AuthenticationForm):
     def clean_username(self):
         # type: () -> str
