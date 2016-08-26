@@ -1443,6 +1443,20 @@ div.focused_table {
     margin-bottom: 5px;
 }
 
+#message_edit_topic.header-v {
+    height: 18px;
+    display: inline-block;
+    margin: -2px 0 0 0;
+    padding: 0px 3px;
+
+    line-height: 0px;
+    font-size: 14px;
+    
+    border-radius: 0px;
+    border: 1px solid #afbfca;
+    box-shadow: none;
+}
+
 #message_edit_topic:focus {
     outline: none;
 }
@@ -3219,7 +3233,7 @@ li.expanded_private_message {
 
 #topic_edit_form {
     display: inline-block;
-    margin: 0 0 10px 0;
+    margin: 0 0 0 0;
     height: 22px;
     background: #e2e2e2;
     padding-left: 20px;
