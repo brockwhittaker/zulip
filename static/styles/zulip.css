@@ -1440,27 +1440,18 @@ div.focused_table {
 }
 
 #message_edit_topic {
-    height: 20px;
-    margin-top: -1px;
-    line-height: 0px;
-    font-size: 14px;
-    display: inline-block;
-    padding: 0px;
-    border-radius: 0px;
-    border: 1px solid #afbfca;
-    padding-left: 3px;
-    padding-right: 3px;
+    margin-bottom: 5px;
 }
 
 #message_edit_topic:focus {
-    box-shadow: none;
     outline: none;
-    border-color: #727d84;
 }
 
 .message_edit_topic_propagate {
     display: inline-block;
-    width: 400px;
+    width: 300px;
+    margin-bottom: 5px !important;
+    max-width: 100%;
 }
 
 .message_content.condensed {
@@ -3222,8 +3213,8 @@ li.expanded_private_message {
     -moz-box-sizing: border-box;
     box-sizing: border-box;
 }
-#message_edit_form .control-group {
-    margin-bottom: 5px;
+#message_edit_form .control-group.no-margin {
+    margin-bottom: 0px;
 }
 
 #topic_edit_form {
