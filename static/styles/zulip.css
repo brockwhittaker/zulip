@@ -3547,3 +3547,17 @@ li.show-more-private-messages a {
     margin-left: 5px;
 }
 
+#preview_message_area {
+    max-height: 325px;
+    overflow: auto;
+    min-height: 58px;
+}
+
+a#markdown_preview,
+a#undo_markdown_preview {
+    text-decoration: none;
+    position: relative;
+    top: 3px;
+    font-size: 16px;
+    color: #777;
+}
