@@ -73,7 +73,9 @@ class RegistrationForm(forms.Form):
     password = forms.CharField(widget=forms.PasswordInput, max_length=100,
                                required=False)
     realm_name = forms.CharField(max_length=100, required=False)
-
+    realm_org_type = forms.ChoiceField(((Realm.COMMUNITY, 'Community'),
+                                        (Realm.CORPORATE, 'Corporate')), \
+                                       initial=Realm.COMMUNITY, required=False)
     if settings.TERMS_OF_SERVICE:
         terms = forms.BooleanField(required=True)
 

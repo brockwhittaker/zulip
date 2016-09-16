@@ -63,9 +63,24 @@ Form is validated both client-side using jquery-validate (see signup.js) and ser
                             <div class="alert alert-error">{{ error }}</div>
                             {% endfor %}
                         {% endif %}
-                    <br /><span class="small">{{ _('You can change this later on the admin page.') }}</span>
+                    <br /><span class="help-inline">{{ _('You can change this later on the admin page.') }}</span>
                 </div>
+            </div>
+
+            <div class="control-group">
+                <label for="id_org_type" class="control-label">{{ _('Default Settings') }}</label>
+                <div class="controls" id="id_org_type">
+                    {% for org_type_value, org_type_text in form.realm_org_type.field.choices %}
+                        <input class="required" type="radio" name="realm_org_type" value="{{ org_type_value }}"
+                            {% if org_type_value == form.realm_org_type.value() %} checked {% endif %} />
+                            {{ org_type_text }} <br />
+                    {% endfor %}
+                    <span class="help-inline">{{ _('All settings can be changed on the admin page.
+                      <br />Corporate defaults are typically appropriate when all
+                      <br />user emails belong to the same domain (e.g. @acme.com).
+                      <br />If you aren\'t sure, choose community.') }}</span>
                 </div>
+            </div>
         {% endif %}
 
         {% if password_auth_enabled %}
