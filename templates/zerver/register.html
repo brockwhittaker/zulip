@@ -144,31 +144,33 @@ Form is validated both client-side using jquery-validate (see signup.js) and ser
 
         {% endif %}
 
-        {% if terms_of_service %}
-            <div class="input-group float-left">
-                {#
-                This is somewhat subtle.
-                Checkboxes have a name and value, and when the checkbox is ticked, the form posts
-                with name=value. If the checkbox is unticked, the field just isn't present at all.
+        <div class="input-group padding">
+            {% if terms_of_service %}
+                <div class="float-left">
+                    {#
+                    This is somewhat subtle.
+                    Checkboxes have a name and value, and when the checkbox is ticked, the form posts
+                    with name=value. If the checkbox is unticked, the field just isn't present at all.
 
-                This is distinct from 'checked', which determines whether the checkbox appears
-                at all. (So, it's not symmetric to the code above.)
-                #}
-                <input id="id_terms" class="required" type="checkbox" name="terms"
-                       {% if form.terms.value() %}checked="checked"{% endif %} />
-                <label for="id_terms" class="inline-block">
-                    {{ _('I agree to the') }} <a href="{{ server_uri }}/terms" target="_blank">{{ _('Terms of Service') }}</a>.
-                </label>
-                {% if form.terms.errors %}
-                    {% for error in form.terms.errors %}
-                        <div class="alert alert-error">{{ error }}</div>
-                    {% endfor %}
-                {% endif %}
+                    This is distinct from 'checked', which determines whether the checkbox appears
+                    at all. (So, it's not symmetric to the code above.)
+                    #}
+                    <input id="id_terms" class="required" type="checkbox" name="terms"
+                           {% if form.terms.value() %}checked="checked"{% endif %} />
+                    <label for="id_terms" class="inline-block">
+                        {{ _('I agree to the') }} <a href="{{ server_uri }}/terms" target="_blank">{{ _('Terms of Service') }}</a>.
+                    </label>
+                    {% if form.terms.errors %}
+                        {% for error in form.terms.errors %}
+                            <div class="alert alert-error">{{ error }}</div>
+                        {% endfor %}
+                    {% endif %}
+                </div>
+            {% endif %}
+            <div class="submit-button-box float-right">
+                <input type="submit" class="button-new sea-green" value="Register" /><br />
+                <input type="hidden" name="next" value="{{ next }}" />
             </div>
-        {% endif %}
-        <div class="submit-button-box float-right">
-            <input type="submit" class="button-new sea-green" value="Register" /><br />
-            <input type="hidden" name="next" value="{{ next }}" />
         </div>
     </form>
   </div>

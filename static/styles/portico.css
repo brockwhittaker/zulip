@@ -934,6 +934,10 @@ a.bottom-signup-button {
     width: auto;
 }
 
+.input-group.padding {
+  padding: 10px 0px;
+}
+
 .password-reset .input-group {
     margin: 15px 0px;
 }
