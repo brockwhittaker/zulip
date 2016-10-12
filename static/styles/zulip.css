@@ -10,6 +10,30 @@ html {
     display: none !important; /* We are now loaded, by definition. */
 }
 
+#footer {
+    position: fixed;
+    bottom: 0px;
+    left: 0px;
+    z-index: 2;
+    width: 100%;
+    background: white;
+}
+
+#typing_notifications {
+    margin-left: 250px;
+    margin-right: 250px;
+    border: 1px solid #dadada;
+    margin-bottom: -1px;
+    padding: 0.4em;
+    padding-left: 0.8em;
+    display: none;
+}
+
+#typing_notification_list {
+    list-style: none;
+    margin: 0;
+}
+
 body {
     font-family: 'Humbug', 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }

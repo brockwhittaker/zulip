@@ -830,6 +830,7 @@ JS_SPECS = {
             'js/referral.js',
             'js/custom_markdown.js',
             'js/bot_data.js',
+            'js/typing.js',
             # JS bundled by webpack is also included here if PIPELINE_ENABLED setting is true
         ],
         'output_filename': 'min/app.js'

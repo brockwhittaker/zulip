@@ -146,7 +146,6 @@ table.compose_table {
 }
 
 #compose {
-    position: fixed;
     bottom: 0px;
     left: 0px;
     z-index: 2;

@@ -75,8 +75,9 @@
       </div>
       <div id="bottom_whitespace"></div>
     </div>
-
-
-{% include "zerver/compose.html" %}
+    <div id="footer">
+      {% include "zerver/typing_notifications.html" %}
+      {% include "zerver/compose.html" %}
+    </div>
 <div id="notifications-area">
 </div>

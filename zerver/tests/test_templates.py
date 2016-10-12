@@ -105,6 +105,7 @@ class TemplateTestCase(ZulipTestCase):
             'zerver/image-overlay.html',
             'zerver/invalid_realm.html',
             'zerver/compose.html',
+            'zerver/typing_notifications.html',
             'zerver/debug.html',
             'zerver/base.html',
             'zerver/api_content.json',
