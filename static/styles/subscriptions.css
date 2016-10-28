@@ -118,12 +118,6 @@
     margin-right: 1px;
 }
 
-.subscription_settings {
-    width: 100%;
-    position: relative;
-    top: -1px;
-}
-
 .subscription_settings form {
     text-align: center;
 }
@@ -378,6 +372,112 @@ form#add_new_subscription {
     display: none;
 }
 
+.subscriptions-overlay-bg {
+    font: menu;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(20,20,20,0.7);
+    color: #444;
+}
+
+.subscriptions-container {
+    position: relative;
+    height: 80%;
+    background-color: #fff;
+    border-radius: 4px;
+    padding: 0px;
+    width: 900px;
+    overflow: hidden;
+}
+
+.subscriptions-header {
+    padding: 12px;
+    text-align: center;
+    text-transform: uppercase;
+    font-weight: 700;
+    border-bottom: 1px solid #ddd;
+}
+
+.subscriptions-container .exit {
+    font-weight: 400;
+    position: absolute;
+    top: 5px;
+    right: 10px;
+    color: #AAA;
+    cursor: pointer;
+}
+
+.subscriptions-container .exit-sign {
+    position: relative;
+    top: 2px;
+    margin-left: 3px;
+    font-size: 1.7em;
+    font-weight: 300;
+}
+
+.subscriptions-container .left,
+.subscriptions-container .right {
+    vertical-align: top;
+    display: inline-block;
+    width: 50%;
+    height: calc(100% - 39px);
+    margin: 0px -2px;
+}
+
+.subscriptions-container .left {
+    border-right: 1px solid #ddd;
+}
+
+.subscriptions-container .left .search-container {
+    padding: 6px 8px;
+    border-bottom: 1px solid #ddd;
+}
+
+.subscriptions-container .right .display-type {
+    padding: 6px;
+    text-align: center;
+    font-weight: 600;
+    border-bottom: 1px solid #ddd;
+}
+
+.subscriptions-container .display-type.preview:after {
+    content: "Preview";
+}
+
+.subscriptions-container .display-type.preferences:after {
+    content: "Preferences";
+}
+
+.subscriptions-container .right iframe {
+    width: 100%;
+    height: calc(100% - 41px);
+    border: none;
+}
+
+.subscriptions-container input[type=text].small {
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 3px;
+    outline: none;
+    color: #444;
+    text-align: center;
+}
+
+.subscriptions-container input[type=text].small:focus {
+    text-align: left;
+}
+
+.subscriptions-container input[type=text].small:valid {
+    text-align: left;
+}
+
+#find_streams {
+    width: 194px;
+}
+
 .streams-list {
     overflow: auto;
     height: calc(100% - 41px);
@@ -398,7 +498,7 @@ form#add_new_subscription {
     border-bottom: 1px solid #eee;
 }
 
-.subscription_table_elem > div {
+.stream-row > div {
     display: inline-block;
     vertical-align: top;
 }
@@ -479,4 +579,35 @@ form#add_new_subscription {
     float: right;
     margin-left: 10px;
     color: #aaa;
+}
+
+#subscription_overlay {
+    display: none;
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0,0,0,0.8);
+    overflow: auto;
+    z-index: 102;
+}
+
+#subscription_overlay.show {
+    display: block;
+}
+
+#subscription_overlay .subscription_settings {
+    display: none;
+    position: relative;
+    width: 600px;
+    margin: 0 auto;
+    border-radius: 4px;
+    top: -1px;
+    max-height: 85vh;
+    overflow: auto;
+}
+
+#subscription_overlay .subscription_settings.show {
+    display: block;
 }
