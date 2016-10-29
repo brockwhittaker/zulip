@@ -179,8 +179,9 @@ function update_stream_name(stream_id, old_name, new_name) {
 function update_stream_description(sub, description) {
     sub.description = description;
 
-    var sub_settings_selector = '.stream-row[data-stream-id=' + sub.stream_id + ']';
-    $(sub_settings_selector + ' .description').text(description);
+    var sub_settings_selector = '.subscription_settings[data-stream-id=' + sub.stream_id + ']';
+    var stream_selector = '.stream-row[data-stream-id="' + sub.stream_id + '"]';
+    $(stream_selector + ' .description').text(description);
     $(sub_settings_selector + ' input.description').val(description);
 }
 
@@ -341,8 +342,7 @@ function show_subscription_settings(sub_row) {
         }
     });
 
-    var colorpicker = $("#subscription_overlay .subscription_settings[data-stream-id='" + sub_row.data("stream-id") + "'] .colorpicker");
-
+    var colorpicker = settings_for_sub(sub_row.data("stream-id")).find(".colorpicker");
     var color = stream_data.get_color(stream_name);
     stream_color.set_colorpicker_color(colorpicker, color);
 
@@ -362,7 +362,7 @@ function show_subscription_settings(sub_row) {
 
 exports.show_settings_for = function (stream_name) {
     var sub_settings = settings_for_sub(stream_data.get_sub(stream_name));
-    var stream = $(".stream-row[data-stream-name='" + stream_name + "']");
+    var stream = $(".subscription_settings[data-stream-name='" + stream_name + "']");
     $(".subscription_settings[data-stream].show").removeClass("show");
     show_subscription_settings(stream);
     $("#subscription_overlay").fadeIn(300);
@@ -938,8 +938,8 @@ $(function () {
         var text_box = sub_row.find('input[name="principal"]');
         var principal = $.trim(text_box.val());
         // TODO: clean up this error handling
-        var error_elem = sub_row.find('.subscriber_list_container .alert-error');
-        var warning_elem = sub_row.find('.subscriber_list_container .alert-warning');
+        var error_elem = settings_row.find('.subscriber_list_container .alert-error');
+        var warning_elem = settings_row.find('.subscriber_list_container .alert-warning');
 
         function invite_success(data) {
             text_box.val('');
@@ -1061,7 +1061,6 @@ $(function () {
                 // The event from the server will update the rest of the UI
                 ui.report_success(i18n.t("The stream description has been updated!"),
                                  $("#subscriptions-status"), 'subscriptions-status');
-                sub_row.find(".description").text(description);
             },
             error: function (xhr) {
                 ui.report_error(i18n.t("Error updating the stream description"), xhr,
@@ -1085,10 +1084,12 @@ $(function () {
         sub_row.find('.icon').expectOne().replaceWith($(html));
 
         html = templates.render('subscription_type', sub);
-        sub_row.find('.subscription-type').expectOne().html(html);
+        $(".subscription_settings[data-stream-name='" + sub.name + "']")
+            .find('.subscription-type').expectOne().html(html);
 
         html = templates.render('change_stream_privacy', sub);
-        sub_row.find('.change-stream-privacy').expectOne().html(html);
+        $(".subscription_settings[data-stream-name='" + sub.name + "']")
+            .find('.change-stream-privacy').expectOne().html(html);
 
         stream_list.redraw_stream_privacy(sub.name);
     }
@@ -1096,8 +1097,9 @@ $(function () {
     function change_stream_privacy(e, url, success_message, error_message, invite_only) {
         e.preventDefault();
 
-        var sub_row = $(e.target).closest('.stream-row');
-        var stream_name = sub_row.attr("data-stream-name");
+        var stream_name = $(e.target).attr("data-stream-name");
+        var sub_row = $(".stream-row[data-stream-name='" + stream_name + "']"),
+            settings_row = $(".subscription_settings[data-stream-name='" + stream_name + "']");
 
         $("#subscriptions-status").hide();
         var data = {"stream_name": stream_name};
@@ -1109,11 +1111,11 @@ $(function () {
                 var sub = stream_data.get_sub(stream_name);
                 sub.invite_only = invite_only;
                 redraw_privacy_related_stuff(sub_row, sub);
-                var feedback_div = sub_row.find(".change-stream-privacy-feedback").expectOne();
+                var feedback_div = settings_row.find(".change-stream-privacy-feedback").expectOne();
                 ui.report_success(success_message, feedback_div);
             },
             error: function (xhr) {
-                var feedback_div = sub_row.find(".change-stream-privacy-feedback").expectOne();
+                var feedback_div = settings_row.find(".change-stream-privacy-feedback").expectOne();
                 ui.report_error(error_message, xhr, feedback_div);
             }
         });
