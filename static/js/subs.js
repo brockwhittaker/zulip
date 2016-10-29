@@ -219,7 +219,7 @@ function button_for_sub(sub) {
 }
 
 function settings_for_sub(sub) {
-    var id = parseInt(sub.stream_id, 10);
+    var id = parseInt(typeof sub === "number" ? sub : sub.stream_id, 10);
     return $("#subscription_overlay .subscription_settings[data-stream-id='" + id + "']");
 }
 
