@@ -1,6 +1,20 @@
 {{#with this}}
 <div class="subscription_settings" data-stream-id="{{stream_id}}" data-stream-name="{{name}}">
  <div class="inner-box">
+  <div class="stream-header">
+    {{#if invite_only}}
+    <div class="large-icon lock" style="color: {{color}}">
+      <i class="icon-vector-lock"></i>
+    </div>
+    {{else}}
+    <div class="large-icon hash" style="color: {{color}}"></div>
+    {{/if}}
+    <div class="stream-name">
+      {{name}}
+    </div>
+  </div>
+  <div class="stream-description">{{description}}</div>
+
   <div class="regular_subscription_settings collapse {{#subscribed}}in{{/subscribed}}">
     <div class="subscription-type">
       {{partial "subscription_type"}}
