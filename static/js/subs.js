@@ -60,6 +60,11 @@ function get_stream_name (target) {
     return target.closest(".stream-row, .subscription_settings").data("stream-name");
 }
 
+function settings_for_sub(sub) {
+    var id = parseInt(typeof sub === "number" ? sub : sub.stream_id, 10);
+    return $("#subscription_overlay .subscription_settings[data-stream-id='" + id + "']");
+}
+
 function stream_home_view_clicked(e) {
     var stream = get_stream_name(e.target);
     var sub_row = $(".stream-row[data-stream-name='" + stream + "']");
@@ -161,6 +166,7 @@ function update_stream_name(stream_id, old_name, new_name) {
     // Rename the stream internally.
     var sub = stream_data.rename_sub(stream_id, new_name);
 
+    settings_for_sub(sub.stream_id).find(".stream-title").text(new_name);
     // Update the left sidebar.
     stream_list.rename_stream(sub, new_name);
 
@@ -217,11 +223,6 @@ exports.set_color = function (stream_name, color) {
 function button_for_sub(sub) {
     var id = parseInt(sub.stream_id, 10);
     return $(".stream-row[data-stream-id='" + id + "'] .check");
-}
-
-function settings_for_sub(sub) {
-    var id = parseInt(typeof sub === "number" ? sub : sub.stream_id, 10);
-    return $("#subscription_overlay .subscription_settings[data-stream-id='" + id + "']");
 }
 
 exports.rerender_subscribers_count = function (sub) {
