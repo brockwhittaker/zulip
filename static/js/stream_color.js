@@ -85,7 +85,7 @@ var subscriptions_table_colorpicker_options = {
 
 exports.set_colorpicker_color = function (colorpicker, color) {
     colorpicker.spectrum(_.extend(subscriptions_table_colorpicker_options,
-                         {color: color, container: "#subscriptions_table"}));
+                         {color: color, container: "#subscription_overlay .subscription_settings.show"}));
 };
 
 exports.update_stream_color = function (sub, stream_name, color, opts) {

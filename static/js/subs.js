@@ -361,10 +361,12 @@ exports.show_settings_for = function (stream_name) {
     var sub_settings = settings_for_sub(stream_data.get_sub(stream_name));
     var stream = $(".subscription_settings[data-stream-name='" + stream_name + "']");
     $(".subscription_settings[data-stream].show").removeClass("show");
-    show_subscription_settings(stream);
+
     $("#subscription_overlay").fadeIn(300);
     $("#subscription_overlay .subscription_settings.show").removeClass("show");
     sub_settings.addClass("show");
+
+    show_subscription_settings(stream);
 };
 
 exports.mark_subscribed = function (stream_name, attrs) {
