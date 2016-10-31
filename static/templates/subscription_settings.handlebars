@@ -1,5 +1,6 @@
 {{#with this}}
 <div class="subscription_settings" data-stream-id="{{stream_id}}" data-stream-name="{{name}}">
+ <div class="inner-box">
   <div class="regular_subscription_settings collapse {{#subscribed}}in{{/subscribed}}">
     <div class="subscription-type">
       {{partial "subscription_type"}}
@@ -94,5 +95,6 @@
     </div>
   </div>
   {{/render_subscribers}}
+ </div>
 </div>
 {{/with}}
