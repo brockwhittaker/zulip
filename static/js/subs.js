@@ -184,11 +184,11 @@ function update_stream_name(stream_id, old_name, new_name) {
 
 function update_stream_description(sub, description) {
     sub.description = description;
-
-    var sub_settings_selector = '.subscription_settings[data-stream-id=' + sub.stream_id + ']';
+    var settings = settings_for_sub(sub.stream_id);
     var stream_selector = '.stream-row[data-stream-id="' + sub.stream_id + '"]';
     $(stream_selector + ' .description').text(description);
-    $(sub_settings_selector + ' input.description').val(description);
+    settings.find('input.description').val(description);
+    settings.find('.stream-description').text(description);
 }
 
 function stream_desktop_notifications_clicked(e) {
@@ -277,11 +277,7 @@ function prepend_subscriber(sub_row, email) {
     list.prepend(format_member_list_elem(email));
 }
 
-function show_subscription_settings(sub_row) {
-    var sub_arrow = sub_row.find('.sub_arrow i');
-    sub_arrow.removeClass('icon-vector-chevron-down');
-    sub_arrow.addClass('icon-vector-chevron-up');
-
+var show_subscription_settings = function (sub_row) {
     var stream_name = get_stream_name(sub_row);
     var warning_elem = sub_row.find('.subscriber_list_container .alert-warning');
     var error_elem = sub_row.find('.subscriber_list_container .alert-error');
@@ -1013,10 +1009,10 @@ $(function () {
     $("#subscriptions_table").on("submit", ".rename-stream form", function (e) {
         e.preventDefault();
 
-        var sub_row = $(e.target).closest('.stream-row');
-        var old_name_box = sub_row.find('.stream-name');
-        var old_name = old_name_box.text();
-        var new_name_box = sub_row.find('input[name="new-name"]');
+        var sub_settings = $(e.target).closest('.subscription_settings');
+        var sub_row = $(".stream-row[data-stream-name='" + sub_settings.data("stream-name") + "']");
+        var old_name = sub_row.data("stream-name");
+        var new_name_box = sub_settings.find('input[name="new-name"]');
         var new_name = $.trim(new_name_box.val());
 
         $("#subscriptions-status").hide();
@@ -1028,7 +1024,13 @@ $(function () {
             success: function (data) {
                 new_name_box.val('');
                 // Update all visible instances of the old name to the new name.
-                old_name_box.text(new_name);
+                $("[data-stream-name='" + old_name + "'] .stream-name").text(new_name);
+                // jquery sets .data differently than [data-*], so set both as .data
+                // and as .attr("data-*").
+                $("[data-stream-name='" + old_name + "']")
+                    .attr("data-stream-name", new_name)
+                    .data("stream-name", new_name);
+
                 sub_row.find(".email-address").text(data.email_address);
 
                 ui.report_success(i18n.t("The stream has been renamed!"), $("#subscriptions-status "),
