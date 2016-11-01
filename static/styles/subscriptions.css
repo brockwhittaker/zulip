@@ -16,12 +16,6 @@
     background-color: inherit;
 }
 
-.subscription_settings,
-.subscription_header,
-.subscription_header.active {
-    background-color: #fefefe;
-}
-
 .color_swatch {
     display: inline-block;
     height: 18px;
@@ -357,7 +351,7 @@ form#add_new_subscription {
     background-color: #fff;
     border-radius: 4px;
     padding: 0px;
-    width: 900px;
+    width: 1100px;
     overflow: hidden;
 }
 
@@ -372,7 +366,7 @@ form#add_new_subscription {
 .subscriptions-container .exit {
     font-weight: 400;
     position: absolute;
-    top: 5px;
+    top: 10px;
     right: 10px;
     color: #AAA;
     cursor: pointer;
@@ -380,10 +374,11 @@ form#add_new_subscription {
 
 .subscriptions-container .exit-sign {
     position: relative;
-    top: 2px;
+    top: 3px;
     margin-left: 3px;
     font-size: 1.7em;
     font-weight: 300;
+    cursor: pointer;
 }
 
 .subscriptions-container .left,
@@ -609,15 +604,21 @@ form#add_new_subscription {
     display: block;
 }
 
+#subscription_overlay .settings {
+    position: relative;
+    height: calc(100% - 50px);
+    overflow-y: auto;
+}
+
 #subscription_overlay .subscription_settings {
     display: none;
     position: relative;
-    width: 600px;
+    width: 100%;
     margin: 0 auto;
     border-radius: 4px;
     top: -1px;
     max-height: 85vh;
-    overflow: auto;
+    overflow: hidden;
 }
 
 #subscription_overlay .subscription_settings.show {
