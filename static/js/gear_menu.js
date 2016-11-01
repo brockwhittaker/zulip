@@ -46,11 +46,14 @@ exports.initialize = function () {
         }
     });
 
-    var subs_link = $('#gear-menu a[href="#subscriptions"]');
+    var subs_link = $('#gear-menu #subscription_trigger');
 
     // If the streams page is shown by clicking directly on the "Streams"
     // link (in the gear menu), then focus the new stream textbox.
     subs_link.on('click', function (e) {
+        subs.setup_page();
+        $("#subscription_overlay").fadeIn(300);
+        $("#subscription_overlay .stream-row").eq(0).click();
         $(document).one('subs_page_loaded.zulip', function (e) {
             $('#create_or_filter_stream_row input[type="text"]').focus().select();
         });

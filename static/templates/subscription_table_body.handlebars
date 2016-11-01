@@ -1,24 +1,41 @@
-<div id="create_or_filter_stream_row">
-    <div class="subscription_table_elem">
-      <form id="add_new_subscription" class="form-inline" action="">
-          <input type="text" name="stream_name" id="search_stream_name"
-            placeholder="{{t 'Filter by stream name' }}" value="" autocomplete="off" />
-          {{#if can_create_streams}}
-              <input type="submit" class="btn btn-primary"
-                id="create_stream_button" value="{{t 'Create new stream' }}" />
-          {{/if}}
-      </form>
-    </div>
-</div>
-
-{{#each subscriptions}}
-{{partial "subscription"}}
-{{/each}}
-
-<div id="subscription_overlay">
+<div id="subscription_overlay" class="new-style">
     <div class="flex">
-        {{#each subscriptions}}
-        {{ partial "subscription_settings" }}
-        {{/each}}
+        <div class="subscriptions-container">
+            <div class="subscriptions-header">
+                Subscriptions
+                <div class="exit">
+                    Esc <span class="exit-sign">&times;</span>
+                </div>
+            </div>
+            <div class="left">
+                <div class="search-container">
+                    <form id="add_new_subscription" class="form-inline" action="">
+                        <input type="text" name="stream_name" id="search_stream_name"
+                          placeholder="{{t 'Filter Streams' }}" value="" autocomplete="off" />
+                        {{#if can_create_streams}}
+                        <!--
+                            <input type="submit" class="btn btn-primary"
+                              id="create_stream_button" value="{{t 'Create new stream' }}" />
+                        -->
+                        {{/if}}
+                    </form>
+                </div>
+                <div class="streams-list">
+                    {{#each subscriptions}}
+                    {{partial "subscription"}}
+                    {{/each}}
+                </div>
+            </div>
+            <div class="right">
+                <div class="display-type">
+                </div>
+                <div class="settings">
+                    {{#each subscriptions}}
+                    {{ partial "subscription_settings" }}
+                    {{/each}}
+                </div>
+                <iframe id="preview_iframe" src="" width="" height=""></iframe>
+            </div>
+        </div>
     </div>
 </div>
