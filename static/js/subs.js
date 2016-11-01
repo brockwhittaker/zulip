@@ -264,7 +264,6 @@ function add_sub_to_table(sub) {
     sub = stream_data.add_admin_options(sub);
     stream_data.update_subscribers_count(sub);
     var html = templates.render('subscription', sub);
-    $('#create_or_filter_stream_row').after(html);
     settings_for_sub(sub).collapse('show');
     var email_address_hint_content = templates.render('email_address_hint', { page_params: page_params });
     add_email_hint(sub, email_address_hint_content);
@@ -372,7 +371,6 @@ exports.show_settings_for = function (stream_name) {
     var stream = $(".subscription_settings[data-stream-name='" + stream_name + "']");
     $(".subscription_settings[data-stream].show").removeClass("show");
 
-    $("#subscription_overlay").fadeIn(300);
     $("#subscription_overlay .subscription_settings.show").removeClass("show");
     sub_settings.addClass("show");
 
@@ -505,7 +503,7 @@ exports.filter_table = function (query) {
 };
 
 function actually_filter_streams() {
-    var search_box = $("#create_or_filter_stream_row input[type='text']");
+    var search_box = $("#add_new_subscription input[type='text']");
     var query = search_box.expectOne().val().trim();
     exports.filter_table({input: query});
 }
@@ -513,6 +511,46 @@ function actually_filter_streams() {
 var filter_streams = _.throttle(actually_filter_streams, 50);
 
 exports.setup_page = function () {
+    function initialize_components () {
+        var stream_filter_toggle = component.toggle({
+            name: "stream-filter-toggle",
+            selected: 0,
+            values: [
+                { label: "All Streams" },
+                { label: "Subscribed" }
+            ],
+            callback: function (name) {
+                actually_filter_streams();
+            }
+        }).get();
+
+        var preview_toggle = component.toggle({
+            name: "preview-toggle",
+            selected: 0,
+            values: [
+                { label: "Settings" },
+                { label: "Preview" }
+            ],
+            callback: function (name) {
+                var stream_name;
+                if (name === "Preview") {
+                    stream_name = $(".settings").hide().data("stream-name");
+                    if ($("#preview_iframe").attr("src") !== "/?stream=" + stream_name) {
+                        $("#preview_iframe").attr("src", "/?stream=" + stream_name);
+                    }
+                    $("#preview_iframe")
+                        .show()
+                        .data("stream-name", stream_name);
+                } else {
+                    $("#preview_iframe").hide().data("stream-name");
+                    $(".settings").show();
+                }
+            }
+        }).get();
+
+        $("#subscriptions_table .search-container").prepend(stream_filter_toggle);
+        $("#subscriptions_table .display-type").prepend(preview_toggle);
+    }
 
     function _populate_and_fill() {
         var sub_rows = stream_data.get_streams_for_settings_page();
@@ -526,13 +564,13 @@ exports.setup_page = function () {
         };
         var rendered = templates.render('subscription_table_body', template_data);
         $('#subscriptions_table').append(rendered);
-
+        initialize_components();
         var email_address_hint_content = templates.render('email_address_hint', { page_params: page_params });
         _.each(sub_rows, function (row) {
             add_email_hint(row, email_address_hint_content);
         });
 
-        $("#create_or_filter_stream_row input[type='text']").on("input", filter_streams);
+        $("#add_new_subscription input[type='text']").on("input", filter_streams);
         $(document).trigger($.Event('subs_page_loaded.zulip'));
     }
 
@@ -960,7 +998,10 @@ $(function () {
 
     $("#subscriptions_table").on("click", ".stream-row", function (e) {
         if ($(e.target).closest(".check, .subscription_settings").length === 0) {
-            exports.show_settings_for(get_stream_name($(e.target)));
+            $(".stream-row.active").removeClass("active no-border");
+            $(this).addClass("active");
+            $(this).prev().addClass("no-border");
+            exports.show_settings_for(get_stream_name(this));
         }
     });
 
