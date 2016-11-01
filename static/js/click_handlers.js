@@ -212,6 +212,9 @@ $(function () {
         popovers.hide_all();
     });
 
+    $("#subscriptions_table").on("click", ".exit", function () {
+        $("#subscription_overlay").fadeOut(500);
+    });
 
     // HOME
 
