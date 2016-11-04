@@ -448,17 +448,12 @@ form#add_new_subscription {
 
 .stream-row {
     padding: 15px 10px;
-    border-bottom: 1px solid #ddd;
+    border-bottom: 1px solid #eee;
     cursor: pointer;
 }
 
 .stream-row.active {
     background-color: #eee;
-    border-bottom: 1px solid #eee;
-}
-
-.stream-row.no-border {
-    border-bottom: 1px solid #eee;
 }
 
 .stream-row > div {
