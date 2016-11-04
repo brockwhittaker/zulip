@@ -1004,9 +1004,8 @@ $(function () {
 
     $("#subscriptions_table").on("click", ".stream-row", function (e) {
         if ($(e.target).closest(".check, .subscription_settings").length === 0) {
-            $(".stream-row.active").removeClass("active no-border");
+            $(".stream-row.active,.stream-row").removeClass("active");
             $(this).addClass("active");
-            $(this).prev().addClass("no-border");
             exports.show_settings_for(get_stream_name(this));
         }
     });
