@@ -374,6 +374,11 @@ exports.show_settings_for = function (stream_name) {
     $("#subscription_overlay .subscription_settings.show").removeClass("show");
     sub_settings.addClass("show");
 
+    if (component.toggle.lookup("preview-toggle").value() === "Preview") {
+        console.log(location.origin + "/?stream=" + stream_name);
+        $("#preview_iframe").attr("src", location.origin + "/?stream=" + stream_name);
+    }
+
     show_subscription_settings(stream);
 };
 
