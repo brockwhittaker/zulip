@@ -386,8 +386,8 @@ form#add_new_subscription {
     vertical-align: top;
     display: inline-block;
     width: 50%;
-    height: calc(100% - 39px);
-    margin: 0px -2px;
+    height: calc(100% - 45px);
+    margin: 0px -1px;
 }
 
 .subscriptions-container .left {
@@ -443,13 +443,18 @@ form#add_new_subscription {
     text-align: left;
 }
 
-#find_streams {
+#search_stream_name {
     width: 194px;
+    padding: 3px;
+    margin: 2px 0px;
+    float: right;
+    border-radius: 5px;
+    box-shadow: none;
 }
 
 .streams-list {
     overflow: auto;
-    height: calc(100% - 41px);
+    height: calc(100% - 45px);
 }
 
 .stream-row {
@@ -607,7 +612,7 @@ form#add_new_subscription {
 
 #subscription_overlay .settings {
     position: relative;
-    height: calc(100% - 50px);
+    height: calc(100% - 45px);
     overflow-y: auto;
 }
 
@@ -618,8 +623,6 @@ form#add_new_subscription {
     margin: 0 auto;
     border-radius: 4px;
     top: -1px;
-    max-height: 85vh;
-    overflow: hidden;
 }
 
 #subscription_overlay .subscription_settings.show {
@@ -649,4 +652,70 @@ form#add_new_subscription {
 
 #subscription_overlay .subscription_settings ul li .sp-replacer {
     box-shadow: none;
+}
+
+@media (max-width: 1130px) {
+    .subscriptions-container {
+        max-width: 95%;
+    }
+
+    #subscription_overlay .left {
+        width: 40%;
+    }
+
+    #subscription_overlay .right {
+        width: 60%;
+    }
+
+    #search_stream_name {
+        width: 150px;
+        margin-top: 2px;
+        margin-bottom: 0px;
+    }
+}
+
+@media (max-width: 1000px) {
+    #search_stream_name {
+        display: none;
+    }
+
+    .search-container {
+        text-align: center;
+    }
+}
+
+@media (max-width: 700px) {
+    #subscription_overlay .left,
+    #subscription_overlay .right {
+        display: block;
+        width: 100%;
+    }
+
+    #subscription_overlay .left {
+        overflow: auto;
+        height: 30%;
+    }
+
+    #subscription_overlay .right {
+        overflow: auto;
+        height: calc(70% - 45px);
+        border-top: 1px solid #ddd;
+    }
+
+    #subscription_overlay .display-type {
+        display: none;
+    }
+
+    #subscription_overlay .subscriptions-container {
+        height: 95%;
+    }
+
+    #subscription_overlay .subscription_settings {
+        overflow: visible;
+    }
+
+    #subscription_overlay .settings {
+        height: auto;
+        overflow: visible;
+    }
 }
