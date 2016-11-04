@@ -414,10 +414,16 @@ form#add_new_subscription {
     content: "Preferences";
 }
 
-.subscriptions-container .right iframe {
+.subscriptions-container .right #preview_iframe {
     width: 100%;
-    height: calc(100% - 41px);
+    height: calc(100% - 45px);
     border: none;
+    background-color: #FAFAFA;
+    box-shadow: inset 0px 0px 50px rgba(0,0,0,0.5);
+    background-image: url(../images/preview-loading.png);
+    background-size: 150px auto;
+    background-position: center center;
+    background-repeat: no-repeat;
 }
 
 .subscriptions-container input[type=text].small {
