@@ -67,18 +67,18 @@ function settings_for_sub(sub) {
 
 function stream_home_view_clicked(e) {
     var stream = get_stream_name(e.target);
-    var sub_row = $(".stream-row[data-stream-name='" + stream + "']");
+    var sub_settings = $(".subscription_settings[data-stream-name='" + stream + "']");
     var sub = stream_data.get_sub(stream);
-    var notification_checkboxes = sub_row.find(".sub_notification_setting");
+    var notification_checkboxes = sub_settings.find(".sub_notification_setting");
 
     subs.toggle_home(stream);
 
     if (sub.in_home_view) {
-        sub_row.find(".mute-note").addClass("hide-mute-note");
+        sub_settings.find(".mute-note").addClass("hide-mute-note");
         notification_checkboxes.removeClass("muted-sub");
         notification_checkboxes.find("input[type='checkbox']").removeAttr("disabled");
     } else {
-        sub_row.find(".mute-note").removeClass("hide-mute-note");
+        sub_settings.find(".mute-note").removeClass("hide-mute-note");
         notification_checkboxes.addClass("muted-sub");
         notification_checkboxes.find("input[type='checkbox']").attr("disabled", true);
     }
@@ -975,9 +975,9 @@ $(function () {
 
     $("#subscriptions_table").on("submit", ".subscriber_list_add form", function (e) {
         e.preventDefault();
-        var sub_row = $(e.target).closest('.stream-row');
-        var stream = get_stream_name(sub_row);
-        var text_box = sub_row.find('input[name="principal"]');
+        var settings_row = $(e.target).closest('.subscription_settings');
+        var stream = get_stream_name(settings_row);
+        var text_box = settings_row.find('input[name="principal"]');
         var principal = $.trim(text_box.val());
         // TODO: clean up this error handling
         var error_elem = settings_row.find('.subscriber_list_container .alert-error');
@@ -1021,7 +1021,7 @@ $(function () {
 
         var list_entry = $(e.target).closest("tr");
         var principal = list_entry.children(".subscriber-email").text();
-        var sub_row = $(e.target).closest('.stream-row');
+        var sub_row = $(e.target).closest('.subscription_settings');
         var stream_name = get_stream_name(sub_row);
         var error_elem = sub_row.find('.subscriber_list_container .alert-error');
         var warning_elem = sub_row.find('.subscriber_list_container .alert-warning');
@@ -1148,7 +1148,7 @@ $(function () {
     function change_stream_privacy(e, url, success_message, error_message, invite_only) {
         e.preventDefault();
 
-        var stream_name = $(e.target).attr("data-stream-name");
+        var stream_name = $(e.target).closest(".subscription_settings").attr("data-stream-name");
         var sub_row = $(".stream-row[data-stream-name='" + stream_name + "']"),
             settings_row = $(".subscription_settings[data-stream-name='" + stream_name + "']");
 
