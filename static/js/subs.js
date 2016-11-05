@@ -510,7 +510,7 @@ function actually_filter_streams() {
 
 var filter_streams = _.throttle(actually_filter_streams, 50);
 
-exports.setup_page = function () {
+exports.setup_page = function (callback) {
     function initialize_components () {
         var stream_filter_toggle = component.toggle({
             name: "stream-filter-toggle",
@@ -572,6 +572,9 @@ exports.setup_page = function () {
 
         $("#add_new_subscription input[type='text']").on("input", filter_streams);
         $(document).trigger($.Event('subs_page_loaded.zulip'));
+        if (callback) {
+            callback();
+        }
     }
 
     function populate_and_fill() {
@@ -585,6 +588,13 @@ exports.setup_page = function () {
     if (!should_list_all_streams()) {
         $('#create_stream_button').val(i18n.t("Subscribe"));
     }
+};
+
+exports.launch = function () {
+    exports.setup_page(function () {
+        $("#subscription_overlay").fadeIn(300);
+        $("#subscription_overlay .stream-row").eq(0).click();
+    });
 };
 
 exports.update_subscription_properties = function (stream_name, property, value) {
@@ -1094,12 +1104,6 @@ $(function () {
                                 $("#subscriptions-status"), 'subscriptions-status');
             }
         });
-    });
-
-    $("body").on("click", "#subscription_overlay", function (e) {
-        if ($(e.target).is(".flex, #subscription_overlay")) {
-            $("#subscription_overlay").fadeOut(300);
-        }
     });
 
     function redraw_privacy_related_stuff(sub_row, sub) {

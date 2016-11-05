@@ -210,10 +210,12 @@ $(function () {
         popovers.hide_all();
     });
 
-    $("#subscriptions_table").on("click", ".exit", function () {
-        $("#subscription_overlay").fadeOut(500);
+    $("#subscriptions_table").on("click", ".exit, #subscription_overlay", function (e) {
+        if ($(e.target).is(".exit, #subscription_overlay, .flex")) {
+            $("#subscription_overlay").fadeOut(500);
+            hashchange.exit_settings();    
+        }
     });
-
     // HOME
 
     // Capture both the left-sidebar Home click and the tab breadcrumb Home
