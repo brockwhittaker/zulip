@@ -193,7 +193,7 @@ function should_ignore (hash) {
     // an array of hashes to ignore (eg. ["subscriptions", "settings", "administration"]).
     var ignore_list = ["subscriptions"];
 
-    hash = hash.replace(/^#/, "").split(/\//);
+    hash = hash.replace(/^#/, "").split(/\//)[0];
     return (ignore_list.indexOf(hash) > -1);
 }
 
@@ -204,10 +204,16 @@ function hashchanged(from_reload, e) {
         ignore.last = old_hash;
     }
 
+    var base = window.location.hash.substr(1).split(/\//)[0];
+
     if (should_ignore(window.location.hash)) {
-        if (!should_ignore(old_hash)) {
-            admin.setup_page();
-            settings.setup_page();
+        if (!should_ignore(old_hash || "#")) {
+            if (base === "settings" || base === "administration") {
+                admin.setup_page();
+                settings.setup_page();    
+            } else if (base === "subscriptions") {
+                subs.launch();
+            }
 
             ignore.prev = old_hash;
         }
