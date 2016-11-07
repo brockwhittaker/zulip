@@ -347,11 +347,11 @@ form#add_new_subscription {
 
 .subscriptions-container {
     position: relative;
-    height: 80%;
+    height: 95%;
     background-color: #fff;
     border-radius: 4px;
     padding: 0px;
-    width: 1100px;
+    width: 97%;
     overflow: hidden;
 }
 
