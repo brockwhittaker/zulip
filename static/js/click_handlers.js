@@ -211,9 +211,9 @@ $(function () {
     });
 
     $("#subscriptions_table").on("click", ".exit, #subscription_overlay", function (e) {
-        if ($(e.target).is(".exit, #subscription_overlay, .flex")) {
+        if ($(e.target).is(".exit, .exit-sign, #subscription_overlay, .flex")) {
             $("#subscription_overlay").fadeOut(500);
-            hashchange.exit_settings();    
+            hashchange.exit_settings();
         }
     });
     // HOME

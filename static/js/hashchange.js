@@ -197,6 +197,10 @@ function should_ignore (hash) {
     return (ignore_list.indexOf(hash) > -1);
 }
 
+function hide_overlays () {
+    $("#subscription_overlay").fadeOut(500);
+}
+
 function hashchanged(from_reload, e) {
     var old_hash;
     if (e) {
@@ -210,7 +214,7 @@ function hashchanged(from_reload, e) {
         if (!should_ignore(old_hash || "#")) {
             if (base === "settings" || base === "administration") {
                 admin.setup_page();
-                settings.setup_page();    
+                settings.setup_page();
             } else if (base === "subscriptions") {
                 subs.launch();
             }
@@ -218,6 +222,7 @@ function hashchanged(from_reload, e) {
             ignore.prev = old_hash;
         }
     } else if (!should_ignore(window.location.hash) && !ignore.flag) {
+        hide_overlays();
         changing_hash = true;
         var ret = do_hashchange(from_reload);
         changing_hash = false;

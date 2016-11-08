@@ -1,4 +1,4 @@
-var component = (function () {
+var components = (function () {
 
 var exports = {};
 
@@ -10,7 +10,11 @@ exports.toggle = (function () {
             var _component = $("<div class='tab-switcher'></div>");
             opts.values.forEach(function (value, i) {
                 var tab = $("<div class='ind-tab' data-tab-id='" + i + "'>" + value.label + "</div>");
-                tab.addClass(i === 0 ? "first" : "second");
+                if (i === 0) {
+                    tab.addClass("first");
+                } else {
+                    tab.addClass("second");
+                }
                 _component.append(tab);
             });
             return _component;
@@ -31,7 +35,7 @@ exports.toggle = (function () {
                         var id = +$(this).data("tab-id");
                         if (last_value !== opts.values[id].label) {
                             last_value = opts.values[id].label;
-                            opts.callback(last_value);    
+                            opts.callback(last_value);
                         }
                     }
                 });
