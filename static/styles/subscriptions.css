@@ -228,12 +228,23 @@ form#add_new_subscription {
 }
 
 #create_stream_button {
-    min-width: 140px;
+    margin: 0px 5px;
+
+    border: none;
+    outline: none;
+    background-color: transparent;
+
+    font-size: 2.2em;
+    font-weight: 300;
+    line-height: 1;
+    color: #aaa;
+
     float: right;
-    margin-top: 9px;
-    /* margin-right: 38px will align with .sub_unsub_button
-       10px will align with the right edge of #subscriptions_table */
-    margin-right: 38px;
+    transition: all 0.2s ease;
+}
+
+#create_stream_button:hover {
+    color: #444;
 }
 
 #stream_name_error {
@@ -452,6 +463,15 @@ form#add_new_subscription {
     box-shadow: none;
 }
 
+.create-stream-title {
+    font-size: 1.5em;
+    font-weight: 600;
+}
+
+section.block {
+    margin-bottom: 20px;
+}
+
 .streams-list {
     overflow: auto;
     height: calc(100% - 45px);
@@ -532,10 +552,11 @@ form#add_new_subscription {
 }
 
 .stream-row .sub-info-box .description {
-    margin-top: 5px;
+    margin-top: 4px;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+    line-height: 0.8;
 }
 
 #subscription_overlay .stream-description:empty:after,
@@ -545,10 +566,23 @@ form#add_new_subscription {
     color: #aaa;
 }
 
+#subscription_overlay #stream-creation {
+    max-height: calc(100% - 45px);
+    overflow: auto;
+}
+
+#stream-creation .stream-creation-body {
+    padding: 15px;
+}
+
 .stream-row .settings-dropdown-trigger {
     float: right;
     margin-left: 10px;
     color: #aaa;
+}
+
+#stream_creation_form {
+    margin: 0px;
 }
 
 #subscription_overlay .inner-box {
