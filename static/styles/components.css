@@ -215,6 +215,10 @@
     -webkit-filter: grayscale(1);
 }
 
+.new-style label.checkbox input[type=checkbox]:disabled ~ span {
+    opacity: 0.3;
+}
+
 .new-style a.no-style {
     color: inherit;
 }

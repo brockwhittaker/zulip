@@ -10,14 +10,12 @@
             <div class="left">
                 <div class="search-container">
                     <form id="add_new_subscription" class="form-inline" action="">
+                        {{#if can_create_streams}}
+                            <input type="submit" class=""
+                              id="create_stream_button" value="{{t '+' }}" />
+                        {{/if}}
                         <input type="text" name="stream_name" id="search_stream_name"
                           placeholder="{{t 'Filter Streams' }}" value="" autocomplete="off" />
-                        {{#if can_create_streams}}
-                        <!--
-                            <input type="submit" class="btn btn-primary"
-                              id="create_stream_button" value="{{t 'Create new stream' }}" />
-                        -->
-                        {{/if}}
                     </form>
                 </div>
                 <div class="streams-list">
