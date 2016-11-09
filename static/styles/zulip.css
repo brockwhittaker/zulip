@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css?family=Yantramanav:300,400,500,700');
+
 body,
 html {
     width: 100%;
@@ -11,7 +13,9 @@ html {
 }
 
 body {
-    font-family: 'Humbug', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-family: "Yantramanav", -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+    -webkit-font-smoothing: antialiased;
+    font-size: 15px;
 }
 
 /* Common background color */
@@ -29,7 +33,7 @@ input,
 button,
 select,
 textarea {
-    font-family: 'Humbug', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-family: "Yantramanav", -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
     line-height: normal;
 }
 
@@ -220,7 +224,7 @@ p.n-margin {
 
 textarea,
 input {
-    font-family: 'Humbug', Helvetica, Arial, sans-serif;
+    font-family: "Yantramanav", -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
 }
 
 /* Override Bootstrap's fixed sizes for various elements */
@@ -1210,7 +1214,7 @@ div.focused_table {
 
 .message_content {
     line-height: 17px;
-    font-size: 14px;
+    font-size: 15px;
     padding-left: 46px;
     display: block;
     position: relative;
@@ -1761,7 +1765,7 @@ nav a .no-style {
     background: rgb(255,255,255); /* Old browsers */
     border: none;
     border-radius: 0px;
-    font-family: 'Humbug';
+    font-family: "Yantramanav", -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
     font-weight: 300;
     line-height: 27px;
 }
