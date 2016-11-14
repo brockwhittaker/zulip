@@ -564,7 +564,9 @@ exports.setup_page = function (callback) {
             }
         }).get();
 
-        $("#subscriptions_table .search-container").prepend(stream_filter_toggle);
+        if (should_list_all_streams()) {
+            $("#subscriptions_table .search-container").prepend(stream_filter_toggle);
+        }
         $("#subscriptions_table .display-type").prepend(preview_toggle);
     }
 
