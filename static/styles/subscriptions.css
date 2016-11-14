@@ -241,6 +241,8 @@ form#add_new_subscription {
 
     float: right;
     transition: all 0.2s ease;
+    padding-bottom: 0px;
+    padding-top: 0px;
 }
 
 #create_stream_button:hover {
