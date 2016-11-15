@@ -610,7 +610,11 @@ exports.setup_page = function (callback) {
 exports.launch = function () {
     exports.setup_page(function () {
         $("#subscription_overlay").fadeIn(300);
-        $("#subscription_overlay .stream-row").eq(0).click();
+
+        // temporarily remove the preview toggle since we don't want to
+        // generate a preview yet.
+        $(".display-type .tab-switcher").hide();
+        $(".display-type #stream_settings_title").show();
     });
 };
 
@@ -797,6 +801,12 @@ $(function () {
 
     $("#subscriptions_table").on("click", "#create_stream_button", function (e) {
         e.preventDefault();
+        // this changes the tab switcher (settings/preview) which isn't necessary
+        // to a add new stream title.
+        $(".display-type #add_new_stream_title").show();
+        $(".display-type #stream_settings_title").hide();
+
+        $(".subscriptions-container .right .nothing-selected").hide();
 
         if (!should_list_all_streams()) {
             ajaxSubscribe($("#search_stream_name").val());
@@ -804,14 +814,9 @@ $(function () {
         }
 
         var stream = $.trim($("#search_stream_name").val());
-        var stream_status = compose.check_stream_existence(stream);
-        if (stream_status === "does-not-exist" || !stream) {
-            $('#create_stream_name').val(stream);
-            show_new_stream_modal();
-            $('#create_stream_name').focus();
-        } else {
-            ajaxSubscribe(stream);
-        }
+        $('#create_stream_name').val(stream);
+        show_new_stream_modal();
+        $('#create_stream_name').focus();
     });
 
     $('#stream_creation_form').on('change',
@@ -1028,17 +1033,41 @@ $(function () {
         exports.invite_user_to_stream(principal, stream, invite_success, invite_failure);
     });
 
-    $("#subscriptions_table").on("click", ".stream-row", function (e) {
-        if ($(e.target).closest(".check, .subscription_settings").length === 0) {
+    function show_stream_row (e) {
+        $(".display-type #add_new_stream_title").hide();
+        $(".display-type #stream_settings_title").show();
+        $(".stream-row.active").removeClass("active");
+        if (e) {
             var container = components.toggle.lookup("preview-toggle").value() === "Preview" ? "#preview_iframe" : ".settings";
+            $("#subscriptions_table .nothing-selected").hide();
             $(container).show();
 
             $("#stream-creation").addClass("hide");
-            $(".stream-row.active,.stream-row").removeClass("active");
             $(this).addClass("active");
             exports.show_settings_for(get_stream_name(this));
+        } else {
+            $("#stream-creation").addClass("hide");
+            $("#subscriptions_table .settings .show").removeClass("show");
+            $("#preview_iframe").hide();
+            $("#subscriptions_table .nothing-selected").show();
+        }
+    }
+
+    $("#subscriptions_table").on("click", ".stream-row", function (e) {
+        if ($(e.target).closest(".check, .subscription_settings").length === 0) {
+            show_stream_row.call(this, e);
         }
     });
+
+    (function defocus_sub_settings () {
+        var sel = ".search-container, .streams-list, .subscriptions-header";
+
+        $("#subscriptions_table").on("click", sel, function (e) {
+            if ($(e.target).is(sel)) {
+                show_stream_row();
+            }
+        });
+    }());
 
     $("#subscriptions_table").on("submit", ".subscriber_list_remove form", function (e) {
         e.preventDefault();
@@ -1143,6 +1172,16 @@ $(function () {
 
         html = templates.render('subscription_type', sub);
         stream_settings.find('.subscription-type').expectOne().html(html);
+
+        if (sub.invite_only) {
+            stream_settings.find(".large-icon")
+                .removeClass("hash").addClass("lock")
+                .html("<i class='icon-vector-lock'></i>");
+        } else {
+            stream_settings.find(".large-icon")
+                .addClass("hash").removeClass("lock")
+                .html("");
+        }
 
         html = templates.render('change_stream_privacy', sub);
         stream_settings.find('.change-stream-privacy').expectOne().html(html);

@@ -190,7 +190,7 @@ function process_hotkey(e) {
     if (event_name === "escape") {
         if ($("#overlay").hasClass("show")) {
             ui.exit_lightbox_photo();
-            return true;    
+            return true;
         } else if ($("#subscription_overlay").css("display") === "block") {
             $("#subscription_overlay").click();
             return true;

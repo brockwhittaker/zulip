@@ -228,7 +228,7 @@ form#add_new_subscription {
 }
 
 #create_stream_button {
-    margin: 0px 5px;
+    margin: 0px 0px 0px 5px;
 
     border: none;
     outline: none;
@@ -403,6 +403,16 @@ form#add_new_subscription {
     margin: 0px -1px;
 }
 
+.subscriptions-container .right .nothing-selected {
+    display: block;
+    margin-top: calc(40vh - 1em);
+    text-align: center;
+    font-size: 1em;
+    color: #aaa;
+    pointer-events: none;
+    -webkit-font-smoothing: antialiased;
+}
+
 .subscriptions-container .left {
     border-right: 1px solid #ddd;
 }
@@ -425,6 +435,16 @@ form#add_new_subscription {
 
 .subscriptions-container .display-type.preferences:after {
     content: "Preferences";
+}
+
+.subscriptions-container .display-type .stream-info-title {
+    display: none;
+    font-size: 1em;
+    line-height: 1;
+    margin: 9px 0px;
+    font-weight: 400;
+    font-weight: 600;
+    color: #444;
 }
 
 .subscriptions-container .right #preview_iframe {
@@ -457,8 +477,8 @@ form#add_new_subscription {
 }
 
 #search_stream_name {
-    width: 194px;
-    padding: 3px;
+    width: 190px;
+    padding: 3px 5px;
     margin: 2px 0px;
     float: right;
     border-radius: 5px;
@@ -551,6 +571,10 @@ section.block {
 
 .stream-row .sub-info-box .top-bar .subscriber-count {
     margin-left: 10px;
+}
+
+.stream-row .sub-info-box .top-bar .subscriber-count-text {
+    margin-right: 5px;
 }
 
 .stream-row .sub-info-box .description {
