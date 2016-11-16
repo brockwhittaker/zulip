@@ -588,7 +588,7 @@ exports.setup_page = function (callback) {
 
         $("#add_new_subscription input[type='text']").on("input", filter_streams);
         $(document).trigger($.Event('subs_page_loaded.zulip'));
-        $(".subscriptions-container .right").append($("#stream-creation").remove().clone(true));
+
         if (callback) {
             callback();
         }
@@ -705,10 +705,6 @@ function ajaxUnsubscribe(stream) {
     });
 }
 
-function hide_new_stream_modal() {
-    $('#stream-creation').modal("hide");
-}
-
 function ajaxSubscribeForCreation(stream, principals, invite_only, announce) {
     // Subscribe yourself and possible other people to a new stream.
     return channel.post({
@@ -721,13 +717,11 @@ function ajaxSubscribeForCreation(stream, principals, invite_only, announce) {
         success: function (data) {
             $("#create_stream_name").val("");
             $("#subscriptions-status").hide();
-            hide_new_stream_modal();
             // The rest of the work is done via the subscribe event we will get
         },
         error: function (xhr) {
             ui.report_error(i18n.t("Error creating stream"), xhr,
                             $("#subscriptions-status"), 'subscriptions-status');
-            hide_new_stream_modal();
         }
     });
 }
