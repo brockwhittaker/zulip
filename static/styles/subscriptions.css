@@ -366,6 +366,8 @@ form#add_new_subscription {
     padding: 0px;
     width: 97%;
     overflow: hidden;
+    max-width: 1200px;
+    max-height: 700px;
 }
 
 .subscriptions-header {
@@ -396,8 +398,9 @@ form#add_new_subscription {
 
 .subscriptions-container .left,
 .subscriptions-container .right {
-    vertical-align: top;
+    position: relative;
     display: inline-block;
+    vertical-align: top;
     width: 50%;
     height: calc(100% - 45px);
     margin: 0px -1px;
@@ -405,7 +408,7 @@ form#add_new_subscription {
 
 .subscriptions-container .right .nothing-selected {
     display: block;
-    margin-top: calc(40vh - 1em);
+    margin-top: calc(50% - 1em);
     text-align: center;
     font-size: 1em;
     color: #aaa;
@@ -593,8 +596,15 @@ section.block {
 }
 
 #subscription_overlay #stream-creation {
-    max-height: calc(100% - 45px);
+    max-height: calc(100% - 102px);
     overflow: auto;
+    outline: none;
+}
+
+#subscription_overlay #stream-creation .modal-footer {
+    position: absolute;
+    bottom: 0;
+    width: calc(100% - 30px);
 }
 
 #stream-creation .stream-creation-body {
