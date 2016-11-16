@@ -867,15 +867,18 @@ $(function () {
 
     $(".subscriptions").on("focusout", "#create_stream_name", function () {
         var stream = $.trim($("#create_stream_name").val());
-        var stream_status = compose.check_stream_existence(stream);
-        if (stream.length < 1) {
+        if (stream.length !== 0) {
+            var stream_status = compose.check_stream_existence(stream);
+
+            if (stream_status !== "does-not-exist") {
+                $("#stream_name_error").text(i18n.t("A stream with this name already exists"));
+                $("#stream_name_error").show();
+            } else {
+                $("#stream_name_error").hide();
+            }
+        } else {
             $("#stream_name_error").text(i18n.t("A stream needs to have a name"));
             $("#stream_name_error").show();
-        } else if (stream_status !== "does-not-exist") {
-            $("#stream_name_error").text(i18n.t("A stream with this name already exists"));
-            $("#stream_name_error").show();
-        } else {
-            $("#stream_name_error").hide();
         }
     });
 
