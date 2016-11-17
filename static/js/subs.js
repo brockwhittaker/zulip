@@ -379,10 +379,6 @@ exports.show_settings_for = function (stream_name) {
     $("#subscription_overlay .subscription_settings.show").removeClass("show");
     sub_settings.addClass("show");
 
-    if (components.toggle.lookup("preview-toggle").value() === "Preview") {
-        $("#preview_iframe").attr("src", location.origin + "/?stream=" + stream_name);
-    }
-
     show_subscription_settings(stream);
 };
 
@@ -409,7 +405,6 @@ exports.mark_subscribed = function (stream_name, attrs) {
             exports.rerender_subscribers_count(sub);
 
             button.toggleClass("checked");
-            button.parent().children(".preview-stream").text(i18n.t("Narrow"));
             // Add the user to the member list if they're currently
             // viewing the members of this stream
             if (sub.render_subscribers && settings.hasClass('in')) {
@@ -454,7 +449,6 @@ exports.mark_sub_unsubscribed = function (sub) {
 
         var button = button_for_sub(sub);
         button.toggleClass("checked");
-        button.parent().children(".preview-stream").text(i18n.t("Preview"));
 
         var settings = settings_for_sub(sub);
         if (settings.hasClass('in')) {
@@ -540,34 +534,9 @@ exports.setup_page = function (callback) {
             }
         }).get();
 
-        var preview_toggle = components.toggle({
-            name: "preview-toggle",
-            selected: 0,
-            values: [
-                { label: "Settings" },
-                { label: "Preview" }
-            ],
-            callback: function (name) {
-                var stream_name;
-                if (name === "Preview") {
-                    stream_name = $(".settings").hide().data("stream-name");
-                    if ($("#preview_iframe").attr("src") !== "/?stream=" + stream_name) {
-                        $("#preview_iframe").attr("src", "/?stream=" + stream_name);
-                    }
-                    $("#preview_iframe")
-                        .show()
-                        .data("stream-name", stream_name);
-                } else {
-                    $("#preview_iframe").hide().data("stream-name");
-                    $(".settings").show();
-                }
-            }
-        }).get();
-
         if (should_list_all_streams()) {
             $("#subscriptions_table .search-container").prepend(stream_filter_toggle);
         }
-        $("#subscriptions_table .display-type").prepend(preview_toggle);
     }
 
     function _populate_and_fill() {
@@ -612,11 +581,6 @@ exports.setup_page = function (callback) {
 exports.launch = function () {
     exports.setup_page(function () {
         $("#subscription_overlay").fadeIn(300);
-
-        // temporarily remove the preview toggle since we don't want to
-        // generate a preview yet.
-        $(".display-type .tab-switcher").hide();
-        $(".display-type #stream_settings_title").show();
     });
 };
 
@@ -751,7 +715,7 @@ function update_announce_stream_state() {
 
 function show_new_stream_modal() {
     $("#stream-creation").removeClass("hide");
-    $(".right .settings, .right #preview_iframe").hide();
+    $(".right .settings").hide();
     $('#people_to_add').html(templates.render('new_stream_users', {
         users: people.get_rest_of_realm()
     }));
@@ -1039,9 +1003,7 @@ $(function () {
         $(".display-type #stream_settings_title").show();
         $(".stream-row.active").removeClass("active");
         if (e) {
-            var container = components.toggle.lookup("preview-toggle").value() === "Preview" ? "#preview_iframe" : ".settings";
             $("#subscriptions_table .nothing-selected").hide();
-            $(container).show();
 
             $("#stream-creation").addClass("hide");
             $(this).addClass("active");
@@ -1049,7 +1011,6 @@ $(function () {
         } else {
             $("#stream-creation").addClass("hide");
             $("#subscriptions_table .settings .show").removeClass("show");
-            $("#preview_iframe").hide();
             $("#subscriptions_table .nothing-selected").show();
         }
     }
