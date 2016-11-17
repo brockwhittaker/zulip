@@ -367,7 +367,7 @@ form#add_new_subscription {
     width: 97%;
     overflow: hidden;
     max-width: 1200px;
-    max-height: 700px;
+    max-height: 1000px;
 }
 
 .subscriptions-header {
@@ -493,7 +493,7 @@ form#add_new_subscription {
     font-weight: 600;
 }
 
-section.block {
+.stream-creation-body section.block {
     margin-bottom: 20px;
 }
 
