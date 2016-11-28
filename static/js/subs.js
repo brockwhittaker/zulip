@@ -1000,7 +1000,7 @@ $(function () {
 
     function show_stream_row (e) {
         $(".display-type #add_new_stream_title").hide();
-        $(".display-type #stream_settings_title").show();
+        $(".display-type #stream_settings_title, .right .settings").show();
         $(".stream-row.active").removeClass("active");
         if (e) {
             $("#subscriptions_table .nothing-selected").hide();
