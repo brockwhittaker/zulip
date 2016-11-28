@@ -412,7 +412,7 @@ form#add_new_subscription {
 
 .subscriptions-container .right .nothing-selected {
     display: block;
-    margin-top: calc(50% - 1em);
+    margin-top: calc(45vh - 30px - 1em);
     text-align: center;
     font-size: 1em;
     color: #aaa;
