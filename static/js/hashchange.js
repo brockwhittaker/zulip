@@ -216,10 +216,7 @@ function hashchanged(from_reload, e) {
     var base = get_main_hash(window.location.hash);
     if (should_ignore(window.location.hash)) {
         if (!should_ignore(old_hash || "#")) {
-            if (base === "settings" || base === "administration") {
-                admin.setup_page();
-                settings.setup_page();
-            } else if (base === "subscriptions") {
+            if (base === "subscriptions") {
                 subs.launch();
             }
 

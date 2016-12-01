@@ -25,8 +25,8 @@ casper.waitForSelector('.sub_unsub_button.checked', function () {
     casper.test.assertExists('.sub_unsub_button.checked', 'Initial subscriptions loaded');
     casper.click('#create_stream_button');
 });
-casper.waitForSelector('#create_stream_button', function () {
-     casper.test.assertTextExists('+', 'Modal for specifying new stream users');
+casper.waitForSelector('#stream_creation_form', function () {
+     casper.test.assertTextExists('Add New Stream', 'New stream creation panel');
      casper.fill('form#stream_creation_form', {stream_name: 'Waseemio', stream_description: 'Oimeesaw'});
      casper.click('form#stream_creation_form button.btn.btn-primary');
 });

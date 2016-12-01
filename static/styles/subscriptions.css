@@ -228,7 +228,8 @@
 }
 
 form#add_new_subscription {
-    display: inline;
+    float: right;
+    margin: 0;
 }
 
 #create_stream_button {
@@ -243,7 +244,7 @@ form#add_new_subscription {
     line-height: 1;
     color: #aaa;
 
-    float: right;
+    display: inline-block;
     transition: all 0.2s ease;
     padding-bottom: 0px;
     padding-top: 0px;
@@ -487,7 +488,7 @@ form#add_new_subscription {
     width: 190px;
     padding: 3px 5px;
     margin: 2px 0px;
-    float: right;
+    display: inline-block;
     border-radius: 5px;
     box-shadow: none;
 }
@@ -520,6 +521,7 @@ form#add_new_subscription {
 .streams-list {
     overflow: auto;
     height: calc(100% - 45px);
+    width: 100%;
 }
 
 .stream-row {

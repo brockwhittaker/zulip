@@ -10,14 +10,15 @@
             <div class="left">
                 <div class="search-container">
                     <form id="add_new_subscription" class="form-inline" action="">
+                        <input type="text" name="stream_name" id="search_stream_name"
+                          placeholder="{{t 'Filter Streams' }}" value="" autocomplete="off" />
                         {{#if can_create_streams}}
                             <input type="submit" class=""
                               id="create_stream_button" value="{{t '+' }}" />
                         {{/if}}
-                        <input type="text" name="stream_name" id="search_stream_name"
-                          placeholder="{{t 'Filter Streams' }}" value="" autocomplete="off" />
                         <div class="float-clear"></div>
                     </form>
+                    <div class="clear-float"></div>
                 </div>
                 <div class="streams-list">
                     {{#each subscriptions}}
