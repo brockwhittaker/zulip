@@ -504,6 +504,12 @@ exports.filter_table = function (query) {
             $(row).addClass("notdisplayed");
         }
     });
+
+    if ($(".stream-row.active").hasClass("notdisplayed")) {
+        $(".right .settings").hide();
+        $(".nothing-selected").show();
+        $(".stream-row.active").removeClass("active");
+    }
 };
 
 function actually_filter_streams() {
