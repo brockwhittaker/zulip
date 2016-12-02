@@ -243,12 +243,6 @@ $(function () {
 
     // MISC
 
-    $('#streams_inline_cog').click(function (e) {
-        ui.change_tab_to('#subscriptions');
-
-        e.preventDefault();
-    });
-
     (function () {
         var sel = ["#group-pm-list", "#stream_filters", "#global_filters", "#user_presences"].join(", ");
 
