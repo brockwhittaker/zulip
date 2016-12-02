@@ -764,13 +764,13 @@ form#add_new_subscription {
         margin-top: 2px;
         margin-bottom: 0px;
     }
-}
 
-@media (max-width: 1000px) {
     #search_stream_name {
         display: none;
     }
+}
 
+@media (max-width: 1000px) {
     .search-container {
         text-align: center;
     }
