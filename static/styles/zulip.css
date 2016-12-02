@@ -20,13 +20,10 @@ html {
 }
 
 #typing_notifications {
-    margin-left: 250px;
-    margin-right: 250px;
-    border: 1px solid #dadada;
-    margin-bottom: -1px;
-    padding: 0.4em;
-    padding-left: 0.8em;
     display: none;
+    margin-left: 10px;
+    font-style: italic;
+    color: #888;
 }
 
 #typing_notification_list {
