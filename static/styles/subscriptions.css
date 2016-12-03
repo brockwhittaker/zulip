@@ -28,6 +28,7 @@
 .subscriptions {
     margin-top: 55px;
     padding-left: 15px;
+    -webkit-font-smoothing: antialiased;
 }
 
 .subscriptions div #response {
@@ -401,7 +402,7 @@ form#add_new_subscription {
     top: 3px;
     margin-left: 3px;
     font-size: 1.7em;
-    font-weight: 300;
+    font-weight: 500;
     cursor: pointer;
 }
 
@@ -796,6 +797,19 @@ form#add_new_subscription {
 
 #subscription_overlay.show {
     display: block;
+    pointer-events: all;
+    opacity: 1;
+}
+
+#subscription_overlay .subscriptions-container {
+    -webkit-transform: scale(0.5);
+    transform: scale(0.5);
+    transition: all 0.3s ease;
+}
+
+#subscription_overlay.show .subscriptions-container {
+    -webkit-transform: scale(1);
+    transform: scale(1);
 }
 
 #subscription_overlay .settings {

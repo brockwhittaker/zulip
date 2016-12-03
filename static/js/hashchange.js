@@ -199,9 +199,9 @@ function do_hashchange(from_reload) {
 // When going from a normal view (eg. `narrow/is/private`) to a settings panel
 // (eg. `settings/your-bots`) it should trigger the `should_ignore` function and
 // return `true` for the current state -- we want to ignore hash changes from
-// within the settings page, as they will be handled by the settings page itself.
-//
-// There is then an `exit_settings` function that allows the hash to change exactly
+// within the settings page. The previous hash however should return `false` as it
+// was outside of the scope of settings.
+// there is then an `exit_settings` function that allows the hash to change exactly
 // once without triggering any events. This allows the hash to reset back from
 // a settings page to the previous view available before the settings page
 // (eg. narrow/is/private). This saves the state, scroll position, and makes the
@@ -214,12 +214,12 @@ var ignore = {
 };
 
 function get_main_hash(hash) {
-    return hash.replace(/^#/, "").split(/\//)[0];
+    return hash ? hash.replace(/^#/, "").split(/\//)[0] : "";
 }
 
 function should_ignore(hash) {
     // an array of hashes to ignore (eg. ["subscriptions", "settings", "administration"]).
-    var ignore_list = ["subscriptions"];
+    var ignore_list = ["subscriptions", "settings", "administration"];
     var main_hash = get_main_hash(hash);
 
     return (ignore_list.indexOf(main_hash) > -1);
@@ -227,6 +227,7 @@ function should_ignore(hash) {
 
 function hide_overlays() {
     subs.close();
+    $("#subscription_overlay, [data-overlay]").removeClass("show");
 }
 
 function hashchanged(from_reload, e) {
@@ -238,10 +239,14 @@ function hashchanged(from_reload, e) {
     }
 
     var base = get_main_hash(window.location.hash);
+
     if (should_ignore(window.location.hash)) {
         if (!should_ignore(old_hash || "#")) {
             if (base === "subscriptions") {
                 subs.launch();
+            } else if (/settings|administration/.test(base)) {
+                settings.setup_page();
+                admin.setup_page();
             }
 
             ignore.prev = old_hash;
