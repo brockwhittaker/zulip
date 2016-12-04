@@ -532,8 +532,8 @@ exports.setup_page = function (callback) {
             name: "stream-filter-toggle",
             selected: 0,
             values: [
+                { label: "Subscribed" },
                 { label: "All Streams" },
-                { label: "Subscribed" }
             ],
             callback: function (name) {
                 actually_filter_streams();
@@ -561,6 +561,7 @@ exports.setup_page = function (callback) {
         var rendered = templates.render('subscription_table_body', template_data);
         $('#subscriptions_table').append(rendered);
         initialize_components();
+        actually_filter_streams();
         var email_address_hint_content = templates.render('email_address_hint', { page_params: page_params });
         _.each(sub_rows, function (row) {
             add_email_hint(row, email_address_hint_content);
