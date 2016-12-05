@@ -254,6 +254,10 @@ form#add_new_subscription {
     color: #444;
 }
 
+#create_stream_description {
+    width: calc(100% - 15px);
+}
+
 #stream_name_error {
     display: none;
     margin-left: 2px;
