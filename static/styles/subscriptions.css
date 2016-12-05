@@ -639,6 +639,10 @@ form#add_new_subscription {
     color: #aaa;
 }
 
+.add-user-label {
+    margin: 8px 0px;
+}
+
 #stream_creation_form {
     margin: 0px;
 }
