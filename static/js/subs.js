@@ -1,7 +1,8 @@
 var subs = (function () {
 
 var meta = {
-    callbacks: {}
+    callbacks: {},
+    stream_created: false
 };
 var exports = {};
 
@@ -275,6 +276,11 @@ function add_sub_to_table(sub) {
 
     var email_address_hint_content = templates.render('email_address_hint', { page_params: page_params });
     add_email_hint(sub, email_address_hint_content);
+
+    if (meta.stream_created) {
+        $(".stream-row[data-stream-name='" + meta.stream_created + "']").click();
+        meta.stream_created = false;
+    }
 }
 
 function format_member_list_elem(email) {
@@ -895,6 +901,9 @@ $(function () {
             );
             // You are always subscribed to streams you create.
             principals.push(page_params.email);
+
+            meta.stream_created = stream;
+
             ajaxSubscribeForCreation(stream,
                 description,
                 principals,
