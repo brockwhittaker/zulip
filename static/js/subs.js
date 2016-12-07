@@ -808,6 +808,8 @@ $(function () {
         $(".display-type #add_new_stream_title").show();
         $(".display-type #stream_settings_title").hide();
 
+        $(".stream-row.active").removeClass("active");
+
         $(".subscriptions-container .right .nothing-selected").hide();
 
         if (!should_list_all_streams()) {
