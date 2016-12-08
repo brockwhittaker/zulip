@@ -11,6 +11,8 @@ $(function () {
     var clicking = false;
     var mouse_moved = false;
 
+    var meta = {};
+
     function mousedown() {
         mouse_moved = false;
         clicking = true;
@@ -127,6 +129,10 @@ $(function () {
         popovers.hide_all();
     });
 
+    $(window).on("focus", function (e) {
+        meta.focusing = true;
+    });
+
     // RECIPIENT BARS
 
     function get_row_id_for_narrowing(narrow_link_elem) {
@@ -213,6 +219,11 @@ $(function () {
     });
 
     $("#subscriptions_table").on("click", ".exit, #subscription_overlay", function (e) {
+        if (meta.focusing) {
+            meta.focusing = false;
+            return;
+        }
+
         if ($(e.target).is(".exit, .exit-sign, #subscription_overlay, #subscription_overlay > .flex")) {
             $("#subscription_overlay").fadeOut(500);
             subs.remove_miscategorized_streams();
