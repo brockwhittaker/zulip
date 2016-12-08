@@ -38,7 +38,7 @@ casper.waitForSelector("form#stream_creation_form", function () {
     casper.test.info("Filtering user list with keyword 'cor'");
     casper.fill('form#stream_creation_form', {user_list_filter: 'cor'});
 });
-casper.then(function () {
+casper.waitForSelector(".subscriber-list", function () {
     casper.test.assertEquals(casper.visible('#user-checkboxes [data-name="cordelia@zulip.com"]'),
                              true,
                              "Cordelia is visible"
