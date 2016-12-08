@@ -486,7 +486,18 @@ exports.mark_sub_unsubscribed = function (sub) {
     }
 
     $(document).trigger($.Event('subscription_remove_done.zulip', {sub: sub}));
+
+    $(".stream-row[data-stream-id='" + sub.stream_id + "']").attr("data-temp-view", true);
 };
+
+// these streams are miscategorized so they don't jump off the page when being
+// unsubscribed from, but should be cleared and sorted when you apply an actual
+// filter.
+function remove_temporarily_miscategorized_streams() {
+    $("[data-temp-view]").removeAttr("data-temp-view", "false");
+}
+
+exports.remove_miscategorized_streams = remove_temporarily_miscategorized_streams;
 
 // query is now an object rather than a string.
 // Query { input: String, subscribed_only: Boolean }
@@ -503,9 +514,11 @@ exports.filter_table = function (query) {
             var sub_name = sub.name.toLowerCase();
             var matches_list = search_terms.indexOf(sub_name) > -1;
             var matches_last_val = sub_name.match(search_terms[search_terms.length - 1]);
+
             return matches_list || matches_last_val;
         }());
-        flag = flag && (sub.subscribed || !query.subscribed_only);
+        flag = flag && ((sub.subscribed || !query.subscribed_only) ||
+                        $(row).attr("data-temp-view") === "true");
 
         if (flag) {
             $(row).removeClass("notdisplayed");
@@ -546,6 +559,7 @@ exports.setup_page = function (callback) {
             ],
             callback: function (name) {
                 actually_filter_streams();
+                remove_temporarily_miscategorized_streams();
             }
         }).get();
 
@@ -576,7 +590,11 @@ exports.setup_page = function (callback) {
             add_email_hint(row, email_address_hint_content);
         });
 
-        $("#add_new_subscription input[type='text']").on("input", filter_streams);
+        $("#add_new_subscription input[type='text']").on("input", function () {
+            remove_temporarily_miscategorized_streams();
+            actually_filter_streams();
+        });
+
         $(document).trigger($.Event('subs_page_loaded.zulip'));
 
         if (callback) {
@@ -676,10 +694,8 @@ function ajaxSubscribe(stream) {
         data: {subscriptions: JSON.stringify([{name: stream}]) },
         success: function (resp, statusText, xhr, form) {
             $("#create_stream_name").val("");
-            exports.filter_table({
-                input: $("#search_stream_name").val().trim(),
-                subscribed_only: components.toggle.lookup("stream-filter-toggle").value() === "Subscribed"
-            });
+
+            actually_filter_streams();
 
             var res = JSON.parse(xhr.responseText);
             if (!$.isEmptyObject(res.already_subscribed)) {

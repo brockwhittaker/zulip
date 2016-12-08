@@ -202,7 +202,7 @@ function should_ignore(hash) {
     return (ignore_list.indexOf(main_hash) > -1);
 }
 
-function hide_overlays () {
+function hide_overlays() {
     $("#subscription_overlay").fadeOut(500);
 }
 
