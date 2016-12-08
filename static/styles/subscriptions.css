@@ -607,11 +607,11 @@ form#add_new_subscription {
 }
 
 .stream-row .sub-info-box .description {
-    margin-top: 4px;
+    margin-top: 2px;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    line-height: 0.8;
+    line-height: 1;
 }
 
 #subscription_overlay .stream-description:empty:after,
