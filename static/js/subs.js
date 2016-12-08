@@ -549,7 +549,7 @@ function actually_filter_streams() {
 var filter_streams = _.throttle(actually_filter_streams, 50);
 
 exports.setup_page = function (callback) {
-    function initialize_components () {
+    function initialize_components() {
         var stream_filter_toggle = components.toggle({
             name: "stream-filter-toggle",
             selected: 0,
@@ -1080,7 +1080,7 @@ $(function () {
         exports.invite_user_to_stream(principal, stream, invite_success, invite_failure);
     });
 
-    function show_stream_row (node, e) {
+    function show_stream_row(node, e) {
         $(".display-type #add_new_stream_title").hide();
         $(".display-type #stream_settings_title, .right .settings").show();
         $(".stream-row.active").removeClass("active");
@@ -1100,7 +1100,7 @@ $(function () {
         }
     });
 
-    (function defocus_sub_settings () {
+    (function defocus_sub_settings() {
         var sel = ".search-container, .streams-list, .subscriptions-header";
 
         $("#subscriptions_table").on("click", sel, function (e) {
