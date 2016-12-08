@@ -817,6 +817,21 @@ $(function () {
     // when new messages come in, but it's fairly quick.
     stream_list.build_stream_list();
 
+    var show_subs_pane = {
+        nothing_selected: function () {
+            $(".nothing-selected, #stream_settings_title").show();
+            $("#add_new_stream_title, .settings, #stream-creation").hide();
+        },
+        stream_creation: function () {
+            $("#stream-creation, #add_new_stream_title").show();
+            $("#stream_settings_title, .settings, .nothing-selected").hide();
+        },
+        settings: function () {
+            $(".settings, #stream_settings_title").show();
+            $("#add_new_stream_title, #stream-creation, .nothing-selected").hide();
+        },
+    };
+
     $("#subscriptions_table").on("click", "#create_stream_button", function (e) {
         e.preventDefault();
         // this changes the tab switcher (settings/preview) which isn't necessary
@@ -826,7 +841,7 @@ $(function () {
 
         $(".stream-row.active").removeClass("active");
 
-        $(".subscriptions-container .right .nothing-selected").hide();
+        show_subs_pane.stream_creation();
 
         if (!should_list_all_streams()) {
             ajaxSubscribe($("#search_stream_name").val());
@@ -840,6 +855,12 @@ $(function () {
     });
 
     $('body').on('change', '#user-checkboxes input, #make-invite-only input', update_announce_stream_state);
+
+
+    $(".subscriptions").on("click", "[data-dismiss]", function (e) {
+        e.preventDefault();
+        show_subs_pane.nothing_selected();
+    });
 
     // 'Check all' and 'Uncheck all' links
     $(document).on('click', '.subs_set_all_users', function (e) {
@@ -1064,15 +1085,12 @@ $(function () {
         $(".display-type #stream_settings_title, .right .settings").show();
         $(".stream-row.active").removeClass("active");
         if (e) {
-            $("#subscriptions_table .nothing-selected").hide();
+            show_subs_pane.settings();
 
-            $("#stream-creation").addClass("hide");
             $(node).addClass("active");
             exports.show_settings_for(get_stream_name(node));
         } else {
-            $("#stream-creation").addClass("hide");
-            $("#subscriptions_table .settings .show").removeClass("show");
-            $("#subscriptions_table .nothing-selected").show();
+            show_subs_pane.nothing_selected();
         }
     }
 
