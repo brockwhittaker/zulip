@@ -223,14 +223,14 @@ function get_main_hash(hash) {
 var get_hash_group = (function () {
     var groups = [
         ["subscriptions"],
-        ["settings", "administration"]
+        ["settings", "administration"],
     ];
 
     return function (value) {
         var idx = null;
 
-        groups.find(function (o, i) {
-            if (o.indexOf(value)) {
+        _.find(groups, function (o, i) {
+            if (o.indexOf(value) > -1) {
                 idx = i;
                 return true;
             }
@@ -267,12 +267,10 @@ function hashchanged(from_reload, e) {
     if (should_ignore(window.location.hash)) {
         // if the old has was a standard non-ignore hash OR the ignore hash
         // base has changed, something needs to run again.
-        if (!should_ignore(old_hash || "#") || ignore.group !== get_hash_group(window.location.hash)) {
-            if (base === "subscriptions") {
-                subs.launch();
-            } else if (/settings|administration/.test(base)) {
-                settings.setup_page();
-                admin.setup_page();
+
+        if (!should_ignore(old_hash || "#") || ignore.group !== get_hash_group(base)) {
+            if (ignore.group !== get_hash_group(base)) {
+                exports.close_modals();
             }
 
             // now only if the previous one should not have been ignored.
@@ -280,7 +278,14 @@ function hashchanged(from_reload, e) {
                 ignore.prev = old_hash;
             }
 
-            ignore.group = get_hash_group(window.location.hash);
+            if (base === "subscriptions") {
+                subs.launch();
+            } else if (/settings|administration/.test(base)) {
+                settings.setup_page();
+                admin.setup_page();
+            }
+
+            ignore.group = get_hash_group(base);
         }
     } else if (!should_ignore(window.location.hash) && !ignore.flag) {
         hide_overlays();
@@ -306,6 +311,10 @@ exports.initialize = function () {
     hashchanged(true);
 };
 
+exports.close_modals = function () {
+    $("[data-overlay]").removeClass("show");
+};
+
 exports.exit_settings = function (callback) {
     if (should_ignore(window.location.hash)) {
         ui.blur_active_element();
@@ -314,6 +323,8 @@ exports.exit_settings = function (callback) {
         if (typeof callback === "function") {
             callback();
         }
+
+        exports.close_modals();
     }
 };
 
