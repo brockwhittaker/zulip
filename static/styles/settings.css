@@ -440,3 +440,19 @@ input[type=checkbox].inline-block {
     margin-right: 20px;
     margin-bottom: auto;
 }
+
+#administration #admin_users_table .user-status-settings .button {
+    padding: 5px 0px;
+    min-width: 70px;
+    width: 35%;
+}
+
+#administration #admin_users_table .user-admin-settings .button {
+    padding: 5px 0px;
+    min-width: 90px;
+    width: 45%;
+}
+
+#administration #admin_users_table .user-edit-button .button {
+    padding: 5px 10px;
+}

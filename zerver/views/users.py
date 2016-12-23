@@ -15,6 +15,7 @@ from zerver.lib.actions import do_change_full_name, do_change_is_admin, \
     do_change_default_all_public_streams, do_regenerate_api_key, do_change_avatar_source
 from zerver.lib.avatar import avatar_url, get_avatar_url
 from zerver.lib.response import json_error, json_success
+from zerver.lib.timestamp import datetime_to_string
 from zerver.lib.upload import upload_avatar_image
 from zerver.lib.validator import check_bool, check_string
 from zerver.lib.utils import generate_random_token
@@ -309,7 +310,9 @@ def get_members_backend(request, user_profile):
                   "is_admin": (profile in admins),
                   "email": profile.email,
                   "avatar_url": avatar_url}
-        if profile.is_bot and profile.bot_owner is not None:
+        if not profile.is_bot:
+            member["last_login"] = datetime_to_string(profile.last_login)
+        elif profile.bot_owner is not None:
             member["bot_owner"] = profile.bot_owner.email
         members.append(member)
     return json_success({'members': members})
