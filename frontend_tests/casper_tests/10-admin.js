@@ -184,18 +184,18 @@ casper.waitForSelector('.admin-filter-form', function () {
 
 // Realm filters have the same issue
 
-// // Test custom realm filters
-// casper.then(function () {
-//     casper.click("li[data-section='filter-settings']");
-// });
+// Test custom realm filters
+casper.then(function () {
+    casper.click("li[data-section='filter-settings']");
+});
 
-// casper.waitForSelector('.admin-filter-form', function () {
-//     casper.fill('form.admin-filter-form', {
-//         pattern: '#(?P<id>[0-9]+)',
-//         url_format_string: 'https://trac.example.com/ticket/%(id)s'
-//     });
-//     casper.click('form.admin-filter-form input.btn');
-// });
+casper.waitForSelector('.admin-filter-form', function () {
+    casper.fill('form.admin-filter-form', {
+        pattern: '#(?P<id>[0-9]+)',
+        url_format_string: 'https://trac.example.com/ticket/%(id)s',
+    });
+    casper.click('form.admin-filter-form input.btn');
+});
 
 casper.waitForSelector('.admin-filter-form', function () {
     casper.fill('form.admin-filter-form', {
@@ -311,9 +311,6 @@ casper.waitUntilVisible('div#admin-filter-pattern-status', function () {
 // go to home page
 casper.then(function () {
     casper.click('.settings-header .exit');
-});
-casper.then(function () {
-    casper.waitWhileVisible('#settings_overlay_container');
 });
 
 // For clarity these should be different than what 08-edit uses, until
