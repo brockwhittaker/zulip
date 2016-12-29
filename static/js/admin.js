@@ -85,7 +85,10 @@ function populate_users(realm_people_data) {
         bots_table.append(templates.render("admin_user_list", {user: user}));
     });
     _.each(active_users, function (user) {
+        // XDate takes number of milliseconds since UTC epoch.
+        var last_login = timerender.render_date(new XDate(user.last_login * 1000));
         users_table.append(templates.render("admin_user_list", {user: user}));
+        $("td[id='last_login_"+user.email+"']").append(last_login);
     });
     _.each(deactivated_users, function (user) {
         deactivated_users_table.append(templates.render("admin_user_list", {user: user}));
