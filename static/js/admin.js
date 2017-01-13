@@ -84,12 +84,23 @@ function populate_users(realm_people_data) {
     _.each(bots, function (user) {
         bots_table.append(templates.render("admin_user_list", {user: user}));
     });
-    _.each(active_users, function (user) {
-        // XDate takes number of milliseconds since UTC epoch.
-        var last_login = timerender.render_date(new XDate(user.last_login * 1000));
-        users_table.append(templates.render("admin_user_list", {user: user}));
-        $("td[id='last_login_"+user.email+"']").append(last_login);
-    });
+
+    // create an IIFE to not expose the MONTHS variable but only declare once
+    // instead of insude the _.each.
+    (function () {
+        var MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Nov", "Dec"];
+
+        _.each(active_users, function (user) {
+            // XDate takes number of milliseconds since UTC epoch.
+            var last_login = (function () {
+                var date = new XDate(user.last_login * 1000);
+                return MONTHS[date.getMonth()] + " " + date.getDate() + ", " + date.getFullYear();
+            }());
+
+            users_table.append(templates.render("admin_user_list", {user: user}));
+            $("td.last-login[data-email='"+user.email+"']").append(last_login);
+        });
+    }());
     _.each(deactivated_users, function (user) {
         deactivated_users_table.append(templates.render("admin_user_list", {user: user}));
     });
