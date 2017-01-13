@@ -456,3 +456,13 @@ input[type=checkbox].inline-block {
 #administration #admin_users_table .user-edit-button .button {
     padding: 5px 10px;
 }
+
+#admin-user-list thead th.last-login {
+    width: 90px;
+}
+
+#admin-user-list .table-striped thead th {
+    background-color: transparent;
+    color: #444;
+    border-top: 1px solid #ddd !important;
+}
