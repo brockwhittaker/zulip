@@ -3,7 +3,8 @@ var subs = (function () {
 var meta = {
     callbacks: {},
     stream_created: false,
-    is_open: false,
+    // check if the hash on browser load is equal to subscriptions.
+    is_open: window.location.hash.replace(/#/, "") === "subscriptions",
 };
 var exports = {};
 
