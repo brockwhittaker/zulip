@@ -676,6 +676,12 @@ PIPELINE = {
             ),
             'output_filename': 'min/portico.css'
         },
+        'landing-page': {
+            'source_filenames': (
+                'styles/landing-page.css',
+            ),
+            'output_filename': 'min/landing.css'
+        },
         # Two versions of the app CSS exist because of QTBUG-3467
         'app-fontcompat': {
             'source_filenames': (
@@ -744,6 +750,12 @@ JS_SPECS = {
             'js/common.js',
         ],
         'output_filename': 'min/common.js'
+    },
+    'landing-page': {
+            'source_filenames': [
+                'js/portico/landing-page.js',
+            ],
+            'output_filename': 'min/landing.js'
     },
     'signup': {
         'source_filenames': [

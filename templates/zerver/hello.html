@@ -1,6 +1,15 @@
 {% extends "zerver/portico.html" %}
+
+{% block customhead %}
+{% stylesheet 'portico' %}
+{% stylesheet 'landing-page' %}
+{{ minified_js('landing-page')|safe }}
+
+{% endblock %}
+
 {% block hello_page_container %} hello-main{% endblock %}
 {% block hello_page_footer %} hello-footer{% endblock %}
+
 {% block os_announcement %}
   {% if show_oss_announcement %}
   <div class="os-headline-container">
@@ -18,188 +27,253 @@
 {% endblock %}
 
 {% block portico_content %}
-<div class="app main-headline">
-  <div class="app-main main-headline-container">
-    <img src="/static/images/logo/textlogo@2x.png" class="main-headline-logo" alt="Zulip logo" />
-    <div class="main-headline-text">
-      <span class="tagline">
-        {{ _('Finally, workplace chat that actually improves your productivity.*') }}
-      </span>
-      <span class="footnote">{{ _("* It's also great for sharing cat pictures.") }}</span>
-        {% if register_link_disabled %}
-        {% elif only_sso %}
-          <a href="{{ url('login-sso') }}" class="main-signup-button btn btn-large btn-primary">{{ _('Log in now!') }}</a>
-        {% else %}
-          <a href="{{ url('register') }}" class="main-signup-button btn btn-large btn-primary">{{ _('Register now!') }}</a>
-        {% endif %}
+<nav>
+    <div class="logo"></div>
+    <ul>
+        <li class="active" scroll-to="0px">Home</li>
+        <li scroll-to="features">Features</li>
+        <li>
+            <a href="/help/">Help Center</a>
+        </li>
+        <li>
+            <a href="/login/">Login</a>
+        </li>
+        <li>
+            <a href="/register/">Register</a>
+        </li>
+    </ul>
+    <div class="clear-float"></div>
+</nav>
+
+<div class="portico-landing">
+    <div class="main">
+        <div class="hero-modal box-shadow">
+            <div class="padded-content">
+                <div class="text-content main-text">
+                    <div class="flex">
+                        <div class="flex-inner">
+                            <h1>Zulip: Workplace chat, organized.</h1>
+                            <p class="grey">
+                                Zulip’s unique threading model organizes your chat messages into conversations. Lots of conversations at once, spread across many days? No problem. With Zulip, you read exactly what matters to you.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="image-content">
+                    <x-grad class="image orange-grad">
+                        <div class="bg macbook"></div>
+                        <div class="bg iphone"></div>
+                        <div class="slides">
+                            <div class="slide-button"></div>
+                            <div class="slide-button"></div>
+                        </div>
+                    </x-grad>
+                </div>
+            </div>
+            <div class="call-to-action">
+                <div class="small-padded-content">
+                    <div class="text-content">
+                        <p class="small grey">
+                            Zulip is available on major Mobile and Desktop Operating Systems.
+                        </p>
+                        <a class="small" href="/apps/">LEARN MORE <span class="arrow">&gt;</span></a>
+                    </div>
+                    <div class="action-content">
+                        <!-- <button type="button" name="button">Learn More</button> -->
+
+                        {% if register_link_disabled %}
+                        {% elif only_sso %}
+                        <a href="{{ url('login-sso') }}">
+                            <button type="button" name="button" class="enter-action">Log In</button>
+                        </a>
+                        {% else %}
+                        <a href="{{ url('register') }}">
+                            <button type="button" name="button" class="enter-action">Register Now</button>
+                        </a>
+                        {% endif %}
+
+                        <button class="green" type="button" name="button">Pricing</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="features" name="features">
+            <div class="text-header">
+                <div class="text-content">
+                    <h1>Features</h1>
+                </div>
+                <div class="action-content">
+                    <!--
+                    <a class="small">
+                        COMPARE ZULIP WITH COMPETITORS <span class="arrow">&gt;</span>
+                    </a>
+                    -->
+                    <a class="small" href="/features/">
+                        SEE ALL FEATURES <span class="arrow">&gt;</span>
+                    </a>
+                </div>
+                <div class="clear-float"></div>
+            </div>
+            <div class="feature-box left">
+                <div class="image box-shadow" style="background-image: url(/static/images/landing-page/assets/threads.png)"></div>
+                <div class="text-content">
+                    <div class="flex">
+                        <div class="inner-flex">
+                            <h2 class="dark-grey">Organized</h2>
+                            <p class="grey">
+                                Follow each conversation separately with Zulip. Messages from bots, sharing links with your co-workers or making lunch plans no longer disrupts your work discussions. Zulip's fast and powerful search experience will delight you.</p>
+                            <!-- <a class="small">LEARN MORE <span class="arrow">&gt;</span></a> -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="feature-box">
+                <div class="text-content">
+                    <div class="flex">
+                        <div class="inner-flex">
+                            <h2 class="dark-grey">Beautiful Messaging</h2>
+                            <p class="grey">
+                                Express yourself just how you like with drag-and-drop file uploads, markdown formatting, syntax highlighting, full internationalization, and hundreds of emoji to choose from.
+                            </p>
+                            <!-- <a class="small">LEARN MORE <span class="arrow">&gt;</span></a> -->
+                        </div>
+                    </div>
+                </div>
+                <div class="image box-shadow" style="background-image: url(/static/images/landing-page/assets/features.png)"></div>
+            </div>
+            <div class="feature-box left">
+                <div class="image box-shadow" style="background-image: url(/static/images/landing-page/assets/integrations.png)"></div>
+                <div class="text-content">
+                    <div class="flex">
+                        <div class="inner-flex">
+                            <h2 class="dark-grey">Fully Featured</h2>
+                            <p class="grey">
+                                Zulip has everything you want in group chat. Apps for the iPhone, Android and desktop. 60+ integrations (GitHub, Jira, Zendesk, etc.). Keyboard shortcuts. Emoji reactions. Need anything else? We probably have it.
+                            </p>
+                            <!-- <a class="small">LEARN MORE <span class="arrow">&gt;</span></a> -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="feature-box">
+                <div class="text-content">
+                    <div class="flex">
+                        <div class="inner-flex">
+                            <h2 class="dark-grey">Open Source</h2>
+                            <p class="grey">
+                                Zulip is open source, built by hundreds of developers around the world. Want some aspect of Zulip to be better? With 60,000 words of developer documentation, a high quality code base and an active, welcoming community, it’s easy for anyone (even high school students!) to jump in.
+                            </p>
+                            <!-- <a class="small">LEARN MORE <span class="arrow">&gt;</span></a> -->
+                        </div>
+                    </div>
+                </div>
+                <div class="image box-shadow contrib-graph">
+
+                </div>
+            </div>
+        </div>
     </div>
-    <img src="/static/images/landing-page/laptop-screenshot.png" class="main-image" alt="Screenshot of Zulip" />
-  </div>
-</div>
 
-<div class="app feature-line dark">
-  <div class="app-main feature-line-container">
-   <div class="feature-text">
-    <span class="tagline">
-      {{ _('Make sense of your messages.') }}
-    </span>
-    <span class="description">
-      <p>{% trans %}Every conversation in Zulip has a <em>topic</em>, so it&rsquo;s
-      easy to keep conversations straight. Are other users discussing
-      a software bug and the content of your website at the same time?
-      No problem.{% endtrans %}
-    </p>
-    </span>
-  </div>
-  <div class="feature-illustration">
-    <img class="feature-image" src="/static/images/landing-page/threads.png" alt="message threading in Zulip" />
-  </div>
-  </div>
-</div>
+    <div class="testimonials">
+        <div class="padded-content">
+            <div class="text-header">
+                <div class="text-content">
+                    <h1>Customers</h1>
+                </div>
+                <div class="action-content">
+                    <!--
+                    <a class="small">
+                        COMPARE ZULIP WITH COMPETITORS <span class="arrow">&gt;</span>
+                    </a>
+                    -->
+                </div>
+                <div class="clear-float"></div>
+            </div>
+            <blockquote class="big-quote">
+                &ldquo;Some quote on how Zulip made our company way more efficient. Word word word.&rdquo;
+                <br />
+                <cite>&mdash; Some Company</cite>
+                <div class="clear-float">
 
-<div class="app feature-line light">
-  <div class="app-main feature-line-container">
-   <div class="feature-text">
-    <span class="tagline">
-      {{ _('Never miss the conversations you care about.') }}
-    </span>
-    <span class="description">
-      <p>{% trans %}Sometimes, important things get discussed when you&rsquo;re not
-      around. Unfortunately, so do a lot of unimportant things.{% endtrans %}</p>
-
-      <p>{% trans %}Zulip makes it easy to review the conversations
-        you missed, so you can focus on that important project
-        without having to catch up on how Jim&rsquo;s guitar
-        lessons are going.{% endtrans %}</p>
-    </span>
-  </div>
-  <div class="feature-illustration">
-    <img class="feature-image shadow" src="/static/images/landing-page/important-things.png" alt="Zulip streams bar" />
-  </div>
-  </div>
-</div>
-
-<div class="app feature-line dark">
-  <div class="app-main feature-line-container">
-   <div class="feature-text">
-    <span class="tagline">
-      {{ _("Fast and powerful search.") }}
-    </span>
-    <span class="description">
-      {% trans %}An impressive amount of knowledge lives in your chat system.  Zulip&rsquo;s
-      Gmail-style search will delight you with how quickly you can find
-      exactly what you&rsquo;re looking for.{% endtrans %}
-    </span>
-  </div>
-  <div class="feature-illustration">
-    <img class="feature-image shadow" src="/static/images/landing-page/better-search.png" alt="example of Zulip search" />
-  </div>
-  </div>
-</div>
-
-<div class="app feature-line light">
-  <div class="app-main feature-line-container">
-   <div class="feature-text">
-    <span class="tagline">
-      {{ _("Integrations that don't intrude.") }}
-    </span>
-    <span class="description">
-      <p>{% trans %}Zulip has <a href="/integrations">many
-      integrations</a> and a powerful <a href="/api">API</a> to
-      match. But here&rsquo;s where it gets interesting: thanks to how
-      Zulip categorizes messages, automated messages never overwhelm
-      you. As with any topic in Zulip, they&rsquo;re easy to focus on,
-      skim, defer to later, or ignore&mdash;as appropriate.{% endtrans %}</p>
-    </span>
-  </div>
-  <div class="feature-illustration">
-    <img class="feature-image shadow" src="/static/images/landing-page/integrations.png" alt="Zulip's Jenkins integration" />
-  </div>
-  </div>
-</div>
-
-<div class="app feature-line dark">
-  <div class="app-main feature-line-container">
-   <div class="feature-text">
-    <span class="tagline">
-      {{ _('As technical as you want to be.') }}
-    </span>
-    <span class="description">
-      <p>{{ _('Keyboard shortcuts? Check.') }}<br />
-        {{ _('Syntax highlighting? Check.') }}<br />
-        {{ _('Discuss code and technical topics with ease.') }}</p>
-    </span>
-  </div>
-  <div class="feature-illustration">
-    <img class="feature-image shadow" src="/static/images/landing-page/technical.png" alt="code highlighting in Zulip" />
-  </div>
-  </div>
-</div>
-
-<div class="app feature-line light">
-  <div class="app-main feature-line-container">
-   <div class="feature-text">
-    <span class="tagline">
-      &hellip; {{ _('Everything else you need to be productive.') }}
-    </span>
-    <span class="description">
-      <p>{% trans %}Drag-and-drop file uploads, image pasting, group
-        private messages, audible notifications, missed-message
-        emails, desktop apps, and <a href="/features">everything else
-        you might want</a>. Including emoji, naturally. And it's all
-        open source under the Apache license!{% endtrans %}</p>
-    </span>
-  </div>
-  <div class="feature-illustration">
-    <img class="feature-image shadow" src="/static/images/landing-page/features.png" alt="unicode and emoji in Zulip" />
-  </div>
-  </div>
-</div>
-
-<div class="app feature-line dark">
-  <div class="app-main feature-line-container">
-   <div class="platform-text">
-    <span class="tagline">
-      {{ _('On the platform of your choice.') }}
-    </span>
-   </div>
-   <div class="platform-icons">
-      <div class="platform">
-         <i class="icon-vector-apple platform-icon"></i>
-         <h4>Mac</h4>
-      </div>
-      <div class="platform">
-         <i class="icon-vector-windows platform-icon"></i>
-         <h4>Windows</h4>
-      </div>
-      <div class="platform">
-         <i class="icon-vector-linux platform-icon"></i>
-         <h4>Linux</h4>
-      </div>
-      <div class="platform">
-         <i class="icon-vector-android platform-icon"></i>
-         <h4>Android</h4>
-      </div>
-      <div class="platform">
-         <i class="icon-vector-mobile-phone platform-icon"></i>
-         <h4>iOS</h4>
-      </div>
-      <div class="platform">
-         <i class="icon-vector-desktop platform-icon"></i>
-         <h4>Web</h4>
-      </div>
+                </div>
+            </blockquote>
+            <div class="company-box">
+                <div class="company doctorondemand"></div>
+                <div class="company levelup"></div>
+                <div class="company recurse"></div>
+                <div class="company panjiva"></div>
+                <div class="company layershift"></div>
+                <div class="company solano"></div>
+                <div class="company veelo"></div>
+                <div class="company cmt"></div>
+            </div>
+        </div>
     </div>
-  </div>
-</div>
 
-<div class="app feature-line light">
-  <div class="app-main feature-line-container centered-content">
-    {% if register_link_disabled %}
-    {% elif only_sso %}
-      <a href="{{ url('login-sso') }}" class="bottom-signup-button btn btn-large btn-primary">{{ _('Log in now') }}</a>
-    {% else %}
-      <a href="{{ url('register') }}" class="bottom-signup-button btn btn-large btn-primary">{{ _('Register now') }}</a>
-    {% endif %}
-  </div>
+    <div class="main">
+        <div class="blog-posts">
+            <div class="text-header">
+                <div class="text-content">
+                    <h1>Recent Blogposts</h1>
+                </div>
+                <div class="action-content">
+                    <a class="small" href="https://blog.zulip.org/">
+                        READ ALL BLOGPOSTS <span class="arrow">&gt;</span>
+                    </a>
+                </div>
+                <div class="clear-float"></div>
+            </div>
+
+            <div class="blog-box">
+                <div class="blog">
+                    <div class="image"></div>
+                </div>
+                <div class="description">
+                    <h3 class="bold">Blog #1 Title</h3>
+                    <p>
+                        Lorem ipsum dolor sit amet, no cum ludus eirmod omittam, dico copiosae eum no.
+                    </p>
+                </div>
+            </div>
+
+            <div class="blog-box">
+                <div class="blog">
+                    <div class="image"></div>
+                </div>
+                <div class="description">
+                    <h3 class="bold">Blog #2 Title</h3>
+                    <p>
+                        Lorem ipsum dolor sit amet.
+                    </p>
+                </div>
+            </div>
+
+            <div class="blog-box">
+                <div class="blog">
+                    <div class="image"></div>
+                </div>
+                <div class="description">
+                    <h3 class="bold">Blog #3 Title</h3>
+                    <p>
+                        Lorem ipsum dolor sit amet, no cum ludus eirmod omittam, dico copiosae eum no.
+                    </p>
+                </div>
+            </div>
+
+            <div class="blog-box">
+                <div class="blog">
+                    <div class="image"></div>
+                </div>
+                <div class="description">
+                    <h3 class="bold">Blog #4 Title</h3>
+                    <p>
+                        Lorem ipsum dolor sit amet, no cum ludus eirmod omittam, dico copiosae eum no. no cum ludus eirmod omittam, dico copiosae eum no.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+    -->
 </div>
 {% endblock %}
