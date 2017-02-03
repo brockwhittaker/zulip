@@ -7,6 +7,14 @@ body {
     line-height: normal;
 }
 
+*::-moz-selection {
+    background-color: rgba(69, 191, 168, 0.5);
+}
+
+*::selection {
+    background-color: rgba(69, 191, 168, 0.5);
+}
+
 /* -- component styling -- */
 button {
     padding: 5px 12px;
@@ -39,11 +47,11 @@ button.button.grey-transparent {
     padding: 8px 20px;
 
     font-size: 1.1rem;
-    font-weight: 600;
+    font-weight: 400;
 
     color: #fff;
     background-color: transparent;
-    border: 2px solid #fff;
+    border: 1px solid #fff;
 
     transition: all 0.2s ease;
 }
@@ -279,6 +287,8 @@ nav ul li.active::after {
 .testimonials {
     color: #fff;
     background-color: #333;
+    background-image: url(/static/images/landing-page/assets/dot.png);
+    background-size: 1%;
 }
 
 .testimonials .padded-content {
@@ -617,9 +627,20 @@ a {
 
 .call-to-action-bottom .footer {
     display: block;
-    margin-top: 180px;
 
     background: transparent;
+}
+
+.call-to-action-bottom .zulip-octopus {
+    margin: 110px auto 10px auto;
+
+    width: 40px;
+    height: 40px;
+
+    background-image: url(/static/images/landing-page/assets/zulip-octopus.png);
+    background-size: contain;
+    background-position: center center;
+    background-repeat: no-repeat;
 }
 
 .call-to-action-bottom button.button {
@@ -670,7 +691,7 @@ a {
 }
 
 .call-to-action-bottom .blur-outer {
-    height: 30%;
+    height: 170px;
     background-color: #666;
     overflow: hidden;
 
@@ -697,13 +718,13 @@ a {
 }
 
 .call-to-action-bottom:hover .blur-outer {
-    height: 70%;
+    height: 350px;
 }
 
 .call-to-action-bottom h1 {
     color: #fff;
     text-align: center;
-    margin-top: 20px;
+    margin-top: 30px;
 }
 
 /* -- modify portico.css -- */
