@@ -26,6 +26,13 @@ var events = function () {
             window.location.href = $(this).attr("href");
         }.bind(this), 500);
     });
+
+    // get the location url like `zulipchat.com/features/`, cut off the trailing
+    // `/` and then split by `/` to get ["zulipchat.com", "features"], then
+    // pop the last element to get the current section (eg. `features`).
+    let location = window.location.href.replace(/\/$/, "").split(/\//).pop();
+
+    $("[on-page='" + location + "']").addClass("active");
 };
 
 // run this callback when the page is determined to have loaded.

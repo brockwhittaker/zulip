@@ -1,5 +1,4 @@
 body {
-    font-family: "Yantramanav";
     -webkit-font-smoothing: antialiased;
     margin: 0;
     background-color: #eaeaea;
@@ -248,7 +247,9 @@ nav ul li.active::after {
 }
 
 .main .features .feature-box .image.contrib-graph {
-    background-color: transparent;
+    height: 300px;
+
+    background-color: #fff;
     background-image: url(/static/images/landing-page/assets/graph.png);
     background-size: contain;
 }
@@ -714,4 +715,64 @@ a {
 
 .header, .footer, .portico-os-announcement {
     display: none;
+}
+
+.footer-padder {
+    display: none;
+}
+
+/* -- features page css -- */
+.features-app .main {
+    background-color: #fff;
+}
+
+.feature-page-header {
+    padding-top: 0px;
+    text-align: left;
+}
+
+.feature-block .flex {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    height: 110px;
+}
+
+.feature-block .icon-container {
+    width: 70px;
+    min-width: 70px;
+    text-align: center;
+}
+
+.feature-block i {
+    color: #888;
+    float: none;
+}
+
+.feature-block .block h4 {
+    font-size: 1em;
+    font-weight: 400;
+    text-transform: uppercase;
+    color: #aaa;
+    margin-left: 15px;
+}
+
+.feature-block .block p {
+    font-size: 1rem;
+    margin-left: 15px;
+    margin-bottom: 0px;
+}
+
+@media (max-width: 1050px) {
+    .call-to-action-bottom .real-image,
+    .call-to-action-bottom .blur-inner {
+        background-size: 150% auto;
+    }
+}
+
+@media (max-width: 768px) {
+    .call-to-action-bottom .real-image,
+    .call-to-action-bottom .blur-inner {
+        background-size: 200% auto;
+    }
 }
