@@ -12,6 +12,7 @@ body {
 button {
     padding: 5px 12px;
 
+    font-family: inherit;
     font-size: 0.7em;
     background-color: #fff;
     color: #444;
@@ -31,6 +32,30 @@ button.green {
     background-color: #4fc0ad;
 
     border: 1px solid #3ca08d;
+}
+
+button.button.grey-transparent {
+    display: block;
+    margin: 0 auto;
+    padding: 8px 20px;
+
+    font-size: 1.1rem;
+    font-weight: 600;
+
+    color: #fff;
+    background-color: transparent;
+    border: 2px solid #fff;
+
+    transition: all 0.2s ease;
+}
+
+button.button.grey-transparent:hover {
+    background-color: rgba(255,255,255,0.2);
+}
+
+button.button.grey-transparent:active {
+    background-color: #fff;
+    color: #666;
 }
 
 /* -- navbar styling -- */
@@ -255,6 +280,10 @@ nav ul li.active::after {
     background-color: #333;
 }
 
+.testimonials .padded-content {
+    padding: 110px;
+}
+
 .testimonials .text-header .text-content {
     float: left;
 }
@@ -450,6 +479,11 @@ a, a:hover, a:visited {
     color: #4fc0ad;
 }
 
+a.no-style:hover {
+    text-decoration: none;
+    color: inherit;
+}
+
 a .arrow {
     display: inline-block;
     height: 18px;
@@ -475,7 +509,7 @@ h1 {
 }
 
 h2 {
-    font-size: 1.5em;
+    font-size: 1.8em;
 }
 
 a {
@@ -574,7 +608,110 @@ a {
     background-color: transparent;
 }
 
+.call-to-action-bottom {
+    position: relative;
+    padding: 250px;
+    margin-top: 0px;
+}
+
+.call-to-action-bottom .footer {
+    display: block;
+    margin-top: 180px;
+
+    background: transparent;
+}
+
+.call-to-action-bottom button.button {
+    margin-top: 20px;
+}
+
+.call-to-action-bottom .footer ul {
+    text-align: center;
+    margin-left: 0px;
+}
+
+.call-to-action-bottom .footer li {
+    display: inline-block;
+    margin: 0px 10px;
+
+    list-style-type: none;
+
+    font-size: 0.8em;
+    font-weight: 400;
+    color: #fff;
+}
+
+.call-to-action-bottom .footer li:before {
+    content: "◦";
+    position: relative;
+    left: -13px;
+}
+
+.call-to-action-bottom .footer li:first-of-type:before {
+    content: "";
+}
+
+.call-to-action-bottom .real-image,
+.call-to-action-bottom .blur-outer,
+.call-to-action-bottom .blur-inner,
+.call-to-action-bottom .inner-content {
+    position: absolute;
+    bottom: 0px;
+    left: 0;
+    width: 100%;
+}
+
+.call-to-action-bottom .real-image {
+    background-image: url(/static/images/landing-page/assets/twin-peaks.png);
+    background-size: 110% auto;
+    background-position: bottom center;
+    height: 100%;
+}
+
+.call-to-action-bottom .blur-outer {
+    height: 30%;
+    background-color: #666;
+    overflow: hidden;
+
+    transition: all 0.3s ease;
+}
+
+.call-to-action-bottom .blur-inner {
+    height: 100%;
+
+    background-color: #fff;
+    background-image: url(/static/images/landing-page/assets/twin-peaks.png);
+    background-size: 110% auto;
+    background-position: bottom center;
+
+    -webkit-filter: blur(25px) saturate(300%);
+    overflow: hidden;
+    opacity: 0.8;
+
+    transition: all 0.5s ease;
+}
+
+.call-to-action-bottom .inner-content {
+    height: 100%;
+}
+
+.call-to-action-bottom:hover .blur-outer {
+    height: 70%;
+}
+
+.call-to-action-bottom h1 {
+    color: #fff;
+    text-align: center;
+    margin-top: 20px;
+}
+
 /* -- modify portico.css -- */
+.app-main {
+    max-width: none;
+    min-width: 0;
+    padding: 0 !important;
+}
+
 .header, .footer, .portico-os-announcement {
     display: none;
 }
