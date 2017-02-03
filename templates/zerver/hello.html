@@ -27,23 +27,8 @@
 {% endblock %}
 
 {% block portico_content %}
-<nav>
-    <div class="logo"></div>
-    <ul>
-        <li class="active" scroll-to="0px">Home</li>
-        <li scroll-to="features">Features</li>
-        <li>
-            <a href="/help/">Help Center</a>
-        </li>
-        <li>
-            <a href="/login/">Login</a>
-        </li>
-        <li>
-            <a href="/register/">Register</a>
-        </li>
-    </ul>
-    <div class="clear-float"></div>
-</nav>
+
+{% include 'zerver/landing-nav.html' %}
 
 <div class="portico-landing">
     <div class="main">
