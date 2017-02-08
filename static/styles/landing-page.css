@@ -76,6 +76,52 @@ nav {
     color: #fff;
 }
 
+nav #hamburger {
+    display: none;
+    fill: #fff;
+    cursor: pointer;
+    margin-top: 3px;
+}
+
+nav .content {
+    position: relative;
+    z-index: 2;
+}
+
+nav .stripes,
+nav .faded,
+nav .faded-light {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+}
+
+nav .stripes,
+nav .faded,
+nav .faded-light {
+    pointer-events: none;
+}
+
+nav .stripes {
+    background: repeating-linear-gradient(
+      75deg,
+      rgba(255,255,255,0) 0px,
+      rgba(255,255,255,0.05) 200px
+    );
+}
+
+nav .faded {
+    background: -webkit-linear-gradient(top bottom, transparent , rgba(0,0,0,0.1));
+    background: linear-gradient(0deg, transparent , rgba(0,0,0,0.1));
+}
+
+nav .faded-light {
+    background: -webkit-linear-gradient(top top, transparent , rgba(104, 210, 192, 0.8));
+    background: linear-gradient(180deg, transparent , rgba(104, 210, 192, 0.8));
+}
+
 nav .logo {
     float: left;
     background-image: url(/static/images/landing-page/assets/bad-logo.png);
@@ -740,6 +786,29 @@ a {
 
 .footer-padder {
     display: none;
+}
+
+/* -- punch card plot -- */
+.punchcard {
+    display: inline-block;
+    padding: 10px;
+
+    background-image: url(/static/images/landing-page/assets/chart-bg.png);
+    background-repeat: repeat;
+    background-size: 25%;
+}
+
+.punchcard .day .hour-container {
+    display: inline-block;
+
+    width: 25px;
+    height: 25px;
+}
+
+.punchcard .day .hour-container .hour {
+    display: inline-block;
+    background-color: #444;
+    border-radius: 50px;
 }
 
 /* -- features page css -- */
