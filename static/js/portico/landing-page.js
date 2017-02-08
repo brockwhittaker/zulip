@@ -30,9 +30,24 @@ var events = function () {
     // get the location url like `zulipchat.com/features/`, cut off the trailing
     // `/` and then split by `/` to get ["zulipchat.com", "features"], then
     // pop the last element to get the current section (eg. `features`).
-    let location = window.location.href.replace(/\/$/, "").split(/\//).pop();
+    var location = window.location.href.replace(/\/$/, "").split(/\//).pop();
 
     $("[on-page='" + location + "']").addClass("active");
+
+    $("body").click(function (e) {
+        var $e = $(e.target);
+
+        var should_close = !$e.is("ul, #hamburger") && $e.closest("ul, #hamburger").length === 0;
+
+        // this means that it is in mobile sidebar mode.
+        if ($("nav ul").height() === window.innerHeight && should_close) {
+            $("nav ul").removeClass("show");
+        }
+    });
+
+    $("#hamburger").click(function (e) {
+        $("nav ul").addClass("show");
+    });
 };
 
 // run this callback when the page is determined to have loaded.

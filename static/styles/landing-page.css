@@ -1,10 +1,19 @@
+html {
+    width: 100vw;
+    overflow-x: hidden;
+}
+
 body {
     -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
     margin: 0;
     background-color: #eaeaea;
     color: #444;
     font-size: 1.2em;
     line-height: normal;
+
+    max-width: 100vw;
+    overflow-x: hidden;
 }
 
 *::-moz-selection {
@@ -68,8 +77,10 @@ button.button.grey-transparent:active {
 /* -- navbar styling -- */
 
 nav {
+    position: relative;
+
     background-color: #348576;
-    background: -webkit-linear-gradient(to bottom, #2e6f63 , #68d2c0);
+    background: -webkit-linear-gradient(to bottom, black , #68d2c0);
     background: linear-gradient(-145deg, #2e6f63 , #68d2c0);
     padding: 50px 100px 130px 100px;
 
@@ -182,6 +193,8 @@ nav ul li.active::after {
     transition: all 0.5s ease;
     margin-top: 200px;
     opacity: 0;
+
+    z-index: 1;
 }
 
 .portico-landing.show {
@@ -207,6 +220,10 @@ nav ul li.active::after {
 .main .hero-modal .text-content {
     margin-right: 25px;
     width: 50%;
+}
+
+.main .hero-modal .small-padded-content .text-content {
+    width: calc(100% - 215px);
 }
 
 .main .hero-modal .main-text.text-content {
@@ -260,74 +277,112 @@ nav ul li.active::after {
     font-weight: 500;
 }
 
-.main .features {
-    margin-top: 50px;
+.features {
+    margin-top: 100px;
+    padding: 100px 110px;
+
+    background-color: #fff;
 }
 
-.main .features .text-content {
+.features .text-content {
     display: inline-block;
 }
 
-.main .features .action-content {
+.features .action-content {
     float: right;
-    margin-top: 18px;
+    margin-top: 23px;
 }
 
-.main .features .action-content a {
+.features .action-content a {
     margin-left: 20px;
     font-weight: 500;
 }
 
-.main .features .feature-box {
+.features .feature-box {
     margin: 50px 0px;
 }
 
-.main .features .feature-box .image,
-.main .features .feature-box .text-content {
+.features .feature-box .image,
+.features .feature-box .text-content {
     display: inline-block;
     vertical-align: top;
     margin-left: 0px;
 }
 
-.main .features .feature-box .image {
+.features .feature-box .image {
     background-color: #fafafa;
     height: 350px;
     width: 60%;
     margin-left: 50px;
 
-    background-size: cover;
+    background-size: 60% auto;
     background-repeat: no-repeat;
     background-position: center center;
 }
 
-.main .features .feature-box .image.contrib-graph {
-    height: 300px;
+.features .feature-box .image.contrib-graph {
+    position: relative;
+    height: 270px;
 
-    background-color: #fff;
-    background-image: url(/static/images/landing-page/assets/graph.png);
-    background-size: contain;
+    background-image: url(/static/images/landing-page/assets/chart-bg.png);
+    background-repeat: repeat;
+    background-size: 25%;
 }
 
-.main .features .feature-box.left .image {
+.features .feature-box .image.contrib-graph .chart {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+
+    background-image: url(/static/images/landing-page/assets/graph.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.features .feature-box.left .image {
     margin-left: 0px;
 }
 
-.main .features .feature-box.left .text-content {
+.features .feature-box.left .text-content {
+    float: right;
     margin-left: 50px;
 }
 
-.main .features .feature-box .text-content {
+.features .feature-box .text-content {
     position: relative;
     width: calc(40% - 50px - 5px);
     height: 350px;
 }
 
-.main .features .feature-box .text-content h2 {
+.features .feature-box .text-content h2 {
     margin-top: 0px;
 }
 
-.main .features .feature-box .text-content a {
+.features .feature-box .text-content a {
     font-weight: 500;
+}
+
+.features .feature-box.open-source {
+    padding: 50px;
+    background: radial-gradient(farthest-corner at 30% 20%, #FFEEC7 20%, #FFD2C4 60%, #FFA58C) !important;
+}
+
+.features .feature-box.open-source.box-shadow {
+    box-shadow: 0px 0px 80px rgba(228, 148, 117, 0.28);
+}
+
+.features .feature-box.open-source .dark-grey {
+    color: #de6680;
+    margin-bottom: 20px;
+}
+
+.features .feature-box.open-source .grey {
+    color: #d48672;
+}
+
+.features .feature-box.open-source .text-content {
+    height: 270px;
 }
 
 .testimonials {
@@ -530,6 +585,7 @@ h1, h2, h3 {
 p {
     margin: 10px 0px;
     font-weight: normal;
+    line-height: 1.5;
 }
 
 a, a:hover, a:visited {
@@ -541,19 +597,20 @@ a.no-style:hover {
     color: inherit;
 }
 
-a .arrow {
+a.arrow:after {
+    content: " ";
     display: inline-block;
-    height: 18px;
-    width: 18px;
+    position: relative;
 
-    font-size: 1.2em;
-    font-weight: 200;
-    line-height: 1.05;
-    text-align: center;
-    background-color: #4fc0ad;
-    color: #fff;
+    height: 17px;
+    width: 17px;
 
-    border-radius: 15px;
+    top: 3px;
+
+    background-image: url(/static/images/landing-page/assets/arrow.png);
+    background-size: 100%;
+
+    margin-left: 2px;
 }
 
 /* because the background of .testimonials is #444. */
@@ -570,7 +627,29 @@ h2 {
 }
 
 a {
+    position: relative;
     cursor: pointer;
+}
+
+a:hover {
+    text-decoration: none;
+}
+
+a:not(.no-style):before {
+    content: " ";
+
+    position: absolute;
+    bottom: -1px;
+
+    height: 1px;
+    width: 0%;
+
+    background-color: #4fc0ad;
+    transition: all 0.5s ease;
+}
+
+a:not(.no-style):hover:before {
+    width: 100%;
 }
 
 .flex {
@@ -610,6 +689,12 @@ a {
 }
 
 /* -- company logos -- */
+.testimonials .company-box .company.akamai {
+    width: 150px;
+    background-image: url(/static/images/landing-page/assets/logos/akamai.png);
+    background-color: transparent;
+}
+
 .testimonials .company-box .company.doctorondemand {
     width: 150px;
     background-image: url(/static/images/landing-page/assets/logos/doctorondemand.png);
@@ -667,12 +752,24 @@ a {
 
 .call-to-action-bottom {
     position: relative;
-    padding: 250px;
+    padding: 250px 0px;
     margin-top: 0px;
 }
 
 .call-to-action-bottom .footer {
     display: block;
+    bottom: -100px;
+
+    background-color: transparent;
+
+    transition: all 0.2s ease;
+}
+
+.call-to-action-bottom:hover .footer {
+    display: block;
+    position: absolute;
+
+    bottom: 0px;
 
     background: transparent;
 }
@@ -756,6 +853,10 @@ a {
     overflow: hidden;
     opacity: 0.8;
 
+    /* force hardware acceleration -- particularly works well in Safari. */
+    transform: translateZ(0);
+    -moz-transform: translateZ(0);
+
     transition: all 0.5s ease;
 }
 
@@ -814,6 +915,7 @@ a {
 /* -- features page css -- */
 .features-app .main {
     background-color: #fff;
+    margin: 0px auto 50px;
 }
 
 .feature-page-header {
@@ -835,8 +937,13 @@ a {
 }
 
 .feature-block i {
-    color: #888;
     float: none;
+}
+
+.feature-block i:before {
+    background: -webkit-linear-gradient(65deg, #2e6f63, #68d2c0);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
 }
 
 .feature-block .block h4 {
@@ -853,6 +960,48 @@ a {
     margin-bottom: 0px;
 }
 
+@media (max-width: 1632px) {
+    .testimonials blockquote.big-quote {
+        width: 30%;
+    }
+
+    .testimonials .company-box {
+        width: calc(70% - 50px - 5px);
+    }
+}
+
+@media (max-width: 1340px) {
+    .features .feature-box.open-source .text-content {
+        display: block;
+        height: auto;
+        width: 100%;
+        margin-bottom: 20px;
+    }
+
+    .features .feature-box.open-source .contrib-graph {
+        width: 100%;
+        margin: 0;
+        height: calc(50vw * 0.5);
+    }
+
+    .testimonials .text-header,
+    .testimonials .company-box,
+    .testimonials blockquote.big-quote {
+        display: block;
+        width: 100%;
+        margin: 0 auto;
+    }
+
+    .testimonials blockquote.big-quote,
+    .testimonials .text-header {
+        margin-bottom: 20px;
+    }
+
+    .testimonials blockquote.big-quote cite {
+        float: none;
+    }
+}
+
 @media (max-width: 1050px) {
     .call-to-action-bottom .real-image,
     .call-to-action-bottom .blur-inner {
@@ -860,9 +1009,222 @@ a {
     }
 }
 
+@media (max-width: 1000px) {
+    .main .hero-modal .text-content.main-text {
+        width: 100%;
+        height: auto;
+        margin-bottom: 20px;
+    }
+
+    .main .hero-modal .text-content.main-text .flex {
+        display: block;
+    }
+
+    .main .hero-modal .text-content.main-text h1 {
+        margin-top: 0px;
+    }
+
+    .main .hero-modal .image-content {
+        width: 100%;
+        margin: 0;
+    }
+}
+
+@media (max-width: 985px) {
+    .features .feature-box .text-content {
+        width: 100%;
+        height: auto;
+        margin-bottom: 20px;
+    }
+
+    .features .feature-box .image {
+        float: none;
+        width: 100%;
+        margin: 0;
+    }
+
+    .features .text-content .flex {
+        display: block;
+    }
+}
+
 @media (max-width: 768px) {
     .call-to-action-bottom .real-image,
     .call-to-action-bottom .blur-inner {
         background-size: 200% auto;
+    }
+
+    nav,
+    .features,
+    .testimonials .padded-content {
+        padding-left: 50px;
+        padding-right: 50px;
+    }
+
+    .main {
+        width: calc(100% - 100px);
+
+        margin-left: 50px;
+        margin-right: 50px;
+    }
+}
+
+@media (max-width: 666px) {
+    nav .content {
+        display: inline-block;
+    }
+
+    nav #hamburger {
+        display: inline-block;
+        float: right;
+    }
+
+    nav ul:before {
+        content: " ";
+        display: block;
+        margin-top: 30px;
+
+        width: 115px;
+        height: 40px;
+
+        background-size: 100% auto;
+        background-image: url(/static/images/landing-page/assets/bad-logo.png);
+        background-position: center;
+
+        -webkit-filter: invert(0.7);
+    }
+
+    nav ul {
+        position: fixed;
+        float: none;
+        top: 0;
+        left: 0;
+        height: 100vh;
+        width: 300px;
+        padding-left: 30px;
+
+        background-color: #fff;
+        transform: translate(-350px, 0px);
+
+
+        box-shadow: 0px 0px 80px rgba(0,0,0,0.12);
+
+        transition: all 0.5s ease;
+    }
+
+    nav ul.show {
+        transform: translate(0px, 0px);
+    }
+
+    nav ul li:first-of-type {
+        margin-top: 30px;
+    }
+
+    nav ul li {
+        display: block;
+
+        font-size: 1.5em;
+        font-weight: 300;
+        line-height: 1.5;
+    }
+
+    nav ul li,
+    nav ul li a {
+        color: #444 !important;
+    }
+
+    nav ul li.active:after {
+        content: ">";
+        transform: scale(1,1);
+        bottom: auto;
+        left: -25px;
+        font-weight: 400;
+    }
+
+    nav ul li.active {
+        font-weight: 400;
+    }
+}
+
+@media (max-width: 576px) {
+    .call-to-action-bottom .real-image,
+    .call-to-action-bottom .blur-inner {
+        background-size: 360% auto;
+    }
+}
+
+@media (max-device-width: 450px) {
+    nav {
+        padding-bottom: 90px;
+        padding-top: 20px;
+    }
+
+    .main {
+        width: 100%;
+        margin: 0;
+    }
+
+    .main .padded-content {
+        padding: 20px;
+    }
+
+    .main .hero-modal .small-padded-content .text-content {
+        width: 100%;
+        margin-right: 0px;
+    }
+
+    .main .hero-modal .small-padded-content .action-content {
+        float: none;
+    }
+
+    .main .call-to-action .action-content {
+        margin-top: 20px;
+    }
+
+    .main .call-to-action .enter-action {
+        margin-left: 0px;
+    }
+
+    .features {
+        padding: 20px;
+        margin-top: 0px;
+    }
+
+    .features .action-content {
+        display: none;
+    }
+
+    .features .feature-box .image {
+        height: 200px;
+    }
+
+    .features .feature-box.open-source {
+        margin: 0;
+        padding: 20px;
+    }
+
+    .features .feature-box.open-source .text-content {
+        margin-bottom: 0px;
+    }
+
+    .features .feature-box.open-source .contrib-graph {
+        display: none;
+    }
+
+    .testimonials .padded-content {
+        padding: 20px;
+    }
+
+    .testimonials .company-box {
+        margin-bottom: 10px;
+    }
+
+    .testimonials .company {
+        width: 130px !important;
+        height: 40px !important;
+    }
+
+    .footer {
+        width: 100vw;
     }
 }

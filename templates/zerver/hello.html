@@ -1,6 +1,7 @@
 {% extends "zerver/portico.html" %}
 
 {% block customhead %}
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 {% stylesheet 'portico' %}
 {% stylesheet 'landing-page' %}
 {{ minified_js('landing-page')|safe }}
@@ -61,7 +62,7 @@
                         <p class="small grey">
                             Zulip is available on major Mobile and Desktop Operating Systems.
                         </p>
-                        <a class="small" href="/apps/">LEARN MORE <span class="arrow">&gt;</span></a>
+                        <a class="arrow small" href="/apps/">LEARN MORE</a>
                     </div>
                     <div class="action-content">
                         <!-- <button type="button" name="button">Learn More</button> -->
@@ -72,91 +73,106 @@
                             <button type="button" name="button" class="enter-action">Log In</button>
                         </a>
                         {% else %}
-                        <a href="{{ url('register') }}">
+                        <a class="no-style" href="{{ url('register') }}">
                             <button type="button" name="button" class="enter-action">Register Now</button>
                         </a>
                         {% endif %}
 
                         <button class="green" type="button" name="button">Pricing</button>
                     </div>
+                    <div class="clear-float"></div>
                 </div>
             </div>
         </div>
+    </div>
 
-        <div class="features" name="features">
-            <div class="text-header">
-                <div class="text-content">
-                    <h1>Features</h1>
-                </div>
-                <div class="action-content">
-                    <!--
-                    <a class="small">
-                        COMPARE ZULIP WITH COMPETITORS <span class="arrow">&gt;</span>
-                    </a>
-                    -->
-                    <a class="small" href="/features/">
-                        SEE ALL FEATURES <span class="arrow">&gt;</span>
-                    </a>
-                </div>
-                <div class="clear-float"></div>
+    <div class="features" name="features">
+        <div class="text-header">
+            <div class="text-content">
+                <h1>Features</h1>
             </div>
-            <div class="feature-box left">
-                <div class="image box-shadow" style="background-image: url(/static/images/landing-page/assets/threads.png)"></div>
-                <div class="text-content">
-                    <div class="flex">
-                        <div class="inner-flex">
-                            <h2 class="dark-grey">Organized</h2>
-                            <p class="grey">
-                                Follow each conversation separately with Zulip. Messages from bots, sharing links with your co-workers or making lunch plans no longer disrupts your work discussions. Zulip's fast and powerful search experience will delight you.</p>
-                            <!-- <a class="small">LEARN MORE <span class="arrow">&gt;</span></a> -->
+            <div class="action-content">
+                <!--
+                <a class="small">
+                    COMPARE ZULIP WITH COMPETITORS <span class="arrow">&gt;</span>
+                </a>
+                -->
+                <a class="arrow small" href="/features/">
+                    SEE ALL FEATURES
+                </a>
+            </div>
+            <div class="clear-float"></div>
+        </div>
+        <div class="feature-box left">
+            <div class="text-content">
+                <div class="flex">
+                    <div class="inner-flex">
+                        <h2 class="dark-grey">Organized</h2>
+                        <p class="grey">
+                            Follow each conversation separately with Zulip. Messages from bots, sharing links with your co-workers or making lunch plans no longer disrupts your work discussions. Zulip's fast and powerful search experience will delight you.</p>
+                        <!-- <a class="small">LEARN MORE <span class="arrow">&gt;</span></a> -->
+                    </div>
+                </div>
+            </div>
+            <div class="image" style="background-image: url(/static/images/landing-page/assets/threads.png)"></div>
+        </div>
+        <div class="feature-box">
+            <div class="text-content">
+                <div class="flex">
+                    <div class="inner-flex">
+                        <h2 class="dark-grey">Beautiful Messaging</h2>
+                        <p class="grey">
+                            Express yourself just how you like with drag-and-drop file uploads, markdown formatting, syntax highlighting, full internationalization, and hundreds of emoji to choose from.
+                        </p>
+                        <!-- <a class="small">LEARN MORE <span class="arrow">&gt;</span></a> -->
+                    </div>
+                </div>
+            </div>
+            <div class="image" style="background-image: url(/static/images/landing-page/assets/features.png)"></div>
+        </div>
+        <div class="feature-box left">
+            <div class="text-content">
+                <div class="flex">
+                    <div class="inner-flex">
+                        <h2 class="dark-grey">Fully Featured</h2>
+                        <p class="grey">
+                            Zulip has everything you want in group chat. Apps for the iPhone, Android and desktop. 60+ integrations (GitHub, Jira, Zendesk, etc.). Keyboard shortcuts. Emoji reactions. Need anything else? We probably have it.
+                        </p>
+                        <!-- <a class="small">LEARN MORE <span class="arrow">&gt;</span></a> -->
+                    </div>
+                </div>
+            </div>
+            <div class="image" style="background-image: url(/static/images/landing-page/assets/integrations.png)"></div>
+        </div>
+        <div class="feature-box open-source box-shadow">
+            <div class="text-content">
+                <div class="flex">
+                    <div class="inner-flex">
+                        <h2 class="dark-grey">Open Source</h2>
+                        <p class="grey">
+                            Zulip has the largest open source community of any group chat software.
+                        </p>
+                        <p class="grey">
+                            Zulip is built upon by hundreds of developers around the world. Want some aspect of Zulip to be better? With 60,000 words of developer documentation, a high quality code base and an active, welcoming community, it’s easy for anyone to jump in.
+                        </p>
+                        <!-- <a class="small">LEARN MORE <span class="arrow">&gt;</span></a> -->
+                    </div>
+                </div>
+            </div>
+            <div class="image box-shadow contrib-graph">
+                <div class="chart"></div>
+            </div>
+            <!--
+            <div class="punchcard">
+                <div class="day" v-for="day in data">
+                    <div class="hour-container" v-for="hour in day">
+                        <div class="flex">
+                            <div class="hour" v-bind:style="'padding:' + (Math.round(hour.value * 12.5) || 0.5) + 'px'"></div>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="feature-box">
-                <div class="text-content">
-                    <div class="flex">
-                        <div class="inner-flex">
-                            <h2 class="dark-grey">Beautiful Messaging</h2>
-                            <p class="grey">
-                                Express yourself just how you like with drag-and-drop file uploads, markdown formatting, syntax highlighting, full internationalization, and hundreds of emoji to choose from.
-                            </p>
-                            <!-- <a class="small">LEARN MORE <span class="arrow">&gt;</span></a> -->
-                        </div>
-                    </div>
-                </div>
-                <div class="image box-shadow" style="background-image: url(/static/images/landing-page/assets/features.png)"></div>
-            </div>
-            <div class="feature-box left">
-                <div class="image box-shadow" style="background-image: url(/static/images/landing-page/assets/integrations.png)"></div>
-                <div class="text-content">
-                    <div class="flex">
-                        <div class="inner-flex">
-                            <h2 class="dark-grey">Fully Featured</h2>
-                            <p class="grey">
-                                Zulip has everything you want in group chat. Apps for the iPhone, Android and desktop. 60+ integrations (GitHub, Jira, Zendesk, etc.). Keyboard shortcuts. Emoji reactions. Need anything else? We probably have it.
-                            </p>
-                            <!-- <a class="small">LEARN MORE <span class="arrow">&gt;</span></a> -->
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="feature-box">
-                <div class="text-content">
-                    <div class="flex">
-                        <div class="inner-flex">
-                            <h2 class="dark-grey">Open Source</h2>
-                            <p class="grey">
-                                Zulip is open source, built by hundreds of developers around the world. Want some aspect of Zulip to be better? With 60,000 words of developer documentation, a high quality code base and an active, welcoming community, it’s easy for anyone (even high school students!) to jump in.
-                            </p>
-                            <!-- <a class="small">LEARN MORE <span class="arrow">&gt;</span></a> -->
-                        </div>
-                    </div>
-                </div>
-                <div class="image box-shadow contrib-graph">
-
-                </div>
-            </div>
+            -->
         </div>
     </div>
 
@@ -184,6 +200,7 @@
                 </div>
             </blockquote>
             <div class="company-box">
+                <div class="company akamai"></div>
                 <div class="company doctorondemand"></div>
                 <div class="company levelup"></div>
                 <div class="company recurse"></div>
