@@ -13,7 +13,6 @@ body {
     line-height: normal;
 
     max-width: 100vw;
-    overflow-x: hidden;
 }
 
 *::-moz-selection {
@@ -22,6 +21,10 @@ body {
 
 *::selection {
     background-color: rgba(69, 191, 168, 0.5);
+}
+
+.center {
+    text-align: center;
 }
 
 /* -- component styling -- */
@@ -387,12 +390,14 @@ nav ul li.active::after {
 
 .testimonials {
     color: #fff;
-    background-color: #333;
+    background-color: #202121;
     background-image: url(/static/images/landing-page/assets/dot.png);
     background-size: 1%;
 }
 
-.testimonials .padded-content {
+.testimonials .padded-content,
+.pricing-model .padded-content,
+.compare .padded-content {
     padding: 110px;
 }
 
@@ -610,7 +615,7 @@ a.arrow:after {
     background-image: url(/static/images/landing-page/assets/arrow.png);
     background-size: 100%;
 
-    margin-left: 2px;
+    margin-left: 5px;
 }
 
 /* because the background of .testimonials is #444. */
@@ -958,6 +963,354 @@ a:not(.no-style):hover:before {
     font-size: 1rem;
     margin-left: 15px;
     margin-bottom: 0px;
+}
+
+/* -- pricing css -- */
+.pricing-model .pricing-container {
+    text-align: center;
+}
+
+.pricing-model .pricing-container .price-box {
+    position: relative;
+    display: inline-block;
+    vertical-align: bottom;
+    margin: -2px;
+    width: 300px;
+    height: 500px;
+
+    text-align: left;
+    background-color: #fff;
+    box-shadow: 0px 0px 40px rgba(0,0,0,0.1);
+
+    cursor: pointer;
+    transition-property: transform;
+    transition-duration: 0.3s;
+    transition-timing-function: ease;
+}
+
+.pricing-model .pricing-container .price-box.med {
+    height: 520px;
+}
+
+.pricing-model .pricing-container .price-box.high {
+    height: 540px;
+}
+
+.pricing-model .pricing-container .text-content {
+    margin: 20px;
+}
+
+.pricing-model .padded-content .text-header .text-content h1 {
+    margin-top: 0px;
+}
+
+.pricing-model .pricing-container .text-content h2 {
+    font-size: 1.3em;
+    margin-bottom: 5px;
+}
+
+.pricing-model .pricing-container hr {
+    border: none;
+    border-bottom: 2px solid #4fc0ad;
+    margin: 20px 0px 0px 0px;
+}
+
+.pricing-model .pricing-container .text-content .description {
+    font-size: 0.9em;
+    font-weight: 400;
+    color: #aaa;
+}
+
+.pricing-model .pricing-container ul {
+    list-style: none;
+    padding: 0px;
+    margin: 0px;
+}
+
+.pricing-model .pricing-container ul li {
+    padding: 20px 0px;
+
+    font-size: 0.9em;
+    font-weight: 500;
+    border-bottom: 1px solid #eee;
+}
+
+.pricing-model .pricing-container ul li:last-of-type {
+    border-bottom: none;
+}
+
+.pricing-model .pricing-container .bottom {
+    position: absolute;
+    bottom: 0px;
+    width: 100%;
+    height: 150px;
+
+    background-color: #eee;
+}
+
+.pricing-model .pricing-container .text-content .price::before {
+    content: "$";
+    position: relative;
+    vertical-align: top;
+    top: 3px;
+    left: -3px;
+
+    font-size: 2rem;
+    font-weight: 300;
+    color: #aaa;
+}
+
+.pricing-model .pricing-container .text-content .price {
+    display: inline-block;
+    margin-right: 15px;
+
+    font-size: 3.5em;
+    font-weight: 600;
+    line-height: 0.8;
+}
+
+.pricing-model .pricing-container .text-content .price .cents {
+    display: inline-block;
+    vertical-align: top;
+    height: 18px;
+
+    font-size: 1.3rem;
+    font-weight: 300;
+    border-bottom: 1px solid #666;
+}
+
+.pricing-model .pricing-container .bottom .details {
+    display: inline-block;
+    vertical-align: top;
+    margin-left: 15px;
+    margin-top: 4px;
+
+    font-size: 0.9em;
+    font-weight: 400;
+    color: #aaa;
+
+    text-align: left;
+}
+
+.pricing-model .pricing-container .bottom button {
+    margin-top: 20px;
+    width: 100%;
+}
+
+.pricing-model .pricing-container .price-box:focus button {
+    box-shadow: 0px 0px 25px #6acab9;
+    animation: box-shadow-pulse 2s infinite;
+}
+
+/* while the overlay is showing, the transform properties should stay fixed
+   for the container that sits inline in the page. */
+.pricing-model.stick .price-box.low,
+.pricing-model:not(.pricing-overlay):hover .price-box.low {
+    transform: translateX(-30px);
+}
+
+.pricing-model.stick .price-box.high,
+.pricing-model:not(.pricing-overlay):hover .price-box.high {
+    transform: translateX(30px);
+}
+
+.pricing-model:not(.pricing-overlay) .price-box.low:focus {
+    transform: translateX(-30px) scale(1.1);
+}
+
+.pricing-model .price-box:focus {
+    transform: scale(1.1);
+}
+
+.pricing-model:not(.pricing-overlay) .price-box.high:focus {
+    transform: translateX(30px) scale(1.1);
+}
+
+.pricing-model .price-box:focus {
+    outline: 10000px solid rgba(0,0,0,0.6);
+    box-shadow: 0px 0px 40px rgba(0,0,0,0.5);
+    z-index: 100;
+}
+
+.pricing-overlay.pricing-model {
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    width: 100vw;
+    height: 100vh;
+
+    opacity: 0;
+    pointer-events: none;
+
+    z-index: 10;
+    transition: all 0.3s ease;
+}
+
+.pricing-overlay.pricing-model .pricing-container {
+    padding: 50px;
+    text-align: left;
+}
+
+.pricing-overlay.pricing-model.active {
+    opacity: 1;
+    pointer-events: all;
+    background-color: rgba(0,0,0,0.6);
+}
+
+.pricing-overlay.pricing-model .price-box {
+    vertical-align: top;
+}
+
+.pricing-overlay.pricing-model .info-box {
+    position: relative;
+    display: inline-block;
+    vertical-align: top;
+    margin-left: 50px;
+    margin-top: -2px;
+    width: calc(100% - 300px - 50px - 40px);
+
+    background: #fff;
+    opacity: 0;
+    transform: translateY(300px);
+
+    transition: all 0.3s ease;
+}
+
+.pricing-overlay.pricing-model .info-box.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.pricing-overlay.pricing-model .info-box .text-content {
+    position: relative;
+    display: inline-block;
+    height: calc(100% - 40px);
+    width: calc(100% - 300px - 40px);
+}
+
+.pricing-overlay.pricing-model .info-box .text-content h1 {
+    margin-top: 0px;
+}
+
+.pricing-overlay.pricing-model .info-box .text-content p {
+    color: #aaa;
+}
+
+.pricing-overlay.pricing-model .info-box .text-content .feature-detail-box {
+    position: absolute;
+    width: 100%;
+    bottom: 0px;
+    text-align: center;
+}
+
+.pricing-overlay.pricing-model .info-box .text-content .feature-detail-box .feature {
+    display: inline-block;
+    width: calc(33% - 21px);
+    height: 200px;
+    background-color: #eee;
+    margin: 10px;
+}
+
+.pricing-overlay.pricing-model .info-box .image {
+    width: 300px;
+    height: 100%;
+
+    float: right;
+
+    background-color: #3ca08d;
+}
+
+/* -- compare css -- */
+.compare {
+    background-color: #2d3035;
+    color: #fff;
+}
+
+.compare .text-header .text-content h1 {
+    margin-top: 0px;
+}
+
+.compare table {
+    width: 100%;
+    text-align: left;
+    border-collapse: collapse;
+}
+
+.compare table thead th:last-of-type {
+    width: 120px;
+}
+
+.compare table thead th.uniform {
+    width: 20%;
+}
+
+.compare table td:not(:first-of-type),
+.compare table th:not(:first-of-type) {
+    text-align: center;
+}
+
+.compare table tr td:last-of-type {
+    text-align: right;
+}
+
+.compare thead {
+    border-bottom: 1px solid #73797d;
+}
+
+.compare thead th {
+    font-weight: 600;
+    padding: 15px 0px;
+}
+
+.compare thead th.normal {
+    font-weight: normal;
+}
+
+.compare tbody tr {
+    border-bottom: 1px solid #393c40;
+}
+
+.compare tbody tr td {
+    padding: 10px 0px;
+}
+
+.compare tbody tr td.no {
+    text-align: center;
+}
+
+.compare tbody tr td.yes::before {
+    content: " ";
+    display: inline-block;
+
+    width: 27px;
+    height: 27px;
+    background-image: url(/static/images/landing-page/assets/checkmark.png);
+    background-size: 100% auto;
+}
+
+.compare tbody tr td.no::before {
+    content: "×";
+
+    position: relative;
+    display: inline-block;
+
+    top: 3px;
+
+    font-size: 2.5rem;
+    font-weight: 600;
+    line-height: 0.9;
+}
+
+.compare tbody tr td a {
+    font-size: 0.9rem;
+    font-weight: 500;
+    text-transform: uppercase;
+}
+
+@keyframes box-shadow-pulse {
+    0%   { box-shadow: 0px 0px 0px rgba(106, 201, 185, 0);  }
+    50%  { box-shadow: 0px 0px 25px rgba(106, 201, 185, 0.8); }
+    100% { box-shadow: 0px 0px 0px rgba(106, 201, 185, 0);  }
 }
 
 @media (max-width: 1632px) {
