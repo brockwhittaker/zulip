@@ -66,19 +66,7 @@
                     </div>
                     <div class="action-content">
                         <!-- <button type="button" name="button">Learn More</button> -->
-
-                        {% if register_link_disabled %}
-                        {% elif only_sso %}
-                        <a href="{{ url('login-sso') }}">
-                            <button type="button" name="button" class="enter-action">Log In</button>
-                        </a>
-                        {% else %}
-                        <a class="no-style" href="{{ url('register') }}">
-                            <button type="button" name="button" class="enter-action">Register Now</button>
-                        </a>
-                        {% endif %}
-
-                        <button class="green" type="button" name="button">Pricing</button>
+                        <button class="green" type="button" name="button">Register Now</button>
                     </div>
                     <div class="clear-float"></div>
                 </div>
