@@ -1307,6 +1307,229 @@ a:not(.no-style):hover:before {
     text-transform: uppercase;
 }
 
+/* -- apps page -- */
+.portico-landing.apps .main {
+    background-color: #fff;
+}
+
+.portico-landing.apps .main .padded-content.headline {
+    padding-bottom: 0px;
+}
+
+.portico-landing.apps .main .headline h3 {
+    font-weight: 400;
+    font-size: 1em;
+    color: #aaa;
+}
+
+.portico-landing.apps .main ul.sidebar {
+    display: inline-block;
+    vertical-align: top;
+    margin: 0 -4px 0 0;
+    list-style: none;
+    font-weight: 500;
+    color: #aaa;
+}
+
+.portico-landing.apps .main ul.sidebar li {
+    padding: 20px 15px 20px 0px;
+    margin: 2px 0px;
+    width: 130px;
+    text-align: right;
+    background-color: #fff;
+    cursor: pointer;
+}
+
+.portico-landing.apps .main ul.sidebar li:first-of-type {
+    margin-top: 0px;
+}
+
+.portico-landing.apps .main ul.sidebar li.active {
+    background-color: #eee;
+}
+
+.portico-landing.apps .main .details-container {
+    position: relative;
+    display: inline-block;
+    vertical-align: top;
+    height: 500px;
+    width: calc(100% - 155px);
+    background-color: #888;
+}
+
+.portico-landing.apps .main .details-container .details-box {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    pointer-events: none;
+
+    transition: all 0.3s ease;
+    z-index: 1;
+}
+
+.portico-landing.apps .main .details-container .details-box.show {
+    opacity: 1;
+    pointer-events: auto;
+    z-index: 2;
+}
+
+.portico-landing.apps .main .details-container .details-box[data-name="windows"] {
+    color: #eeeeee;
+
+    background: -webkit-radial-gradient(top right, ellipse cover, #a7c6ea 0%, #052c67 100%);
+    background: radial-gradient(ellipse farthest corner at 0px 0px, #a7c6ea 0%, #052c67 100%);
+}
+
+
+.portico-landing.apps .main .details-container .details-box[data-name="linux"] {
+    color: #ffece5;
+
+    background: -webkit-radial-gradient(top right, ellipse cover, #ffb89e 0%, #d01f0d 100%);
+    background: radial-gradient(ellipse farthest corner at 0px 0px, #ffb89e 0%, #d01f0d 100%);
+}
+
+.portico-landing.apps .main .details-container .details-box[data-name="mac"] {
+    color: #ffe8ec;
+
+    background: -webkit-radial-gradient(top right, ellipse cover, #ffc6bc 0%, #8a0e17 100%);
+    background: radial-gradient(ellipse farthest corner at 0px 0px, #ffc6bc 0%, #8a0e17 100%);
+}
+
+.portico-landing.apps .main .details-container .details-box[data-name="ios"] {
+    color: #ecf4f9;
+
+    background: -webkit-radial-gradient(top right, ellipse cover, #e1fcff 0%, #2f6b96 100%);
+    background: radial-gradient(ellipse farthest corner at 0px 0px, #e1fcff 0%, #2f6b96 100%);
+}
+
+.portico-landing.apps .main .details-container .details-box[data-name="android"] {
+    color: #ebfaf4;
+
+    background: -webkit-radial-gradient(top right, ellipse cover, #c1eada 0%, #27634f 100%);
+    background: radial-gradient(ellipse farthest corner at 0px 0px, #c1eada 0%, #27634f 100%);
+}
+
+.portico-landing.apps .details-box[data-name="mac"] .platform.description {
+    margin-top: 22px;
+}
+
+.portico-landing.apps .details-box[data-name="windows"] .platform.description {
+    margin-top: 38px;
+}
+
+.portico-landing.apps .details-box[data-name="ios"] .platform.description {
+    margin-top: 50px;
+}
+
+.portico-landing.apps .details-box[data-name="android"] .platform.description {
+    margin-top: 50px;
+}
+
+
+.portico-landing.apps .details-box[data-name="mac"] .platform.image {
+    text-align: center;
+}
+
+.portico-landing.apps .details-box[data-name="mac"] .platform.image img {
+    width: 450px;
+}
+
+.portico-landing.apps .details-box[data-name="windows"] .platform.image img {
+    width: 450px;
+}
+
+.portico-landing.apps .details-box[data-name="ios"] .platform.image img {
+    width: 175px;
+    margin-top: -22px;
+}
+
+.portico-landing.apps .details-box[data-name="android"] .platform.image img {
+    width: 240px;
+    margin-top: -50px;
+}
+
+.portico-landing.apps .details-box button.grey-transparent {
+    margin-top: 30px;
+}
+
+.portico-landing.apps .details-box[data-name="mac"] button.grey-transparent:active {
+    color: #bd323c;
+}
+
+.portico-landing.apps .details-box[data-name="ios"] button.grey-transparent:active {
+    color: #6b96b5;
+}
+
+.portico-landing.apps .details-box[data-name="windows"] button.grey-transparent:active {
+    color: #2d5187;
+}
+
+.portico-landing.apps .main .details-box > .image {
+    width: 100%;
+    padding: 35px 0px;
+    height: 344px;
+    background-color: rgba(255,255,255,0.1);
+}
+
+.portico-landing.apps .main .details-container h1 {
+    margin: 20px 0px;
+}
+
+.portico-landing.apps .main .details-container .platform {
+    display: inline-block;
+    vertical-align: top;
+    width: calc(49.5% - 40px);
+    padding: 20px;
+    text-align: center;
+}
+
+.portico-landing.apps .main .details-container .platform h2 {
+    margin-top: 0px;
+}
+
+.portico-landing.apps .main .details-container pre {
+    display: inline-block;
+    width: 400px;
+    border: none;
+    padding: 15px;
+    box-shadow: 0px 0px 30px rgba(255,255,255,0.3);
+    text-align: left;
+    background-color: #ffece5;
+    color: #b5776f;
+}
+
+.portico-landing.apps .main .details-container .instructions {
+    width: 430px;
+    margin: 30px auto 0 auto;
+    text-align: left;
+    font-size: 1.1rem;
+}
+
+.portico-landing.apps .main .details-container .instructions a {
+    color: #fff;
+}
+
+.portico-landing.apps .main .details-container .instructions a:not(.no-style):before {
+    background-color: rgba(255,255,255,0.5);
+    width: 50%;
+    left: 25%;
+}
+
+.portico-landing.apps .main .details-container .instructions a:not(.no-style):hover:before {
+    background-color: #fff;
+    width: 100%;
+    left: 0%;
+}
+
+.portico-landing.apps .main .details-container .instructions img {
+    display: block;
+    margin: -32px auto 0px auto;
+    width: 195px;
+}
+
 @keyframes box-shadow-pulse {
     0%   { box-shadow: 0px 0px 0px rgba(106, 201, 185, 0);  }
     50%  { box-shadow: 0px 0px 25px rgba(106, 201, 185, 0.8); }
