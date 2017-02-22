@@ -166,8 +166,8 @@ nav ul li {
     transition: all 0.2s ease;
 }
 
-li a,
-li a:hover {
+nav li a,
+nav li a:hover {
     text-decoration: none;
     color: #fff !important;
 }
@@ -1530,6 +1530,90 @@ a:not(.no-style):hover:before {
     width: 195px;
 }
 
+/* -- integrations page css -- */
+.portico-landing.integrations {
+    color: #444;
+    font-weight: normal;
+}
+
+.portico-landing.integrations .main {
+    width: calc(100% - 200px - 20px);
+    margin: 0 auto;
+
+    background-color: #fff;
+}
+
+.portico-landing.integrations .padded-content {
+    padding: 50px;
+}
+
+.portico-landing.integrations .padded-content .inner-content {
+    opacity: 0;
+    pointer-events: none;
+
+    transition: all 0.3s ease;
+}
+
+.portico-landing.integrations .padded-content .inner-content.show {
+    opacity: 1;
+    pointer-events: all;
+}
+
+.portico-landing.integrations ol li {
+    list-style: none;
+}
+
+.portico-landing.integrations ol > li > p {
+    max-width: calc(100% - 33px);
+    margin-top: 0px;
+}
+
+.portico-landing.integrations code {
+    display: inline-block;
+    vertical-align: middle;
+    max-width: 100%;
+    overflow: auto;
+
+    font-family: Monaco, Menlo, Consolas, "Courier New", Courier, monospace
+}
+
+.portico-landing.integrations .portico-page-header a {
+    color: inherit;
+}
+
+.portico-landing.integrations .integration-lozenges {
+    transition: all 0.3s ease;
+}
+
+.portico-landing.integrations .integration-lozenges.hide {
+    opacity: 0;
+    transform: translateY(-200px);
+}
+
+.portico-landing.integrations .integration-lozenge {
+    height: 180px;
+    transition: all 0.3s ease;
+}
+
+.portico-landing.integrations .integration-lozenge:hover {
+    box-shadow: 0px 0px 40px rgba(0,0,0,0.1);
+    background: #fefefe;
+}
+
+.portico-landing.integrations .integration-lozenge img {
+    max-width: 90%;
+    display: block;
+    margin: 10% auto 0 auto;
+    border-radius: 8px;
+}
+
+.portico-landing.integrations .integration-lozenge .integration-label {
+    font-weight: 500;
+    color: #666;
+}
+
+/* -- media queries -- */
+
 @keyframes box-shadow-pulse {
     0%   { box-shadow: 0px 0px 0px rgba(106, 201, 185, 0);  }
     50%  { box-shadow: 0px 0px 25px rgba(106, 201, 185, 0.8); }
@@ -1585,6 +1669,24 @@ a:not(.no-style):hover:before {
     }
 }
 
+@media (max-width: 1024px) {
+    nav {
+        padding-bottom: 110px;
+    }
+
+    nav .logo {
+        float: none;
+        margin: 0 auto;
+    }
+
+    nav ul {
+        display: block;
+        margin: 20px auto 0 auto;
+        float: none;
+        text-align: center;
+    }
+}
+
 @media (max-width: 1000px) {
     .main .hero-modal .text-content.main-text {
         width: 100%;
@@ -1637,6 +1739,7 @@ a:not(.no-style):hover:before {
         padding-right: 50px;
     }
 
+    .portico-landing.integrations .main,
     .main {
         width: calc(100% - 100px);
 
@@ -1646,6 +1749,16 @@ a:not(.no-style):hover:before {
 }
 
 @media (max-width: 666px) {
+    .main, .portico-landing.integrations .main {
+        width: calc(100% - 50px);
+        margin: 0 auto;
+    }
+
+    nav ul {
+        margin-top: 0px;
+        text-align: left;
+    }
+
     nav .content {
         display: inline-block;
     }
@@ -1735,9 +1848,17 @@ a:not(.no-style):hover:before {
         padding-top: 20px;
     }
 
-    .main {
+    .main, .portico-landing.integrations .main {
         width: 100%;
         margin: 0;
+    }
+
+    .portico-landing.integrations .main .portico-page-header {
+        padding-top: 10px;
+    }
+
+    .portico-landing.integrations .main .padded-content {
+        padding: 20px;
     }
 
     .main .padded-content {

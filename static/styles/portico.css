@@ -108,12 +108,14 @@ body {
     list-style: none;
 }
 
-.markdown ol > li {
+.markdown ol > li,
+.portico-landing.integrations ol > li {
     counter-increment: item;
     margin-bottom: 5px;
 }
 
-.markdown ol > li:before {
+.markdown ol > li:before,
+.portico-landing.integrations ol > li:before {
     content: counter(item);
     display: inline-block;
     vertical-align: top;
@@ -127,7 +129,8 @@ body {
     text-align: center;
 }
 
-.markdown ol > li > p {
+.markdown ol > li > p,
+.portico-landing.integrations ol > li > p {
     display: inline-block;
     vertical-align: top;
     max-width: calc(100% - 30px);
@@ -672,11 +675,6 @@ a.bottom-signup-button {
     margin-top: 5px;
 }
 
-.integration-lozenge:hover {
-    box-shadow: 0px 0px 3px rgba(0,0,0,0.5);
-    background: #fefefe;
-}
-
 .integration-lozenge-static:hover {
     box-shadow: none;
     background: #ededed;
@@ -694,9 +692,6 @@ a.bottom-signup-button {
 
 .integration-lozenge .integration-label {
     display: block;
-    font-weight: 300;
-    font-size: 18px;
-    color: #000;
     text-align: center;
     padding-bottom: 18px;
     padding-top: 8px;
@@ -705,10 +700,10 @@ a.bottom-signup-button {
 .integration-lozenge .integration-label-secondary {
     display: block;
     font-size: 12px;
-    font-weight: 300;
+    font-weight: 500;
     text-align: center;
     padding-bottom: 5px;
-    color: #000;
+    color: #aaa;
 }
 
 .integration-instructions {
@@ -787,9 +782,14 @@ a.bottom-signup-button {
 #integration-list-link {
     position: absolute;
     top: 200px;
-    width: 130px;
     text-align: center;
     display: none;
+    margin-left: 5px;
+}
+
+#integration-list-link span {
+    display: inline-block;
+    margin-left: 5px;
 }
 
 .integrations-page-header .integrations-icon {
