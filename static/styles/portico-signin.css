@@ -1,0 +1,260 @@
+.header {
+    padding: 15px 0px;
+}
+
+.header,
+.header .stripes,
+.header .darker {
+    background: transparent;
+    color: #444;
+}
+
+.header .top-links a,
+.header .header-main .logo span {
+    color: #444;
+}
+
+.header .header-main .logo .brand-logo circle {
+    fill: #444 !important;
+}
+
+.header .header-main .logo .brand-logo path {
+    fill: #fff !important;
+    stroke: #fff !important;
+}
+
+
+.new-style {
+    -webkit-font-smoothing: antialiased;
+}
+
+.register-form.new-style {
+    width: 436px;
+    text-align: left;
+}
+
+.new-style .input-box {
+    position: relative;
+    display: inline-block;
+}
+
+.new-style .form-inline {
+    margin: 0px;
+}
+
+.new-style button {
+    display: inline-block;
+    vertical-align: top;
+    margin-top: 20px;
+}
+
+.new-style .alert {
+    height: 0;
+
+    padding: 0;
+    font-weight: 500;
+    font-size: 0.8em;
+    background-color: transparent;
+
+    border: none;
+    color: rgb(190, 88, 88);
+}
+
+.new-style .input-box input[type=text],
+.new-style .input-box input[type=email],
+.new-style .input-box input[type=password] {
+    padding: 13px 12px 11px 12px;
+
+    font-family: "Humbug";
+    font-size: 1.2rem;
+
+    width: 300px;
+
+    border: 2px solid #ddd;
+    box-shadow: none;
+    border-radius: 0px;
+
+    transition: border 0.3s ease;
+}
+
+.new-style .input-box label {
+    position: absolute;
+    top: 0px;
+
+    transition: all 0.3s ease;
+}
+
+.new-style .input-box input[type=text]:invalid + label,
+.new-style .input-box input[type=email]:invalid + label,
+.new-style .input-box input[type=password]:invalid + label {
+    transform: translateY(35px) translateX(120px);
+    font-size: 1.2rem;
+    font-weight: 500;
+    color: #aaa;
+
+    pointer-events: none;
+}
+
+.new-style .input-box input[type=text]:focus:invalid,
+.new-style .input-box input[type=email]:focus:invalid,
+.new-style .input-box input[type=password]:focus:invalid {
+    box-shadow: none;
+    color: #444;
+}
+
+.new-style .input-box input[type=text]:focus,
+.new-style .input-box input[type=email]:focus,
+.new-style .input-box input[type=password]:focus {
+    border: 2px solid #888;
+}
+
+.new-style .input-box input[required] ~ .required:after {
+    content: "*";
+    position: absolute;
+    top: 22px;
+    right: 5px;
+    transform: translateY(8px);
+
+    color: #d66a6a;
+    font-size: 2em;
+    transition: all 0.3s ease;
+}
+
+.new-style .input-box input[required]:valid ~ .required:after {
+    transform: translateY(0px);
+    opacity: 0;
+}
+
+.new-style .input-box input[required] ~ .valid {
+    position: absolute;
+    top: 33px;
+    right: 10px;
+    width: 20px;
+    transform: translateX(10px);
+    opacity: 0;
+
+    transition: all 0.3s ease;
+}
+
+.new-style .input-box input[required]:valid ~ .valid {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.new-style .input-box input[type=text]:focus + label,
+.new-style .input-box input[type=email]:focus + label,
+.new-style .input-box input[type=password]:focus + label,
+.new-style .input-box input[type=text]:valid + label,
+.new-style .input-box input[type=email]:valid + label,
+.new-style .input-box input[type=password]:valid + label {
+    transform: translateY(-0px) translateX(0px);
+    color: #444;
+    font-size: 1rem;
+    font-weight: 600;
+
+    pointer-events: auto;
+}
+
+.new-style .get-started {
+    margin-left: -3px;
+    margin-bottom: 30px;
+}
+
+.new-style button {
+    display: inline-block;
+    vertical-align: top;
+    padding: 13px 20px 11px 20px;
+
+    font-family: "Humbug";
+
+    font-size: 1.2rem;
+    font-weight: 400;
+    border: 2px solid #ddd;
+    box-sizing: border-box;
+    outline: none;
+    color: #54b8a7;
+    background-color: transparent;
+
+    transition: all 0.3s ease;
+}
+
+.new-style button:active {
+    background-color: rgba(84, 184, 167, 0.05);
+}
+
+.draw {
+    position: relative;
+    transition: color: 0.125s;
+}
+
+.draw:hover,
+.draw:focus {
+    color: #60daaa;
+}
+
+.draw:hover::before,
+.draw:focus::before {
+    border-top-color: #60daaa;
+    border-right-color: #60daaa;
+    -webkit-transition: width 0.125s ease-out, height 0.125s ease-out 0.125s;
+    transition: width 0.125s ease-out, height 0.125s ease-out 0.125s;
+}
+
+.draw:hover::before, .draw:hover::after,
+.draw:focus::before, .draw:focus::after {
+    width: 100%;
+    height: 100%;
+}
+
+.draw::before {
+    top: 0;
+    left: 0;
+}
+
+.draw::before, .draw::after {
+    border: 2px solid transparent;
+    width: 0;
+    height: 0;
+}
+
+button::before, button::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+
+.draw:hover::after,
+.draw:focus::after {
+    border-bottom-color: #60daaa;
+    border-left-color: #60daaa;
+    -webkit-transition: border-color 0s ease-out 0.25s, width 0.125s ease-out 0.25s, height 0.125s ease-out 0.375s;
+    transition: border-color 0s ease-out 0.25s, width 0.125s ease-out 0.25s, height 0.125s ease-out 0.375s;
+}
+
+.draw:hover::before, .draw:hover::after,
+.draw:focus::before, .draw:focus::after {
+    width: 100%;
+    height: 100%;
+}
+
+.draw::before, .draw::after {
+    border: 2px solid transparent;
+    width: 0;
+    height: 0;
+    transform: translateX(-2px) translateY(-2px);
+}
+
+
+.draw::after {
+    bottom: 0;
+    right: 0;
+    transform: translateX(2px) translateY(2px);
+}
+
+button::before, button::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}

@@ -13,17 +13,33 @@ $(function () {
     <div class="app-main register-page-container">
         <div class="center-container">
             <div class="center-block">
-                <div class="register-form">
-                    <p class="lead">
-                        <div class="register-page-header">{{ _("Let's get started") }}…</div>
-                    </p>
+                <div class="register-form new-style">
+                    <div class="lead">
+                        <h1 class="get-started">{{ _("Let's get started") }}…</h1>
+                    </div>
                     <form class="form-inline" id="send_confirm" name="email_form"
-                        action="{{ current_url() }}" method="post">
-                        {{ csrf_input }}
-                        <input type="text" class="email required" placeholder="{{ _("Enter your work email address") }}"
-                               id="email" name="email"/>
-                        <input type="submit" class="button btn btn-primary btn-large register-button" value="{{ _("Sign up") }}"/>
+                          action="{{ current_url() }}" method="post">
+                          {{ csrf_input }}
+
+                          <div class="input-box">
+                              <input type="text" id="email" class="email" name="email" value="" required>
+                              <label>Work email</label>
+                              <div class="required"></div>
+                              <div class="valid">
+                                  <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 320 370">
+                                      <g>
+                                          <title>Layer 1</title>
+                                          <g id="layer1">
+                                              <path fill="#54b8a7" fill-rule="evenodd" stroke-width="0.25pt" d="m20,200l100,90l180,-180l-35,-35l-145,145l-60,-60l-40,40z"/>
+                                          </g>
+                                      </g>
+                                  </svg>
+                              </div>
+                          </div>
+
+                          <button type="submit" class="draw" name="">{{ _('Sign up') }}</button>
                     </form>
+
                     <div id="errors"></div>
                     {% if form.email.errors %}
                         {% for error in form.email.errors %}
@@ -50,5 +66,21 @@ $(function () {
 if (window.location.hash.substring(0, 1) === "#") {
     document.email_form.action += window.location.hash;
 }
+
+/*
+let submit = () => {
+    $.ajax({
+        type: "POST",
+        url: "{{ current_url() }}",
+        data: $('#send_confirm').serialize(),
+        success: function (response) {
+            console.log(response);
+        },
+        error: function (response) {
+            console.log(response);
+        }
+    });
+};
+*/
 </script>
 {% endblock %}

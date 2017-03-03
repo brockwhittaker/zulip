@@ -677,6 +677,7 @@ PIPELINE = {
             'source_filenames': (
                 'third/zocial/zocial.css',
                 'styles/portico.css',
+                'styles/portico-signin.css',
                 'styles/pygments.css',
                 'third/thirdparty-fonts.css',
                 'styles/fonts.css',
