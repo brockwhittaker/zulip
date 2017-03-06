@@ -64,6 +64,7 @@
 .new-style .input-box input[type=email],
 .new-style .input-box input[type=password] {
     padding: 13px 12px 11px 12px;
+    margin-top: 20px;
 
     font-family: "Humbug";
     font-size: 1.2rem;
@@ -141,6 +142,7 @@
     transform: translateX(0);
 }
 
+.new-style .input-box label,
 .new-style .input-box input[type=text]:focus + label,
 .new-style .input-box input[type=email]:focus + label,
 .new-style .input-box input[type=password]:focus + label,
@@ -148,11 +150,11 @@
 .new-style .input-box input[type=email]:valid + label,
 .new-style .input-box input[type=password]:valid + label {
     transform: translateY(-0px) translateX(0px);
-    color: #444;
+    pointer-events: auto;
+
     font-size: 1rem;
     font-weight: 600;
-
-    pointer-events: auto;
+    color: #444;
 }
 
 .new-style .get-started {
@@ -257,4 +259,14 @@ button::before, button::after {
     position: absolute;
     width: 100%;
     height: 100%;
+}
+
+/* -- /accounts/register/ page -- */
+.pitch h1 {
+    margin-bottom: 0px;
+}
+
+.pitch p {
+    font-weight: 400;
+    color: #aaa;
 }

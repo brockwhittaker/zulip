@@ -13,7 +13,7 @@ Form is validated both client-side using jquery-validate (see signup.js) and ser
 
 {% block portico_content %}
 <div class="center-container">
-  <div class="center-block" style="padding: 20px 0px">
+  <div class="center-block new-style" style="padding: 20px 0px">
     <div class="pitch">
         {% trans %}
         <h1>You're almost there.</h1>
@@ -25,20 +25,19 @@ Form is validated both client-side using jquery-validate (see signup.js) and ser
 
     <form method="post" class="form-horizontal" id="registration" action="{{ url('zerver.views.registration.accounts_register') }}">
     {{ csrf_input }}
-        <div class="input-group grid">
-            <label for="id_email" class="inline-block label-title">{{ _('Email') }}</label>
+        <div class="grid input-box">
             <input type='hidden' name='key' value='{{ key }}' />
             <input id="id_email" type='text' disabled="true" placeholder="{{ email }}" />
+            <label for="id_email" class="inline-block label-title">{{ _('Email') }}</label>
         </div>
 
-        <div class="input-group grid">
-            <label for="id_full_name" class="inline-block label-title">{{ _('Full name') }}</label>
+        <div class="grid input-box">
             {% if lock_name %}
                 <p class="fakecontrol">{{ full_name }}</p>
             {% else %}
-                <input id="id_full_name" class="required" type="text" name="full_name" placeholder='{{ "Wile E. Coyote" }}'
+                <input id="id_full_name" class="required" type="text" name="full_name"
                 value="{% if full_name %}{{ full_name }}{% elif form.full_name.value() %}{{ form.full_name.value() }}{% endif %}"
-                maxlength={{ MAX_NAME_LENGTH}} />
+                maxlength={{ MAX_NAME_LENGTH }} required />
                 {% if form.full_name.errors %}
                     {% for error in form.full_name.errors %}
                         <div class="help-inline text-error">{{ error }}</div>
@@ -48,6 +47,7 @@ Form is validated both client-side using jquery-validate (see signup.js) and ser
             <div class="help-box">
                 {{ _('Zulip has full unicode support, so you can spell your name exactly how you want it to appear.') }}
             </div>
+            <label for="id_full_name" class="inline-block label-title">{{ _('Full name') }}</label>
         </div>
 
 
@@ -187,8 +187,7 @@ Form is validated both client-side using jquery-validate (see signup.js) and ser
             </div>
             {% endif %}
             <div class="submit-button-box float-right">
-                <input type="submit" class="button-new sea-green"
-                       value="{{ _('Register') }}" /><br />
+                <button type="submit" class="draw">{{ _('Register') }}</button>
                 <input type="hidden" name="next" value="{{ next }}" />
             </div>
         </div>
