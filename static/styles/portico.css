@@ -568,6 +568,11 @@ a.bottom-signup-button {
     margin-bottom: -54px;
 }
 
+.portico-page {
+    /* height of the white portico navbar */
+    min-height: calc(100% - 59px);
+}
+
 .signup-signature {
     margin-top: 20px;
     padding-bottom: 50px;
