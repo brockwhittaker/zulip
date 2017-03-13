@@ -482,7 +482,9 @@ $(function () {
         }
 
         $(document).on("keydown", ".editable-section", function (e) {
-            e.stopPropagation();
+            if (e.keyCode !== 27 && e.keyCode !== 13) {
+                e.stopPropagation();
+            }
         });
 
         $(document).on("drop", ".editable-section", function () {

@@ -128,7 +128,8 @@ exports.process_escape_key = function (e) {
     var row;
 
     if (exports.is_editing_stream_name(e)) {
-        return false;
+        $(e.target).parent().children("[data-make-editable]").click();
+        return true;
     }
 
     if ($("#overlay").hasClass("show")) {
