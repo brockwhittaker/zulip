@@ -153,32 +153,10 @@ function populate_users(realm_people_data) {
     list_render(users_table, active_users, {
         name: "users_table_list",
         modifier: function (item) {
-            var activity_rendered;
-            var row = $(templates.render("admin_user_list", {user: item}));
-            if (people.is_current_user(item.email)) {
-                activity_rendered = timerender.render_date(new XDate());
-            } else if (activity.presence_info[item.user_id]) {
-                // XDate takes number of milliseconds since UTC epoch.
-                var last_active = activity.presence_info[item.user_id].last_active * 1000;
-                activity_rendered = timerender.render_date(new XDate(last_active));
-            } else {
-                activity_rendered = $("<span></span>").text(i18n.t("Never"));
-            }
-            row.find(".last_active").append(activity_rendered);
-
-            return row.html();
-        },
-        lazy_load: true,
-        load_count: 10,
-    }).init();
-
-    list_render(deactivated_users_table, deactivated_users, {
-        name: "deactivated_users_table_list",
-        modifier: function (item) {
             return templates.render("admin_user_list", { user: item });
         },
         lazy_load: true,
-        load_count: 5,
+        load_count: 10,
     }).init();
 
     list_render(deactivated_users_table, deactivated_users, {
