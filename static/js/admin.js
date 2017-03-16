@@ -191,10 +191,16 @@ function populate_users(realm_people_data) {
 function populate_streams(streams_data) {
     var streams_table = $("#admin_streams_table").expectOne();
     all_streams = streams_data;
-    streams_table.find("tr.stream_row").remove();
-    _.each(streams_data.streams, function (stream) {
-        streams_table.append(templates.render("admin_streams_list", {stream: stream}));
-    });
+
+    list_render(streams_table, streams_data.streams, {
+        name: "admin_streams_list",
+        modifier: function (item) {
+            return templates.render("admin_streams_list", { stream: item });
+        },
+        lazy_load: true,
+        load_count: 10,
+    }).init();
+
     loading.destroy_indicator($('#admin_page_streams_loading_indicator'));
 }
 
