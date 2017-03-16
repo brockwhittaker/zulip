@@ -120,6 +120,8 @@ var list_render = (function () {
                 return this;
             },
 
+            // clear the HTML and reset the offset. This is good for DOM memory
+            // cleanup.
             clear: function () {
                 $container.html("");
                 meta.offset = 0;
