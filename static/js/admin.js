@@ -130,7 +130,21 @@ function populate_users(realm_people_data) {
     list_render(bots_table, bots, {
         name: "admin_bot_list",
         modifier: function (item) {
-            return templates.render("admin_user_list", { user: item });
+            var activity_rendered;
+            var row = $(templates.render("admin_user_list", {user: item}));
+            if (people.is_current_user(item.email)) {
+                activity_rendered = timerender.render_date(new XDate());
+            } else if (activity.presence_info[item.user_id]) {
+                // XDate takes number of milliseconds since UTC epoch.
+                var last_active = activity.presence_info[item.user_id].last_active * 1000;
+                activity_rendered = timerender.render_date(new XDate(last_active));
+            } else {
+                activity_rendered = $("<span></span>").text(i18n.t("Never"));
+            }
+            row.find(".last_active").append(activity_rendered);
+            users_table.append(row);
+
+            return row[0];
         },
         lazy_load: true,
         load_count: 10,
@@ -167,21 +181,14 @@ function populate_users(realm_people_data) {
         load_count: 5,
     }).init();
 
-    _.each(active_users, function (user) {
-        var activity_rendered;
-        var row = $(templates.render("admin_user_list", {user: user}));
-        if (people.is_current_user(user.email)) {
-            activity_rendered = timerender.render_date(new XDate());
-        } else if (activity.presence_info[user.user_id]) {
-            // XDate takes number of milliseconds since UTC epoch.
-            var last_active = activity.presence_info[user.user_id].last_active * 1000;
-            activity_rendered = timerender.render_date(new XDate(last_active));
-        } else {
-            activity_rendered = $("<span></span>").text(i18n.t("Never"));
-        }
-        row.find(".last_active").append(activity_rendered);
-        users_table.append(row);
-    });
+    list_render(deactivated_users_table, deactivated_users, {
+        name: "deactivated_users_table_list",
+        modifier: function (item) {
+            return templates.render("admin_user_list", { user: item });
+        },
+        lazy_load: true,
+        load_count: 10,
+    }).init();
 
     loading.destroy_indicator($('#admin_page_users_loading_indicator'));
     loading.destroy_indicator($('#admin_page_bots_loading_indicator'));
