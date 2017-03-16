@@ -127,12 +127,45 @@ function populate_users(realm_people_data) {
     deactivated_users = _.sortBy(deactivated_users, 'full_name');
     bots = _.sortBy(bots, 'full_name');
 
-    var bots_table_html = "";
-    _.each(bots, function (user) {
-        var bot_html = templates.render("admin_user_list", {user: user});
-        bots_table_html = bots_table_html.concat(bot_html);
-    });
-    bots_table.append(bots_table_html);
+    list_render(bots_table, bots, {
+        name: "admin_bot_list",
+        modifier: function (item) {
+            return templates.render("admin_user_list", { user: item });
+        },
+        lazy_load: true,
+        load_count: 10,
+    }).init();
+
+    list_render(users_table, active_users, {
+        name: "users_table_list",
+        modifier: function (item) {
+            var activity_rendered;
+            var row = $(templates.render("admin_user_list", {user: item}));
+            if (people.is_current_user(item.email)) {
+                activity_rendered = timerender.render_date(new XDate());
+            } else if (activity.presence_info[item.user_id]) {
+                // XDate takes number of milliseconds since UTC epoch.
+                var last_active = activity.presence_info[item.user_id].last_active * 1000;
+                activity_rendered = timerender.render_date(new XDate(last_active));
+            } else {
+                activity_rendered = $("<span></span>").text(i18n.t("Never"));
+            }
+            row.find(".last_active").append(activity_rendered);
+
+            return row.html();
+        },
+        lazy_load: true,
+        load_count: 10,
+    }).init();
+
+    list_render(deactivated_users_table, deactivated_users, {
+        name: "deactivated_users_table_list",
+        modifier: function (item) {
+            return templates.render("admin_user_list", { user: item });
+        },
+        lazy_load: true,
+        load_count: 5,
+    }).init();
 
     _.each(active_users, function (user) {
         var activity_rendered;
@@ -150,12 +183,6 @@ function populate_users(realm_people_data) {
         users_table.append(row);
     });
 
-    var deactivated_table_html = "";
-    _.each(deactivated_users, function (user) {
-        var user_html = templates.render("admin_user_list", {user: user});
-        deactivated_table_html = deactivated_table_html.concat(user_html);
-    });
-    deactivated_users_table.append(deactivated_table_html);
     loading.destroy_indicator($('#admin_page_users_loading_indicator'));
     loading.destroy_indicator($('#admin_page_bots_loading_indicator'));
     loading.destroy_indicator($('#admin_page_deactivated_users_loading_indicator'));

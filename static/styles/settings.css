@@ -465,6 +465,11 @@ input[type=checkbox].inline-block {
     margin: 20px 0 0 0;
 }
 
+.progressive-table-wrapper {
+    max-height: calc(95vh - 200px);
+    overflow: auto;
+}
+
 .bots_list {
     display: none;
     list-style-type: none;
