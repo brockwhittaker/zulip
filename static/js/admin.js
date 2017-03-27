@@ -130,6 +130,15 @@ function populate_users(realm_people_data) {
     list_render(bots_table, bots, {
         name: "admin_bot_list",
         modifier: function (item) {
+            return templates.render("admin_user_list", {user: user});
+        },
+        lazy_load: true,
+        load_count: 10,
+    }).init();
+
+    list_render(users_table, active_users, {
+        name: "users_table_list",
+        modifier: function (item) {
             var activity_rendered;
             var row = $(templates.render("admin_user_list", {user: item}));
             if (people.is_current_user(item.email)) {
@@ -142,18 +151,8 @@ function populate_users(realm_people_data) {
                 activity_rendered = $("<span></span>").text(i18n.t("Never"));
             }
             row.find(".last_active").append(activity_rendered);
-            users_table.append(row);
 
             return row[0];
-        },
-        lazy_load: true,
-        load_count: 10,
-    }).init();
-
-    list_render(users_table, active_users, {
-        name: "users_table_list",
-        modifier: function (item) {
-            return templates.render("admin_user_list", { user: item });
         },
         lazy_load: true,
         load_count: 10,
