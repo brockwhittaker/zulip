@@ -1,3 +1,43 @@
+html {
+    min-height: 500px;
+}
+
+.flex {
+    display: flex;
+    height: calc(100vh - 100px);
+    min-height: 350px;
+    align-items: center;
+    justify-content: center;
+}
+
+.login-page-container {
+    position: relative;
+    border: 2px solid #ddd;
+    padding: 20px 15px;
+}
+
+.login-page-container.dev-login {
+    margin-top: 20px;
+    border: none;
+}
+
+.login-page-container .login-form {
+    width: auto;
+}
+
+.login-page-header {
+    font-size: 1.8em;
+    font-weight: 300;
+    margin-top: 50px;
+}
+
+.login-page-container .group {
+    display: inline-block;
+    vertical-align: top;
+
+    margin: 0px 20px;
+}
+
 .header {
     padding: 15px 0px;
 }
@@ -36,6 +76,7 @@
 .new-style .input-box {
     position: relative;
     display: inline-block;
+    vertical-align: top;
 }
 
 .new-style .form-inline {
@@ -81,6 +122,7 @@
 .new-style .input-box label {
     position: absolute;
     top: 0px;
+    left: 0%;
 
     transition: all 0.3s ease;
 }
@@ -88,7 +130,8 @@
 .new-style .input-box input[type=text]:invalid + label,
 .new-style .input-box input[type=email]:invalid + label,
 .new-style .input-box input[type=password]:invalid + label {
-    transform: translateY(35px) translateX(120px);
+    left: 50%;
+    transform: translateY(35px) translateX(-50%);
     font-size: 1.2rem;
     font-weight: 500;
     color: #aaa;
@@ -149,6 +192,7 @@
 .new-style .input-box input[type=text]:valid + label,
 .new-style .input-box input[type=email]:valid + label,
 .new-style .input-box input[type=password]:valid + label {
+    left: 0px;
     transform: translateY(-0px) translateX(0px);
     pointer-events: auto;
 
@@ -269,4 +313,125 @@ button::before, button::after {
 .pitch p {
     font-weight: 400;
     color: #aaa;
+}
+
+.login-page-container input[type=submit] {
+    color: #aaa;
+    border: 2px solid #ddd;
+    border-radius: 0px;
+    background: transparent;
+
+    transition: color 0.3s ease, border 0.3s ease;
+}
+
+.login-page-container input[type=submit]:hover {
+    border-color: #888;
+    color: #444;
+}
+
+.login-page-container input[type=submit].btn-admin {
+    border-color: #54b8a7;
+    color: #54b8a7;
+}
+
+.login-page-container input[type=submit].btn-admin:hover {
+    color: #60daaa;
+    border-color: #60daaa;
+}
+
+/*
+.login-page-container label {
+    font-size: 1rem;
+    margin-top: 20px;
+}
+*/
+
+.or {
+    width: 328px;
+    display: block;
+    margin: 0 auto;
+    color: #bbb;
+    font-weight: 600;
+    text-align: center;
+    text-transform: uppercase;
+}
+
+.or::before,
+.or::after {
+    content: " ";
+
+    display: inline-block;
+    position: relative;
+    width: calc(149px);
+    top: -3px;
+
+    border-bottom: 2px solid #ddd;
+
+}
+
+.or::before {
+    left: -5px;
+}
+
+.or::after {
+    left: 5px;
+}
+
+.login-google {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+button.login-google-button,
+button.login-github-button {
+    width: 328px;
+    padding-left: 35px;
+
+    background-size: auto 60%;
+    background-repeat: no-repeat;
+    background-position: 13px 50%;
+    margin-left: 0px;
+    margin-top: 0px;
+
+    color: #aaa;
+}
+
+button.login-google-button {
+    background-image: url(/static/images/landing-page/assets/logos/google-icon.png);
+}
+
+.github-wrapper:before {
+    content: "\f09b";
+    position: absolute;
+
+    font-family: "FontAwesome";
+    font-size: 2rem;
+    color: #444;
+    transform: translateX(15px) translateY(13px);
+}
+
+.actions {
+    margin: 20px 10px 0px 10px;
+    text-align: left;
+}
+
+.actions a {
+    color: #60daaa;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.8em;
+}
+
+#registration .input-box {
+    margin: 10px;
+}
+
+.login-page .right-side,
+.login-page .left-side {
+    display: inline-block;
+    vertical-align: top;
+}
+
+.login-page .left-side {
+    width: 500px;
 }

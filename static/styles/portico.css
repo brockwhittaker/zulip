@@ -278,6 +278,12 @@ img.screenshot {
     width: 220px;
 }
 
+#registration #pw_strength {
+    width: 325px;
+    height: 48px;
+    margin-top: 20px;
+}
+
 .def:before {
     content: " - ";
 }
@@ -738,7 +744,6 @@ a.bottom-signup-button {
 .authors-page-header,
 .feature-page-header,
 .integrations-page-header,
-.login-page-header,
 .register-page-header {
     font-weight: 300;
     font-size: 40px;
@@ -859,6 +864,10 @@ a.bottom-signup-button {
     width: auto;
 }
 
+.login-page {
+    text-align: center;
+}
+
 .login-page .alert {
     width: 320px;
     margin: auto;
@@ -869,7 +878,8 @@ a.bottom-signup-button {
 
 .login-form {
     margin: auto;
-    width: 300px;
+    /* plus input padding. */
+    width: calc(300px + 28px);
 }
 
 .register-form {

@@ -38,8 +38,15 @@ autofocus('#id_username');
 {% endif %}
 
 
-<div class="app login-page">
-  <div class="app-main login-page-container">
+<div class="app login-page new-style flex">
+  <div class="app-main login-page-container inline-block">
+
+    {% if dev_auth_enabled %}
+    <h3 class="login-page-header">{{ _('Development login') }}</h3>
+    {% if not password_auth_enabled %}
+    <h4 class="login-page-subheader">Click on a user to log in!</h4>
+    {% endif %}
+    {% else %}
     <h3 class="login-page-header">{{ _('You look familiar.') }}</h3>
 
 {% if only_sso %}
@@ -48,84 +55,109 @@ autofocus('#id_username');
     <div class="login-sso">
       <a href="/accounts/login/sso" class="btn btn-large btn-primary">{{ _('Sign in with SSO') }}</a>
     </div>
-
-{% else %}
-{# Non-SSO users. #}
-
-{% if form.errors %}
-<div class="alert alert-error">
-    {% for error in form.errors.values() %}
-    <div>{{ error | striptags }}</div>
-    {% endfor %}
-</div>
-{% endif %}
-
-    {% if email %}
-    <div class="alert">
-        {{ _("You've already registered with this email address. Please log in below.") }}
-    </div>
-    {% endif %}
-
-    {% if subdomain %}
-    <div class="alert">
-        {{ wrong_subdomain_error }}.
-    </div>
-    {% endif %}
-
-        {% if password_auth_enabled %}
-        <form name="login_form" id="login_form" method="post" class="login-form"
-              action="{{ url('django.contrib.auth.views.login') }}?next={{ next }}"
-        >
-            {{ csrf_input }}
-            <div class="control-group">
-                <label for="id_username" class="control-label">{{ _('Email') }}</label>
-                <div class="controls">
-                  <input id="id_username" type="email" name="username"
-                         class="email required"
-                         {% if email %}
-                         value="{{ email }}"
-                         {% else %}
-                         value=""
-                         {% endif %}
-                         maxlength="72" />
+    <div class="app-main login-page-container inline-block">
+        <div class="left-side">
+            <div class="header">
+                <div class="avatar"></div>
+                <div class="info-box">
+                    <div class="organization-name">Recurse Center</div>
+                    <div class="organization-path">recurse.zulipchat.com</div>
                 </div>
             </div>
+            <div class="description">
+                Pitch deck iterate prototype entrepreneur pivot big data food-truck parallax pivot thought leader driven integrate quantitative vs. qualitative. Actionable insight pivot ship it experiential long shadow prototype pivot paradigm.
+            </div>
+        </div>
 
-            <div class="control-group">
-                <label for="id_password" class="control-label">{{ _('Password') }}</label>
-                <div class="controls">
-                    <input id="id_password" name="password" class="required" type="password" />
-                </div>
+        <div class="right-side">
+
+            {% if subdomain %}
+            <div class="alert">
+                {{ wrong_subdomain_error }}.
+            </div>
+            {% endif %}
+
+                {% if password_auth_enabled %}
+                <form name="login_form" id="login_form" method="post" class="login-form"
+                      action="{{ url('django.contrib.auth.views.login') }}?next={{ next }}">
+                    {{ csrf_input }}
+                    <div class="input-box">
+                      <input id="id_username" type="email" name="username"
+                             class="email required"
+                             {% if email %}
+                             value="{{ email }}"
+                             {% else %}
+                             value=""
+                             {% endif %}
+                             maxlength="72" required />
+                         <label for="id_username">{{ _('Email') }}</label>
+                         <div class="required"></div>
+                         <img class="valid" src="/static/images/checkbox-valid.svg" />
+                    </div>
+
+                    <div class="input-box">
+                        <input id="id_password" name="password" class="required" type="password" required />
+                        <label for="id_password" class="control-label">{{ _('Password') }}</label>
+                        <div class="required"></div>
+                        <img class="valid" src="/static/images/checkbox-valid.svg" />
+                    </div>
+
+                </form>
+                {% endif %}
+                {% if dev_auth_enabled %}
+                <form name="direct_login_form" id="direct_login_form" method="post" class="login-form"
+                      action="{{ url('zerver.views.auth.dev_direct_login') }}">
+                    {{ csrf_input }}
+                    <div class="control-group">
+                        {% if password_auth_enabled %}
+                        <label for="direct_email" class="direct-label">{{ _('or Choose a user') }}:</label>
+                        {% endif %}
+                        <div class="controls">
+                            <label>({{ _('Administrators') }})</label>
+                            {% for user_email in direct_admins %}
+                            <button type="submit" name="direct_email" class="btn-direct btn-admin" value="{{ user_email }}" />
+                                {{ user_email }}
+                            </button>
+                            {% endfor %}
+
+                            <label>({{ _('Normal users') }})</label>
+                            {% for user_email in direct_users %}
+                            <p><input type="submit" name="direct_email" class="btn-direct btn-user" value="{{ user_email }}" /></p>
+                            {% endfor %}
+
+                            <label>({{ _('Community users') }})</label>
+                            {% for user_email in community_users %}
+                            <p><input type="submit" name="direct_email" class="btn-direct btn-user" value="{{ user_email }}" /></p>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </form>
+                {% endif %}
+
+            <div class="or">or</div>
+            {% if google_auth_enabled %}
+            <div class="login-google">
+                <a href="href="{{ url('zerver.views.auth.start_google_oauth2') }}"">
+                    <button class="login-google-button draw">{{ _('Sign in with Google') }}</button>
+                </a>
+            </div>
+            {% endif %}
+
+            <div class="login-github">
+                <a href="{{ url('login-social', args=('github',)) }}" class="github-wrapper">
+                    <button class="login-github-button draw github">
+                        <span>{{ _('Sign in with GitHub') }}</span>
+                    </button>
+                </a>
             </div>
 
-            <div class="control-group">
-                <div class="controls">
-                    <input type="submit" class="btn btn-large btn-primary" value="Log in" />
-                    <span class="login-forgot-password">
-                      <a href="{{ url('django.contrib.auth.views.password_reset') }}">{{ _('Forgot password?') }}</a>
-                    </span>
-                </div>
+            <div class="actions">
+                <a class="forgot-password" href="#">Forgot your password?</a>
             </div>
-        </form>
-        {% endif %}
 
-    {% if google_auth_enabled %}
-    <div class="login-google">
-    or <a href="{{ url('zerver.views.auth.start_google_oauth2') }}" class="login-google-button zocial google">{{ _('Sign in with Google') }}</a>
+            {% endif %}
+        </div>
     </div>
-    {% endif %}
-
-    {% if github_auth_enabled %}
-    <div class="login-github">
-        or <a href="{{ url('login-social', args=('github',)) }}" class="login-github-button zocial github">
-            <span>{{ _('Sign in with GitHub') }}</span>
-        </a>
-    </div>
-    {% endif %}
-
-{% endif %}
-
-</div>
 <div class="footer-padder"></div>
 </div>
 <script type="text/javascript">

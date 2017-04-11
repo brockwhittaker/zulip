@@ -50,15 +50,16 @@ Form is validated both client-side using jquery-validate (see signup.js) and ser
             <label for="id_full_name" class="inline-block label-title">{{ _('Full name') }}</label>
         </div>
 
+        <br />
 
         {% if password_auth_enabled %}
-        <div class="input-group grid">
-            <label for="id_password" class="inline-block">{{ _('Password') }}</label>
+        <div class="grid input-box">
             <input id="id_password" class="required" type="password" name="password"
                    value="{% if form.password.value() %}{{ form.password.value() }}{% endif %}"
                    maxlength={{ MAX_PASSWORD_LENGTH }}
                    data-min-length="{{password_min_length}}"
                    data-min-quality="{{password_min_quality}}"/>
+            <label for="id_password" class="inline-block">{{ _('Password') }}</label>
             {% if full_name %}
             <span class="help-inline">
               {{ _('This is used for mobile applications and other tools that require a password.') }}
@@ -70,8 +71,10 @@ Form is validated both client-side using jquery-validate (see signup.js) and ser
             {% endfor %}
             {% endif %}
             <br />
-            <label class="inline-block"></label>
+        </div>
+        <div class="grid input-box">
             <div class="progress" id="pw_strength" title="{{ _('Password strength') }}">
+                <label class="inline-block">Password Strength</label>
                 <div class="bar bar-danger" style="width: 10%;"></div>
             </div>
         </div>
