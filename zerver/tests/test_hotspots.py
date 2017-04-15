@@ -16,14 +16,14 @@ class TestGetNextHotspots(ZulipTestCase):
     def test_first_hotspot(self):
         # type: () -> None
         user = UserProfile.objects.get(email='hamlet@zulip.com')
-        self.assertEqual(get_next_hotspots(user), ['welcome'])
+        self.assertEqual(get_next_hotspots(user)[0], ['welcome'])
 
     def test_some_done_some_not(self):
         # type: () -> None
         user = UserProfile.objects.get(email='hamlet@zulip.com')
         do_mark_hotspot_as_read(user, 'welcome')
         do_mark_hotspot_as_read(user, 'topics')
-        self.assertEqual(get_next_hotspots(user), ['streams'])
+        self.assertEqual(get_next_hotspots(user)[0], ['streams'])
 
     def test_all_done(self):
         # type: () -> None

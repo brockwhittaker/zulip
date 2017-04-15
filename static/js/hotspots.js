@@ -5,7 +5,7 @@ var exports = {};
 exports.show = function (hotspot_list) {
     $('.hotspot').hide();
     for (var i = 0; i < hotspot_list.length; i += 1) {
-        $("#hotspot_".concat(hotspot_list[i])).show();
+        $("#hotspot_".concat(hotspot_list[i][0])).show();
     }
 };
 

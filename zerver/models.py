@@ -1413,6 +1413,7 @@ class UserActivity(models.Model):
     class Meta(object):
         unique_together = ("user_profile", "client", "query")
 
+MIN_USER_ACTIVITY_INTERVAL_LENGTH = datetime.timedelta(minutes=15)
 class UserActivityInterval(models.Model):
     user_profile = models.ForeignKey(UserProfile) # type: UserProfile
     start = models.DateTimeField('start time', db_index=True) # type: datetime.datetime
