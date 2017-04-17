@@ -37,40 +37,29 @@ exports.build_default_stream_table = function (streams_data) {
 
     self.row_dict = new Dict();
 
-    function set_up_remove_click_hander(row, stream_name) {
-        row.on("click", ".remove-default-stream", function (e) {
-            e.preventDefault();
-            e.stopPropagation();
-
-            channel.del({
-                url: '/json/default_streams'+ '?' + $.param({stream_name: stream_name}),
-                error: function (xhr) {
-                    var button = row.find("button");
-                    if (xhr.status.toString().charAt(0) === "4") {
-                        button.closest("td").html(
-                            $("<p>").addClass("text-error").text(JSON.parse(xhr.responseText).msg)
-                        );
-                    } else {
-                        button.text(i18n.t("Failed!"));
-                    }
-                },
-                success: function () {
-                    row.remove();
-                },
-            });
-        });
-    }
-
-    (function () {
+    var table_list = list_render.get("default_streams_list");
+    if (table_list) {
+        table_list.data(streams_data);
+    } else {
         var table = $("#admin_default_streams_table").expectOne();
-        _.each(streams_data, function (stream) {
-            var row = $(templates.render("admin_default_streams_list", {stream: stream, can_modify: page_params.is_admin}));
-            set_up_remove_click_hander(row, stream.name);
-            self.row_dict.set(stream.stream_id, row);
-            table.append(row);
-        });
+
+        list_render(table, streams_data, {
+            name: "default_streams_list",
+            modifier: function (item) {
+                var row = $(templates.render("admin_default_streams_list", { stream: item }));
+                self.row_dict.set(item.stream_id, row);
+                return row;
+            },
+            filter: {
+                element: table.closest(".settings-section").find(".search"),
+                callback: function (item, value) {
+                    return item.name.toLowerCase().match(value);
+                },
+            },
+        }).init();
+
         loading.destroy_indicator($('#admin_page_default_streams_loading_indicator'));
-    }());
+    }
 
     self.remove = function (stream_id) {
         if (self.row_dict.has(stream_id)) {
