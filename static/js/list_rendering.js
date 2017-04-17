@@ -62,7 +62,7 @@ var list_render = (function () {
                 load_count = load_count || opts.load_count || DEFAULTS.LOAD_COUNT;
 
                 // Stop once the offset reaches the length of the original list.
-                if (meta.offset >= meta.filtered_list.length) {
+                if (meta.offset > meta.filtered_list.length) {
                     return;
                 }
 
