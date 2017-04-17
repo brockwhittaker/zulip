@@ -32,6 +32,10 @@
     text-decoration: none;
 }
 
+#streams_list .sidebar-title {
+    position: relative;
+}
+
 .tooltip {
     max-width: 10em;
 }

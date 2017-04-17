@@ -89,6 +89,55 @@ p.n-margin {
     height: 24px;
 }
 
+.hotspot {
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding: 5px;
+    border-radius: 30px;
+    background-color: rgba(226, 115, 115, 0.5);
+
+    animation-name: pulseHotspot;
+    animation-duration: 1s;
+    animation-iteration-count: infinite;
+
+    z-index: 105;
+    cursor: pointer;
+}
+
+.hotspot::after {
+    content: "";
+    height: 30px;
+    width: 30px;
+    border-radius: 30px;
+    background-color: rgb(255, 192, 113);
+    display: block;
+}
+
+.hotspot .tooltip {
+    min-width: 250px;
+
+    transform: translateX(calc(-50% + 15px)) translateY(-60px);
+}
+
+.hotspot .tooltip .tooltip-inner {
+    max-width: none;
+}
+
+@keyframes pulseHotspot {
+    0% {
+        background-color: rgba(255, 192, 113, 0.5);
+    }
+
+    50% {
+        background-color: rgba(255, 192, 113, 0.1);
+    }
+
+    100% {
+        background-color: rgba(255, 192, 113, 0.5);
+    }
+}
+
 #unmute_muted_topic_notification {
     display: none;
     position: absolute;

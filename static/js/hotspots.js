@@ -3,7 +3,6 @@ var hotspots = (function () {
 var exports = {};
 
 exports.show = function (hotspot_list) {
-    $('.hotspot').hide();
     for (var i = 0; i < hotspot_list.length; i += 1) {
         $("#hotspot_".concat(hotspot_list[i][0])).show();
     }
@@ -50,6 +49,28 @@ $(function () {
         mark_hotspot_as_read("get_started");
         e.preventDefault();
         e.stopPropagation();
+    });
+
+    var n = ["welcome", "search"];
+    (() => {
+        let map = {};
+
+        page_params.hotspots[0].forEach((o, i) => {
+            map[n[i]] = o;
+        });
+
+        page_params.hotspots = map;
+    })();
+
+    $("body").on("click", ".hotspot", function (e) {
+        var name = $(this).attr("data-hotspot");
+        $(this).html($(`
+            <div class='tooltip top in'>
+                <div class='tooltip-arrow'></div>
+                <div class='tooltip-inner'>${page_params.hotspots[name]}</div>
+            </div>
+        `));
+        e.preventDefault();
     });
 });
 
