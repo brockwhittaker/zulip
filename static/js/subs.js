@@ -319,18 +319,18 @@ function show_subscription_settings(sub_row) {
     var emails = [];
     sub.subscribers.each(function (o, i) {
         var email = people.get_person_from_user_id(i).email;
-        emails.push(format_member_list_elem(email));
+        emails.push(email);
     });
 
-    var list_html = emails.sort().reduce(function (accumulator, item) {
-        return accumulator + item;
-    }, "");
-
-    // wait for the next frame to append the list so other things can happen in
-    // the meanwhile.
-    window.requestAnimationFrame(function () {
-        list.append(list_html);
-    });
+    list_render(list, emails.sort(), {
+        name: "stream_subscribers/" + stream_id,
+        modifier: function (item) {
+            return format_member_list_elem(item);
+        },
+        filter: {
+            element: $("[data-stream-id='" + stream_id + "'] .search"),
+        },
+    }).init();
 
     sub_settings.find('input[name="principal"]').typeahead({
         source: people.get_realm_persons, // This is a function.
