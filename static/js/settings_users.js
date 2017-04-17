@@ -159,6 +159,24 @@ function populate_users(realm_people_data) {
             },
         },
     }).init();
+
+    var $deactivated_users_table = $("#admin_deactivated_users_table");
+    list_render($deactivated_users_table, deactivated_users, {
+        name: "deactivated_users_table_list",
+        modifier: function (item) {
+            return templates.render("admin_user_list", { user: item });
+        },
+        filter: {
+            element: $deactivated_users_table.closest(".settings-section").find(".search"),
+            callback: function (item, value) {
+                return (
+                    item.full_name.toLowerCase().match(value) ||
+                    item.email.toLowerCase().match(value)
+                );
+            },
+        },
+    }).init();
+
     loading.destroy_indicator($('#admin_page_users_loading_indicator'));
     loading.destroy_indicator($('#admin_page_bots_loading_indicator'));
     loading.destroy_indicator($('#admin_page_deactivated_users_loading_indicator'));
