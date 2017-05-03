@@ -212,7 +212,6 @@ function edit_failed_message(message) {
     message_edit.start_local_failed_edit(current_msg_list.get_row(message.local_id), message);
 }
 
-
 $(function () {
     function on_failed_action(action, callback) {
         $("#main_div").on("click", "." + action + "-failed-message", function (e) {
