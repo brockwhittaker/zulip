@@ -7,7 +7,7 @@ var exports = {};
 // implemented as the emoji_popover.
 var current_message_emoji_popover_elem;
 
-function promote_popular(a, b) {
+var promote_popular = (function () {
     function rank(name) {
         switch (name) {
             case '+1': return 1;
@@ -19,14 +19,16 @@ function promote_popular(a, b) {
         }
     }
 
-    var diff = rank(a.name) - rank(b.name);
+    return function (a, b) {
+        var diff = rank(a.name) - rank(b.name);
 
-    if (diff !== 0) {
-        return diff;
-    }
+        if (diff !== 0) {
+            return diff;
+        }
 
-    return util.strcmp(a.name, b.name);
-}
+        return util.strcmp(a.name, b.name);
+    };
+}());
 
 function compute_placement(elt) {
     var approx_popover_height = 400;
