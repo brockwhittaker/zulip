@@ -30,11 +30,23 @@ if ! [ -e /usr/bin/realpath ]; then
 fi
 ZULIP_PATH="$(realpath $(dirname $0)/../..)"
 
+apt-get install -y software-properties-common
+add-apt-repository ppa:certbot/certbot -y
+
 # setup-apt-repo does an `apt-get update`
 "$ZULIP_PATH"/scripts/lib/setup-apt-repo
 
 apt-get -y dist-upgrade $APT_OPTIONS
-apt-get install -y puppet git python python3 python-six python3-six crudini $ADDITIONAL_PACKAGES
+
+apt-get install -y puppet git python python3 python-six python3-six crudini certbot $ADDITIONAL_PACKAGES
+
+certbot --standalone certonly -d "$DOMAIN"
+apt-get install -y python-certbot-nginx
+ln -nsf /etc/letsencrypt/live/"$DOMAIN"/privkey.pem /etc/ssl/private/zulip.key
+ln -nsf /etc/letsencrypt/live/"$DOMAIN"/fullchain.pem /etc/ssl/certs/zulip.combined-chain.crt
+
+# Cron job to renew certs daily:
+#   certbot renew --nginx --quiet
 
 # Handle issues around upstart on Ubuntu Xenial
 "$ZULIP_PATH"/scripts/lib/check-upstart
