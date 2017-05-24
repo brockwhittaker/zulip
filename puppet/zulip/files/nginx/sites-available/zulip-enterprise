@@ -7,6 +7,10 @@ include /etc/nginx/zulip-include/upstreams;
 
 server {
     listen 443;
+    # Regular expressions have the lowest precedence for server_name
+    # values, so any other nginx config on the server will take
+    # precedence.
+    server_name ~.*;
 
     ssl on;
     ssl_certificate /etc/ssl/certs/zulip.combined-chain.crt;
