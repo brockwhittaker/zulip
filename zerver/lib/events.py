@@ -446,7 +446,8 @@ def apply_event(state, event, user_profile, include_subscribers):
         if event['flag'] == 'read' and event['operation'] == 'add':
             for display_recipient, msg_ids in state['unread_msgs']:
                 for remove_id in event['messages']:
-                    msg_ids.remove(remove_id)
+                    if remove_id in msg_ids:
+                        msg_ids.remove(remove_id)
             state['unread_msgs'] = [
                 (display_recipient, msg_ids)
                 for display_recipient, msg_ids in state['unread_msgs']
