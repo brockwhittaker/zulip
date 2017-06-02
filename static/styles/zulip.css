@@ -2341,22 +2341,22 @@ button.topic_edit_cancel {
 }
 
 .emoji {
-    height: 25px;
-    width: 25px;
+    height: 24px;
+    width: 24px;
     position: relative;
-    top: 6px;
+    top: 2px;
     margin-top: -7px;
-}
-
-img.emoji {
-    /* This is the right offset for the realm emoji <img> style emoji */
-    top: 3px;
+    vertical-align: top;
 }
 
 .emoji.realm-emoji {
     background-size: contain;
     background-position: center;
     background-repeat: no-repeat;
+}
+
+.typeahead .emoji {
+    margin-top: -5px;
 }
 
 .twitter-tweet {
