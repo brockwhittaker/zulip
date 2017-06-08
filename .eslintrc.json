@@ -21,6 +21,7 @@
         "moment": false,
         "i18n": false,
         "DynamicText": false,
+        "SmartPhoto": false,
         "bridge": false,
         "page_params": false,
         "attachments_ui": false,
