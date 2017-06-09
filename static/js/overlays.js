@@ -5,6 +5,7 @@ var exports = {};
 var active_overlay;
 var close_handler;
 var open_overlay_name;
+var overlap_overlays = [];
 
 function reset_state() {
     active_overlay = undefined;
@@ -38,7 +39,7 @@ exports.open_overlay = function (opts) {
         return;
     }
 
-    if (active_overlay || open_overlay_name || close_handler) {
+    if ((active_overlay || open_overlay_name || close_handler) && !opts.allowOverlayOverlap) {
         blueslip.error('Programming error--trying to open ' + opts.name +
             ' before closing ' + open_overlay_name);
         return;
@@ -52,9 +53,16 @@ exports.open_overlay = function (opts) {
         return;
     }
 
+    opts.overlay.addClass('show');
+
+    // don't allow for these overlays to be recorded as the primary overlay to close.
+    if (opts.allowOverlayOverlap) {
+        overlap_overlays.push(opts);
+        return;
+    }
+
     open_overlay_name = opts.name;
     active_overlay = opts.overlay;
-    opts.overlay.addClass('show');
 
     close_handler = function () {
         opts.on_close();
@@ -63,6 +71,22 @@ exports.open_overlay = function (opts) {
 };
 
 exports.close_overlay = function (name) {
+    var overlap_overlay = _.find(overlap_overlays, function (opts) {
+        return opts.name === name;
+    });
+
+    console.log(overlap_overlay);
+
+    if (overlap_overlay) {
+        overlap_overlay.overlay.removeClass("show");
+        setTimeout(function () {
+            overlap_overlay.overlay.remove();
+        }, 300);
+        overlap_overlays.splice(overlap_overlays.indexOf(overlap_overlay), 1);
+
+        return;
+    }
+
     if (name !== open_overlay_name) {
         blueslip.error("Trying to close " + name + " when " + open_overlay_name + " is open." );
         return;
