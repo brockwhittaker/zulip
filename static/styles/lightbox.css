@@ -1,5 +1,21 @@
+body.gauss-blur .app-main > .column-left,
+body.gauss-blur .app-main > .column-right,
+body.gauss-blur .app-main > .column-middle,
+body.gauss-blur .app > .alert-box,
+body.gauss-blur > .header {
+    -webkit-filter: blur(8px);
+    -moz-filter: blur(8px);
+    filter: blur(8px);
+
+    -webkit-transform: translate3d(0,0,0);
+    -webkit-transform: translateZ(0);
+    transform: translate3d(0,0,0);
+    transform: translateZ(0);
+}
+
+
 #lightbox_overlay {
-    background-color: hsl(227, 40%, 16%);
+    background-color: hsla(208, 100%, 6%, 0.7);
 
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
@@ -89,7 +105,7 @@
     width: 75px;
 
     margin: 0px 5px;
-    padding: 1px 5px;
+    padding: 0px 5px;
 
     border-radius: 4px;
 
@@ -124,7 +140,7 @@
 }
 
 #lightbox_overlay .image-actions .smart-photo-trigger .status {
-    margin-top: -5px;
+    margin-top: -7px;
     font-size: 1.1em;
 
     opacity: 0.7;
@@ -252,6 +268,7 @@
 
     background-color: hsla(0, 0%, 94%, 0.2);
     opacity: 0.5;
+    border-radius: 4px;
 
     background-size: cover;
     background-position: center;
@@ -262,20 +279,15 @@
     opacity: 1;
 }
 
-.image-actions .button {
-    font-size: 0.8rem;
-    min-width: inherit;
-    padding: 4px 10px;
-    border: 1px solid hsla(0, 0%, 100%, 0.6);
-    background-color: transparent;
-    color: #fff;
+.image-actions a.button {
+    border: none;
+    background-color: hsla(207, 32%, 12%, 0.2);
     border-radius: 4px;
+    color: #fff;
 }
 
 .image-actions .button:hover {
-    background-color: #fff;
-    border-color: #fff;
-    color: hsl(227, 40%, 16%);
+    background-color: hsla(207, 32%, 12%, 0.5);
 }
 
 .image-actions a.button {
