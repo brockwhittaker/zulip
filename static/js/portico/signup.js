@@ -68,4 +68,9 @@ $(function () {
             $(this).val($.trim($(this).val()));
         }
     });
+
+    $('#top_navbar a .logout').on('click', function () {
+        $('#logout_form').submit();
+        return false;
+    });
 });
