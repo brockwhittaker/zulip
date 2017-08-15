@@ -118,7 +118,7 @@ label {
     padding: 0px 20px;
 }
 
-.table.table-condensed.table-striped {
+.table.table-condensed {
     margin: 0px;
 }
 
@@ -566,7 +566,7 @@ input[type=checkbox].inline-block {
 }
 
 .progressive-table-wrapper {
-    max-height: calc(95vh - 200px);
+    max-height: calc(200px);
     overflow: auto;
 }
 

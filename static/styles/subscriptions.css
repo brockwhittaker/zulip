@@ -930,6 +930,36 @@ form#add_new_subscription {
     margin-right: 5px;
 }
 
+#subscription_overlay table tr:first-of-type td {
+    border-top: none;
+}
+
+#subscription_overlay table tbody {
+    border-bottom: none;
+}
+
+.table.header-table thead {
+    border-top: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
+}
+
+.table-box {
+    margin: 10px 0px;
+
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+.table-box .table.header-table thead {
+    border-top: none;
+
+    background-color: hsl(0, 0%, 97%);
+}
+
+.table-box .table.header-table thead th {
+    padding: 5px;
+}
+
 @media (max-width: 1130px) {
     .subscriptions-container {
         max-width: 95%;

@@ -58,6 +58,24 @@
                 <label class="stream-title" for="people_to_add">
                     {{t "People to add" }}
                 </label>
+
+                <input type="text" class="search" placeholder="{{t 'Filter streams' }}" aria-label="{{t 'Filter streams' }}"/>
+                <div class="clear-float"></div>
+                <div class="table-box">
+                    <table class="table table-condensed wrapped-table header-table">
+                        <thead>
+                            <th>{{t "Stream" }}</th>
+                        </thead>
+                    </table>
+                    <div class="progressive-table-wrapper" id="stream-checkboxes">
+                        <table class="table table-condensed wrapped-table">
+                            <tbody id="streams_table" class="admin_bot_table required-text thick"
+                                   data-empty="{{t 'No bots match your current filter.' }}"></tbody>
+                        </table>
+                    </div>
+                </div>
+
+
                 <div class="controls" id="people_to_add"></div>
             </section>
         </div>

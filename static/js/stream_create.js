@@ -202,10 +202,29 @@ exports.new_stream_clicked = function (stream_name) {
 exports.show_new_stream_modal = function () {
     $("#stream-creation").removeClass("hide");
     $(".right .settings").hide();
+
+    list_render($("#streams_table"), stream_data.get_streams_for_settings_page(), {
+        name: "add_streams",
+        modifier: function (item) {
+            return templates.render('add_stream_list', item);
+        },
+        filter: {
+            element: $("#stream-creation .search"),
+            callback: function (item, value) {
+                return !!item.name.toLowerCase().match(value.toLowerCase());
+            },
+        },
+    }).init();
+
+
+
+/*
     $('#people_to_add').html(templates.render('new_stream_users', {
         users: people.get_rest_of_realm(),
         streams: stream_data.get_streams_for_settings_page(),
     }));
+*/
+
 
     // Make the options default to the same each time:
     // public, "announce stream" on.
@@ -261,13 +280,6 @@ $(function () {
                 $(li.firstElementChild).prop('checked', false);
             }
         });
-        e.preventDefault();
-        update_announce_stream_state();
-    });
-
-    $(document).on('click', '#copy-from-stream-expand-collapse', function (e) {
-        $('#stream-checkboxes').toggle();
-        $("#copy-from-stream-expand-collapse .toggle").toggleClass('icon-vector-caret-right icon-vector-caret-down');
         e.preventDefault();
         update_announce_stream_state();
     });
