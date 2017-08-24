@@ -87,9 +87,12 @@ var View = (() => {
         this.do_render = do_render;
         this.object = object;
 
-        return funcs.traverse_object(object, function (object, key) {
+        funcs.traverse_object(object, function (object, key) {
             funcs.define_prop(object, key, do_render, object, parent);
         });
+
+        // run an initial pass render.
+        this.render();
     };
 
     Node.prototype = {
@@ -106,6 +109,11 @@ var View = (() => {
             this.parent.innerHTML = this.do_render(this.object);
 
             return this;
+        },
+
+        // general render function that can be called at any time.
+        render: function () {
+            this.parent.innerHTML = this.do_render(this.object);
         },
     };
 
