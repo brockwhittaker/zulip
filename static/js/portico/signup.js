@@ -73,4 +73,18 @@ $(function () {
         $('#logout_form').submit();
         return false;
     });
+
+    $(".dropdown").click(function () {
+        $(this).toggleClass("show");
+    });
+
+    $("body").click(function (e) {
+        var $this = $(e.target);
+
+        if ($this.is(".dropdown") || $this.closest(".dropdown").length) {
+            $(".dropdown").addClass("show");
+        } else {
+            $(".dropdown").removeClass("show");
+        }
+    });
 });

@@ -203,6 +203,16 @@ var events = function () {
         return false;
     });
 
+    $("body").click(function (e) {
+        var $this = $(e.target);
+
+        if ($this.is(".dropdown") || $this.closest(".dropdown").length) {
+            $(".dropdown").addClass("show");
+        } else {
+            $(".dropdown").removeClass("show");
+        }
+    });
+
     if (path_parts().includes("apps")) {
         apps_events();
     }
