@@ -1819,6 +1819,8 @@ nav ul li.active::after {
 
 .portico-landing.why-page .main h3 {
     margin-top: 20px;
+    margin-bottom: 5px;
+    font-weight: 600;
 }
 
 .portico-landing.why-page .main li strong {
