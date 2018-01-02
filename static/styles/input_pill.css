@@ -74,13 +74,14 @@
 }
 
 .pm_recipient .pill-container .pill {
-    color: hsl(0, 0%, 100%);
-    border: 1px solid #36a29b;
-    background: hsl(170, 47%, 53%);
+    color: inherit;
+    border: 1px solid hsla(0, 0%, 0%, 0.15);
+    background: hsla(0, 0%, 0%, 0.07);
     font-weight: 600;
 }
 
 .pm_recipient .pill-container .pill:focus {
+    color: #fff;
     border: 1px solid #108179;
     background: hsl(176, 49%, 42%);
 }
