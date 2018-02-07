@@ -660,7 +660,6 @@ td.pointer {
 .alert-msg {
     position: absolute;
     right: -110px;
-    font-size: 14px;
     color: hsl(170, 47%, 54%);
     background-color: hsl(0, 0%, 100%);
     z-index: 999;
@@ -998,7 +997,6 @@ td.pointer {
     display: inline-block;
     padding: 3px 6px 2px 6px;
     font-weight: normal;
-    font-size: 14px;
     height: 17px;
     line-height: 17px;
 }
@@ -1103,7 +1101,6 @@ td.pointer {
     font-weight: 700;
     vertical-align: top;
     line-height: 12px;
-    font-size: 14px;
     margin-left: -3px;
 }
 
@@ -1114,7 +1111,6 @@ td.pointer {
     padding-bottom: 5px;
     vertical-align: middle;
     line-height: 18px;
-    font-size: 14px;
     position: relative;
     max-width: calc(100% - 50px);
 }
@@ -1298,9 +1294,7 @@ div.focused_table {
 }
 
 .message_content {
-    line-height: 17px;
     min-height: 17px;
-    font-size: 14px;
     margin-left: 46px;
     display: block;
     position: relative;
@@ -1349,7 +1343,6 @@ div.focused_table {
     padding: 0px 3px;
 
     line-height: 0px;
-    font-size: 14px;
 
     border-radius: 0px;
     border: 1px solid hsl(204, 20%, 74%);
@@ -1544,7 +1537,6 @@ blockquote p {
     margin: 0px 0px 0px 0px;
     height: 40px;
     line-height: 40px;
-    font-size: 16px;
     border: none;
     white-space: nowrap;
 }
@@ -1567,7 +1559,6 @@ blockquote p {
     background-color: hsl(0, 0%, 88%);
     border-width: 0px;
     margin-right: -4px;
-    font-size: 14px;
 }
 
 #tab_list li.private_message a {
@@ -1823,7 +1814,6 @@ nav a .no-style {
 
 #search_query {
     width: 100%;
-    font-size: 16px;
     height: 40px;
     padding: 0px;
     padding-left: 35px;
@@ -1833,6 +1823,7 @@ nav a .no-style {
     font-family: 'Source Sans Pro';
     font-weight: 300;
     line-height: 27px;
+    font-size: 1em;
 }
 
 #search_query:focus {
@@ -2262,7 +2253,6 @@ button.topic_edit_cancel {
 .settings-dropdown-caret {
     margin-left: 8px;
     margin-right: 8px;
-    font-size: 14px;
 }
 
 #notifications-area {
@@ -2322,7 +2312,6 @@ button.topic_edit_cancel {
 
 .star {
     display: inline-block;
-    font-size: 14px;
 }
 
 .star:not(.empty-star) {
