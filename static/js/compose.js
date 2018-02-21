@@ -564,7 +564,7 @@ function validate_stream_message() {
 // for now)
 function validate_private_message() {
     if (compose_state.recipient().length === 0) {
-        compose_error(i18n.t("Please specify at least one recipient"), $("#private_message_recipient"));
+        compose_error(i18n.t("Please specify at least one valid recipient"), $("#private_message_recipient"));
         return false;
     } else if (page_params.realm_is_zephyr_mirror_realm) {
         // For Zephyr mirroring realms, the frontend doesn't know which users exist
@@ -695,6 +695,7 @@ exports.initialize_pills = function () {
         // message users who don't have an account in the Zulip side
         // of the Zephyr mirroring system (yet; one will be
         // automatically created if you actually send your message).
+        console.log(page_params.realm_is_zephyr_mirror_realm); // THIS IS WHERE IT IS STILL FALSE.
         if (!match && !page_params.realm_is_zephyr_mirror_realm) {
             reject();
             return;

@@ -177,27 +177,23 @@ people.add(bob);
     compose_state.recipient('');
     $("#private_message_recipient").select(noop);
     assert(!compose.validate());
-    assert.equal($('#compose-error-msg').html(), i18n.t('Please specify at least one recipient'));
+    assert.equal($('#compose-error-msg').html(), i18n.t('Please specify at least one valid recipient'));
 
-    /*
-    BROCK -- we need to deal with the zephyr case
+
     compose_state.recipient('foo@zulip.com');
+
     global.page_params.realm_is_zephyr_mirror_realm = true;
     assert(compose.validate());
-    */
 
     global.page_params.realm_is_zephyr_mirror_realm = false;
     assert(!compose.validate());
-    /*
-    BROCK -- this behavior changes due to the key scheme
-    assert.equal($('#compose-error-msg').html(), i18n.t('The recipient foo@zulip.com is not valid', {}));
-    */
+
+    assert.equal($('#compose-error-msg').html(), i18n.t('Please specify at least one valid recipient', {}));
 
     compose_state.recipient('foo@zulip.com,alice@zulip.com');
     assert(!compose.validate());
-    /*
-    assert.equal($('#compose-error-msg').html(), i18n.t('The recipients foo@zulip.com,alice@zulip.com are not valid', {}));
-    */
+
+    assert.equal($('#compose-error-msg').html(), i18n.t('Please specify at least one valid recipient', {}));
 
     people.add_in_realm(bob);
     compose_state.recipient('bob@example.com');
